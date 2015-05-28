@@ -1,0 +1,24 @@
+<div class="container" ng-controller="TeacherCtrl as TCtrl" ng-init="TCtrl.load()">
+
+<div id="class-details" class="row">
+<h3>{{TCtrl.current_teacher}}</h3>
+<h4>Co Teacher: {{TCtrl.other_teacher}}</h4>
+<strong>Center:</strong> {{TCtrl.teacher.center_name}}<br />
+<strong>Class Date:</strong> {{TCtrl.teacher.class_time}}
+</div>
+
+<form method="post" role="form" ng-submit="TCtrl.save(TCtrl.teacher.id, TCtrl.teacher.students)">
+<input type="hidden" name="class_id" value="{{TCtrl.teacher.id}}" />
+<div id="students">
+<div class="student" ng-repeat="student in TCtrl.teacher.students" class="row">
+<span class="attendance"></span>
+<span class="student-name">{{student.name}}</span>
+<input type="number" name="participation[{{student.id}}]" id="participation-{{student.id}}" ng-model="student.participation" class="rating" min="0" max="5" step="1" 
+			data-size="xs" data-show-caption="true" data-clear-value="0" data-clear-caption="Absent" value="0" />
+</div>
+
+<button class="btn btn-lg btn-primary btn-block" type="submit" name="action" value="Save">Save</button><br />
+</div>
+</form>
+
+</div>

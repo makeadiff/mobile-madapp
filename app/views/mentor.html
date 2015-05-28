@@ -1,0 +1,44 @@
+<div class="container" ng-controller="MentorCtrl as MCtrl" ng-init="MCtrl.load()">
+
+<div id="class-details" class="row">
+<h3>{{MCtrl.mentor.name}}</h3>
+<strong>Center:</strong> {{MCtrl.mentor.center_name}}<br />
+<strong>Class Date:</strong> {{MCtrl.mentor.class_on}}, {{MCtrl.mentor.batch_name}}
+</div>
+
+<form method="post" role="form" ng-submit="MCtrl.save(MCtrl.mentor.batch_id, MCtrl.mentor.class_on, MCtrl.mentor.classes)">
+<input type="hidden" name="batch_id" value="{{MCtrl.mentor.batch_id}}" />
+<input type="hidden" name="class_on" value="{{MCtrl.mentor.class_on}}" />
+
+<div class="classes">
+<div class="class" ng-repeat="class in MCtrl.mentor.classes" ng-class="(class.class_status == '1' ? 'active' : 'cancelled')">
+<div class="class-box" id="class-{{class.id}}">
+<button class="btn btn-danger btn-xs pull-right" type="button" name="cancel" id="cancel-button-{{class.id}}" value="Cancel Class" ng-click="MCtrl.cancelClass(class)">Cancel Class</button>
+
+<h3 class="level-name">{{class.level_name}}</h3>
+
+<div class="teachers">
+<div class="teacher" ng-repeat="teacher in class.teachers" class="row">
+<div class="pull-right">
+<span class="status"><input  id="attendance-{{teacher.id}}" type="checkbox" name="status[{{teacher.id}}]" ng-model="teacher.status" title="Attendance" /></span>
+<span class="zero-hour"> | ZH <input  id="zero-hour-{{teacher.id}}" type="checkbox" name="zero-hour[{{teacher.id}}]" ng-model="teacher.zero_hour_attendance" title="Zero Hour" /></span>
+</div>
+
+<span class="teacher-name" ng-click="MCtrl.showSubstitute({{teacher.id}})">{{teacher.name}}</span>
+<div class="substitute-area" id="substitute-{{teacher.id}}">
+<label>Substitute: </label>
+<select name="substitute[{{teacher.id}}]" ng-model="teacher.substitute_id" id="sub-{{teacher.id}}">
+<option ng-repeat="sub in MCtrl.all_teachers" value="{{sub.id}}">{{sub.name}}</option>
+</select>
+</div><br />
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<button class="btn btn-lg btn-primary btn-block" type="submit" name="action" value="Save">Save</button><br />
+</form>
+
+</div>

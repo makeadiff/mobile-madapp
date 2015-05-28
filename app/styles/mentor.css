@@ -1,0 +1,30 @@
+#class-details {
+	padding: 5px;
+	border-bottom: 1px solid #000;
+}
+
+.class-box {
+	padding:10px;
+}
+.class-box h3 {
+	margin:0;
+}
+
+.substitute-area {
+	display: none;
+}
+
+.cancelled {
+	background: #eee;
+}
+
+/*
+#all-teachers {
+	display: none;
+	width: 90%;
+	height: 400px;
+	position: absolute;
+	top: 5%;
+	left: 5%;
+	overflow: auto;
+}*/
