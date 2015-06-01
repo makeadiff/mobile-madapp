@@ -24,7 +24,11 @@ angular.module('mobileApp')
 	    		LoginCtrl.user = data;
 	    		user_service.setUser(LoginCtrl.user);
 
-	    		$location.path("/");
+                if(LoginCtrl.user.mentor == "1") {
+	    		    $location.path("/mentor");
+                } else {
+                    $location.path("/teacher");
+                }
 	    	} else {
 	    		LoginCtrl.error = data.error;
 	    	}

@@ -25,7 +25,7 @@
 </div>
 
 <span class="teacher-name" ng-click="MCtrl.showSubstitute({{teacher.id}})">{{teacher.name}}</span>
-<div class="substitute-area" id="substitute-{{teacher.id}}">
+<div id="substitute-{{teacher.id}}" class="substitute-area" >
 <label>Substitute: </label>
 <select name="substitute[{{teacher.id}}]" ng-model="teacher.substitute_id" id="sub-{{teacher.id}}">
 <option ng-repeat="sub in MCtrl.all_teachers" value="{{sub.id}}">{{sub.name}}</option>

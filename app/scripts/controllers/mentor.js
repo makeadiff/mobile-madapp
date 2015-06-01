@@ -15,8 +15,6 @@ angular.module('mobileApp')
   	var base_url = "http://localhost/Projects/Madapp/index.php/api/";
   	var key = "am3omo32hom4lnv32vO";
 
-  	jQuery(".student-participation").rating();
-
   	MentorCtrl.load = function() {
 	  	$http({
 	        method: 'GET',
@@ -25,6 +23,26 @@ angular.module('mobileApp')
 		}).success(function(data) {
 			MentorCtrl.mentor = data;
 			MentorCtrl.mentor.name = user.name;
+			console.log(data);
+
+			setTimeout(function() {
+				for(var index in data.classes) {
+					var cls = data.classes[index];
+					
+					// Disable cancelled classes
+					if(cls.class_status == "0") {
+						MentorCtrl.cancelClass(cls, true);
+					}
+
+					// Show the substitue dropdown if a substitue is selected.
+					for(var inde in cls.teachers) {
+						var teach = cls.teachers[inde];
+						if(teach.substitute_id != "0") {
+							$("#substitute-" + teach.id).show();
+						}
+					}
+				}
+			}, 200);
 		}).error(error);
 
 		$http({
@@ -33,29 +51,26 @@ angular.module('mobileApp')
 	        params: {city_id: user.city_id, key: key}
 		}).success(function(data) {
 			MentorCtrl.all_teachers = data.teachers;
-
-			// MentorCtrl.all_teachers = [{"id":"123456", "name": "One"}, 
-			// 	{"id":"223456", "name": "Two"},
-			// 	{"id":"323456", "name": "Three"},
-			// 	{"id":"423456", "name": "Four"},
-			// 	{"id":"523456", "name": "Five"},
-			// 	{"id":"623456", "name": "Six"},
-			// 	{"id":"0", "name": "None"}
-			// 	];
 		});
 	}
 
 	MentorCtrl.save = function(batch_id, class_on, classes) {
-		console.log(classes, classes.length);
-		
+		$http({
+	        method: 'GET',
+	        url: base_url + 'class_save',
+	        params: {user_id: user_id, key: key, class_data: angular.toJson(classes)}
+		}).success(function(data) {
+			console.log(data);
+		}).error(error);
 	}
 
-	MentorCtrl.cancelClass = function(class_info) {
+	MentorCtrl.cancelClass = function(class_info, reverse) {
 		var status = class_info.class_status;
+		if(reverse) status = (status == "1") ? "0" : "1"; // This is needed when lodaing.
 		var button_text = "";
 
-		if(status == 1) {
-			class_info.class_status = 0;
+		if(status == "1") {
+			class_info.class_status = "0";
 			button_text = "Un-Cancel Class";
 
 			for(var teacher_index in class_info.teachers) {
@@ -65,7 +80,7 @@ angular.module('mobileApp')
 				$("#sub-" + teacher_id).prop("disabled", true);
 			}
 		} else {
-			class_info.class_status = 1;
+			class_info.class_status = "1";
 			button_text = "Cancel Class";
 
 			for(var teacher_index in class_info.teachers) {
