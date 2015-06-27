@@ -8,7 +8,7 @@
  * Controller of the mobileApp
  */
 angular.module('mobileApp')
-  .controller('TeacherCtrl', ['$scope', '$http', 'UserService', function ($scope, $http, user_service) {
+  .controller('TeacherCtrl', ['$scope', '$http', 'growl', 'UserService', function ($scope, $http, growl, user_service) {
   	var TeacherCtrl = this;
   	var user_id = user_service.getUserId();
   	var base_url = "http://localhost/Projects/Madapp/index.php/api/";
@@ -21,39 +21,39 @@ angular.module('mobileApp')
 	        method: 'GET',
 	        url: base_url + 'class_get_last',
 	        params: {user_id: user_id, key: key}
-		}).success(function(data) {
-			TeacherCtrl.teacher = data;
-			var current_teacher;
-			var other_teacher;
-			for(var i = 0; i<data.teachers.length; i++) {
-				if(data.teachers[i].current_user) {
-					current_teacher = data.teachers[i].name;
-				} else {
-					if(other_teacher) other_teacher += "," + data.teachers[i].name;
-					else other_teacher = data.teachers[i].name;
-				}
+		}).success(TeacherCtrl.openClass).error(error);
+	}
+
+	TeacherCtrl.openClass = function(data) {
+		TeacherCtrl.teacher = data;
+		var current_teacher;
+		var other_teacher;
+		for(var i = 0; i<data.teachers.length; i++) {
+			if(data.teachers[i].current_user) {
+				current_teacher = data.teachers[i].name;
+			} else {
+				if(other_teacher) other_teacher += "," + data.teachers[i].name;
+				else other_teacher = data.teachers[i].name;
 			}
-			for(var i in TeacherCtrl.teacher.students) {
-				TeacherCtrl.teacher.students[i].participation = Number(TeacherCtrl.teacher.students[i].participation);
-			}
+		}
+		for(var i in TeacherCtrl.teacher.students) {
+			TeacherCtrl.teacher.students[i].participation = Number(TeacherCtrl.teacher.students[i].participation);
+		}
 
-			TeacherCtrl.current_teacher = current_teacher;
-			TeacherCtrl.other_teacher = other_teacher;
+		TeacherCtrl.current_teacher = current_teacher;
+		TeacherCtrl.other_teacher = other_teacher;
 
-			// Wait a small time before applying the makeup.
-			setTimeout(function() {
-				$(".rating").rating({starCaptions: {
-					"0": "Absent",
-					"1": "Disruptive",
-					"2": "Distracted",
-					"3": "Normal",
-					"4": "Interested",
-					"5": "Excited",
-				}});
-			}, 100);
-
-
-		}).error(error);
+		// Wait a small time before applying the makeup.
+		setTimeout(function() {
+			$(".rating").rating({starCaptions: {
+				"0": "Absent",
+				"1": "Disruptive",
+				"2": "Distracted",
+				"3": "Normal",
+				"4": "Interested",
+				"5": "Excited",
+			}});
+		}, 100);
 	}
 
 	TeacherCtrl.save = function(class_id, students) {
@@ -68,9 +68,8 @@ angular.module('mobileApp')
 	        url: base_url + 'class_save_student_participation',
 	        params: {"user_id": user_id, "key": key, "students": students, "class_id": class_id}
 		}).success(function(data) {
-			console.log(data)
+			growl.addSuccessMessage("Information Updated.", {ttl: 3000});
 		}).error(error);
-
 	}
     
 }]);

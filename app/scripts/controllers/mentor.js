@@ -8,7 +8,7 @@
  * Controller of the mobileApp
  */
 angular.module('mobileApp')
-  .controller('MentorCtrl', ['$scope', '$http', 'UserService', function ($scope, $http, user_service) {
+  .controller('MentorCtrl', ['$scope', '$http', '$location', 'growl', 'UserService', function ($scope, $http, $location, growl, user_service) {
   	var MentorCtrl = this;
   	var user = user_service.getUser();
   	var user_id = user.user_id;
@@ -20,11 +20,32 @@ angular.module('mobileApp')
 	        method: 'GET',
 	        url: base_url + 'class_get_last_batch',
 	        params: {user_id: user_id, key: key}
-		}).success(function(data) {
-			MentorCtrl.mentor = data;
-			MentorCtrl.mentor.name = user.name;
-			console.log(data);
+		}).success(MentorCtrl.openBatch).error(error);
 
+		$http({
+	        method: 'GET',
+	        url: base_url + 'user_get_teachers',
+	        params: {city_id: user.city_id, key: key}
+		}).success(function(data) {
+			MentorCtrl.all_teachers = data.teachers;
+		});
+	}
+
+	MentorCtrl.openBatch = function(data) {
+		// If there is no classes happening, exit without setting the other variables.
+		if(data.classes.length == 0) {
+			growl.addErrorMessage("Can't find batches beyond this point.", {ttl: 3000});
+			return;
+		}
+
+		MentorCtrl.mentor = data;
+		MentorCtrl.mentor.name = user.name;
+
+		if(data.error) {
+			$scope.error = data.error;
+			$location.path("/error");
+			
+		} else {
 			setTimeout(function() {
 				for(var index in data.classes) {
 					var cls = data.classes[index];
@@ -38,20 +59,14 @@ angular.module('mobileApp')
 					for(var inde in cls.teachers) {
 						var teach = cls.teachers[inde];
 						if(teach.substitute_id != "0") {
+							// This should be done by Angluar automatically. Both of these. But its not happening. So.
 							$("#substitute-" + teach.id).show();
+							$("#sub-" + teach.id).val(teach.substitute_id); 
 						}
 					}
 				}
 			}, 200);
-		}).error(error);
-
-		$http({
-	        method: 'GET',
-	        url: base_url + 'user_get_teachers',
-	        params: {city_id: user.city_id, key: key}
-		}).success(function(data) {
-			MentorCtrl.all_teachers = data.teachers;
-		});
+		}
 	}
 
 	MentorCtrl.save = function(batch_id, class_on, classes) {
@@ -60,7 +75,7 @@ angular.module('mobileApp')
 	        url: base_url + 'class_save',
 	        params: {user_id: user_id, key: key, class_data: angular.toJson(classes)}
 		}).success(function(data) {
-			console.log(data);
+			growl.addSuccessMessage("Information Updated.", {ttl: 3000});
 		}).error(error);
 	}
 
@@ -79,6 +94,7 @@ angular.module('mobileApp')
 				$("#attendance-" + teacher_id).prop("disabled", true);
 				$("#sub-" + teacher_id).prop("disabled", true);
 			}
+			growl.addSuccessMessage("Class cancelled.", {ttl: 3000});
 		} else {
 			class_info.class_status = "1";
 			button_text = "Cancel Class";
@@ -97,5 +113,25 @@ angular.module('mobileApp')
 	MentorCtrl.showSubstitute = function(user_id) {
 		$("#substitute-"+user_id).toggle();
 	}
+
+	MentorCtrl.browseClass = function(batch_id, class_on, direction) {
+		var class_on = new Date(class_on);
+		if(direction == "+") class_on.setDate(class_on.getDate() + 7);
+		else class_on.setDate(class_on.getDate() - 7);
+		var mysql_format = (class_on.getYear() + 1900) +  "-" + pad(class_on.getMonth() + 1, 2) + "-" + pad(class_on.getDate(), 2);
+
+		$http({
+			method: 'GET',
+			url: base_url + 'open_batch',
+			params: {"user_id": user_id, "key": key, "batch_id": batch_id, "class_on": mysql_format}
+		}).success(MentorCtrl.openBatch).error(error);
+	}
+
     
 }]);
+
+function pad(num, size) {
+    var s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
+}

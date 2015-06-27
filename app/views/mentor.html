@@ -3,7 +3,10 @@
 <div id="class-details" class="row">
 <h3>{{MCtrl.mentor.name}}</h3>
 <strong>Center:</strong> {{MCtrl.mentor.center_name}}<br />
-<strong>Class Date:</strong> {{MCtrl.mentor.class_on}}, {{MCtrl.mentor.batch_name}}
+<strong>Class Date:</strong>
+<a class="glyphicon glyphicon-chevron-left" ng-click="MCtrl.browseClass(MCtrl.mentor.batch_id, MCtrl.mentor.class_on, '-')"></a> 
+{{MCtrl.mentor.class_date}}, {{MCtrl.mentor.batch_name}}
+<a class="glyphicon glyphicon-chevron-right" ng-click="MCtrl.browseClass(MCtrl.mentor.batch_id, MCtrl.mentor.class_on, '+')"></a> 
 </div>
 
 <form method="post" role="form" ng-submit="MCtrl.save(MCtrl.mentor.batch_id, MCtrl.mentor.class_on, MCtrl.mentor.classes)">
@@ -15,7 +18,7 @@
 <div class="class-box" id="class-{{class.id}}">
 <button class="btn btn-danger btn-xs pull-right" type="button" name="cancel" id="cancel-button-{{class.id}}" value="Cancel Class" ng-click="MCtrl.cancelClass(class)">Cancel Class</button>
 
-<h3 class="level-name">{{class.level_name}}</h3>
+<h3 class="level-name">{{class.grade}} {{class.level_name}}</h3>
 
 <div class="teachers">
 <div class="teacher" ng-repeat="teacher in class.teachers" class="row">
@@ -25,7 +28,7 @@
 </div>
 
 <span class="teacher-name" ng-click="MCtrl.showSubstitute({{teacher.id}})">{{teacher.name}}</span>
-<div id="substitute-{{teacher.id}}" class="substitute-area" >
+<div id="substitute-{{teacher.id}}" class="substitute-area" ng-show="teacher.substitute_id">
 <label>Substitute: </label>
 <select name="substitute[{{teacher.id}}]" ng-model="teacher.substitute_id" id="sub-{{teacher.id}}">
 <option ng-repeat="sub in MCtrl.all_teachers" value="{{sub.id}}">{{sub.name}}</option>

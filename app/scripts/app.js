@@ -16,7 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ngStorage'
+    'ngStorage',
+    'angular-growl'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -53,6 +54,11 @@ angular
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
+        restricted : false
+      })
+      .when('/error', {
+        templateUrl: 'views/error.html',
+        controller: 'ErrorCtrl',
         restricted : false
       })
       .when('/login', {
