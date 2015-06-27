@@ -5,9 +5,9 @@
 <h4 ng-show="TCtrl.other_teacher">Co Teacher: {{TCtrl.other_teacher}}</h4>
 <strong>Center:</strong> {{TCtrl.teacher.center_name}}<br />
 <strong>Class Date:</strong>
-<a class="glyphicon glyphicon-chevron-left" ng-click="TCtrl.browseClass(TCtrl.mentor.batch_id, TCtrl.mentor.class_on, '-')"></a> 
+<a class="glyphicon glyphicon-chevron-left" ng-click="TCtrl.browseClass(TCtrl.user_id, TCtrl.teacher.class_on, '-')"></a> 
 {{TCtrl.teacher.class_time}}
-<a class="glyphicon glyphicon-chevron-right" ng-click="TCtrl.browseClass(TCtrl.mentor.batch_id, TCtrl.mentor.class_on, '+')"></a> 
+<a class="glyphicon glyphicon-chevron-right" ng-click="TCtrl.browseClass(TCtrl.user_id, TCtrl.teacher.class_on, '+')"></a> 
 </div>
 
 <form method="post" role="form" ng-submit="TCtrl.save(TCtrl.teacher.id, TCtrl.teacher.students)">

@@ -11,10 +11,12 @@ angular.module('mobileApp')
   .controller('TeacherCtrl', ['$scope', '$http', 'growl', 'UserService', function ($scope, $http, growl, user_service) {
   	var TeacherCtrl = this;
   	var user_id = user_service.getUserId();
+
   	var base_url = "http://localhost/Projects/Madapp/index.php/api/";
   	var key = "am3omo32hom4lnv32vO";
 
   	jQuery(".student-participation").rating();
+  	TeacherCtrl.user_id = user_id;
 
   	TeacherCtrl.load = function() {
 	  	$http({
@@ -25,7 +27,12 @@ angular.module('mobileApp')
 	}
 
 	TeacherCtrl.openClass = function(data) {
+		if(data.error) {
+			growl.addErrorMessage("Class not found beyond this point.", {ttl: 3000});
+			return;
+		}
 		TeacherCtrl.teacher = data;
+
 		var current_teacher;
 		var other_teacher;
 		for(var i = 0; i<data.teachers.length; i++) {
@@ -53,6 +60,7 @@ angular.module('mobileApp')
 				"4": "Interested",
 				"5": "Excited",
 			}});
+			$('.rating').rating('update', TeacherCtrl.teacher.students[11448].participation);
 		}, 100);
 	}
 
@@ -72,4 +80,18 @@ angular.module('mobileApp')
 		}).error(error);
 	}
     
+    TeacherCtrl.browseClass = function(uid, class_on_date, direction) {
+		var class_on = new Date(class_on_date.split(" ")[0]);
+
+		if(direction == "+") class_on.setDate(class_on.getDate() + 7);
+		else class_on.setDate(class_on.getDate() - 7);
+		var mysql_format = (class_on.getYear() + 1900) +  "-" + pad(class_on.getMonth() + 1, 2) + "-" + pad(class_on.getDate(), 2);
+
+		$http({
+			method: 'GET',
+			url: base_url + 'get_class_on',
+			params: {"user_id": uid, "key": key, "class_on": mysql_format}
+		}).success(TeacherCtrl.openClass).error(error);
+	}
+
 }]);
