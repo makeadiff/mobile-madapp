@@ -24,10 +24,10 @@
 <div class="teacher" ng-repeat="teacher in class.teachers" class="row">
 <div class="pull-right">
 <span class="status"><input  id="attendance-{{teacher.id}}" type="checkbox" name="status[{{teacher.id}}]" ng-model="teacher.status" title="Attendance" /></span>
-<span class="zero-hour"> | ZH <input  id="zero-hour-{{teacher.id}}" type="checkbox" name="zero-hour[{{teacher.id}}]" ng-model="teacher.zero_hour_attendance" title="Zero Hour" /></span>
+<span class="zero-hour" ng-show="teacher.status"> | ZH <input  id="zero-hour-{{teacher.id}}" type="checkbox" name="zero-hour[{{teacher.id}}]" ng-model="teacher.zero_hour_attendance" title="Zero Hour" /></span>
 </div>
 
-<span class="teacher-name" ng-click="MCtrl.showSubstitute({{teacher.id}})">{{teacher.name}}</span>
+<span ng-class="{'substituted': (teacher.substitute_id != '0'), 'teacher-name':true}" ng-click="MCtrl.showSubstitute({{teacher.id}}, {{teacher}})">{{teacher.name}}</span>
 <div id="substitute-{{teacher.id}}" class="substitute-area" ng-show="teacher.substitute_id">
 <label>Substitute: </label>
 <select name="substitute[{{teacher.id}}]" ng-model="teacher.substitute_id" id="sub-{{teacher.id}}">

@@ -110,8 +110,25 @@ angular.module('mobileApp')
 
 	}
 
-	MentorCtrl.showSubstitute = function(user_id) {
-		$("#substitute-"+user_id).toggle();
+	MentorCtrl.showSubstitute = function(user_id, teacher) {
+		for(var i in MentorCtrl.mentor.classes) {
+			var cls = MentorCtrl.mentor.classes[i];
+			for(var j in cls.teachers) {
+				var teach = cls.teachers[j];
+				if(teach.id == teacher.id) {
+					if(MentorCtrl.mentor.classes[i].teachers[j].substitute_id == "0") {
+						$("#substitute-"+user_id).toggle();
+
+					} else {
+						// When Hiding subs, unset the sub as well.
+						MentorCtrl.mentor.classes[i].teachers[j].substitute_id = "0";
+						MentorCtrl.mentor.classes[i].teachers[j].substitute = "";
+						$("#substitute-"+user_id).hide();
+					}
+					return;
+				}
+			}
+		}
 	}
 
 	MentorCtrl.browseClass = function(batch_id, class_on, direction) {

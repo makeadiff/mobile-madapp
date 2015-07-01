@@ -18,6 +18,13 @@
 	background: #eee;
 }
 
+.substituted {
+	color: #ccc !important;
+}
+.teacher-name {
+	font-weight: bold;
+}
+
 /*
 #all-teachers {
 	display: none;
