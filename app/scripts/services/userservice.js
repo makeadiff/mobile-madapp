@@ -17,7 +17,6 @@ angular.module('mobileApp')
         }
 
         user.isLoggedIn = function() {
-            console.log($localStorage.user, $localStorage.logged_in)
             return $localStorage.logged_in;
         }
 

@@ -32,6 +32,11 @@ angular.module('mobileApp')
 	}
 
 	MentorCtrl.openBatch = function(data) {
+		if(data.error) {
+			$location.path("/message").search({"error": data.error});
+			return;
+		}
+
 		// If there is no classes happening, exit without setting the other variables.
 		if(data.classes.length == 0) {
 			growl.addErrorMessage("Can't find batches beyond this point.", {ttl: 3000});
@@ -41,32 +46,26 @@ angular.module('mobileApp')
 		MentorCtrl.mentor = data;
 		MentorCtrl.mentor.name = user.name;
 
-		if(data.error) {
-			$scope.error = data.error;
-			$location.path("/error");
-			
-		} else {
-			setTimeout(function() {
-				for(var index in data.classes) {
-					var cls = data.classes[index];
-					
-					// Disable cancelled classes
-					if(cls.class_status == "0") {
-						MentorCtrl.cancelClass(cls, true);
-					}
+		setTimeout(function() {
+			for(var index in data.classes) {
+				var cls = data.classes[index];
+				
+				// Disable cancelled classes
+				if(cls.class_status == "0") {
+					MentorCtrl.cancelClass(cls, true);
+				}
 
-					// Show the substitue dropdown if a substitue is selected.
-					for(var inde in cls.teachers) {
-						var teach = cls.teachers[inde];
-						if(teach.substitute_id != "0") {
-							// This should be done by Angluar automatically. Both of these. But its not happening. So.
-							$("#substitute-" + teach.id).show();
-							$("#sub-" + teach.id).val(teach.substitute_id); 
-						}
+				// Show the substitue dropdown if a substitue is selected.
+				for(var inde in cls.teachers) {
+					var teach = cls.teachers[inde];
+					if(teach.substitute_id != "0") {
+						// This should be done by Angluar automatically. Both of these. But its not happening. So.
+						$("#substitute-" + teach.id).show();
+						$("#sub-" + teach.id).val(teach.substitute_id); 
 					}
 				}
-			}, 200);
-		}
+			}
+		}, 200);
 	}
 
 	MentorCtrl.save = function(batch_id, class_on, classes) {

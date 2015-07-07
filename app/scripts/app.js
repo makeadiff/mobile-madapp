@@ -56,9 +56,9 @@ angular
         controller: 'AboutCtrl',
         restricted : false
       })
-      .when('/error', {
-        templateUrl: 'views/error.html',
-        controller: 'ErrorCtrl',
+      .when('/message', {
+        templateUrl: 'views/message.html',
+        controller: 'MessageCtrl',
         restricted : false
       })
       .when('/login', {

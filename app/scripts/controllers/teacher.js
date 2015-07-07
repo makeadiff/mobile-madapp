@@ -8,7 +8,7 @@
  * Controller of the mobileApp
  */
 angular.module('mobileApp')
-  .controller('TeacherCtrl', ['$scope', '$http', 'growl', 'UserService', function ($scope, $http, growl, user_service) {
+  .controller('TeacherCtrl', ['$scope', '$location', '$http', 'growl', 'UserService', function ($scope, $location, $http, growl, user_service) {
   	var TeacherCtrl = this;
   	var user_id = user_service.getUserId();
 
@@ -28,6 +28,11 @@ angular.module('mobileApp')
 
 	TeacherCtrl.openClass = function(data) {
 		if(data.error) {
+			if(data.error == "No classes found.") {
+				$location.path("/message").search({"error": data.error});
+				return;
+			}
+
 			growl.addErrorMessage("Class not found beyond this point.", {ttl: 3000});
 			return;
 		}
@@ -60,7 +65,6 @@ angular.module('mobileApp')
 				"4": "Interested",
 				"5": "Excited",
 			}});
-			$('.rating').rating('update', TeacherCtrl.teacher.students[11448].participation);
 		}, 100);
 	}
 
