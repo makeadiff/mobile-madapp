@@ -93,10 +93,10 @@ angular.module('mobileApp')
 				$("#attendance-" + teacher_id).prop("disabled", true);
 				$("#sub-" + teacher_id).prop("disabled", true);
 			}
-			growl.addSuccessMessage("Class cancelled.", {ttl: 3000});
+			// growl.addSuccessMessage("Class cancelled.", {ttl: 3000});
 		} else {
 			class_info.class_status = "1";
-			button_text = "Cancel Class";
+			button_text = ""; // Cancel Class
 
 			for(var teacher_index in class_info.teachers) {
 				var teacher_id = class_info.teachers[teacher_index].id;

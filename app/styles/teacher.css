@@ -1,4 +1,19 @@
 #class-details {
-	padding: 5px;
-	background: #eee;
+	padding: 0 20px 10px 20px;
+	background-color: #23bbb9;
+	color: #000;
 } 
+.info {
+	color:#fff;
+}
+#class-details h3 {
+	margin:5px 0;
+}
+
+.student-name {
+	font-size: 120%;
+}
+.student {
+	padding:10px;
+	border-top: 1px solid #25a5a3;
+}

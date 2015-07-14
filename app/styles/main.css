@@ -14,6 +14,16 @@ body {
 /* Custom page header */
 .header {
 }
+.navbar {
+  margin-bottom: 0px !important;
+}
+.navbar-default {
+  background-color: #ffe700;
+  border-radius: 0px !important;
+}
+.navbar-default .navbar-brand {
+  color: #000;
+}
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
   margin-top: 0;
@@ -45,7 +55,6 @@ body {
   }
 }
 
-
 .form-area label {
   width:100px;
   display:block;
@@ -61,6 +70,9 @@ body {
 }
 br {
   clear:both;
+}
+select {
+  color:black;
 }
 
 #loading {
@@ -154,3 +166,7 @@ ul.horizontal li {
   background-position:center left;
 }
 
+
+.btn-bottom {
+  background-color: #23bbb9;
+}

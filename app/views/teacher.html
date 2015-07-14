@@ -3,10 +3,10 @@
 <div id="class-details" class="row">
 <h3>{{TCtrl.current_teacher}}</h3>
 <h4 ng-show="TCtrl.other_teacher">Co Teacher: {{TCtrl.other_teacher}}</h4>
-<strong>Center:</strong> {{TCtrl.teacher.center_name}}<br />
+<strong>Center:</strong> <span class="info">{{TCtrl.teacher.center_name}}</span><br />
 <strong>Class Date:</strong>
 <a class="glyphicon glyphicon-chevron-left" ng-click="TCtrl.browseClass(TCtrl.user_id, TCtrl.teacher.class_on, '-')"></a> 
-{{TCtrl.teacher.class_time}}
+<span class="info">{{TCtrl.teacher.class_time}}</span>
 <a class="glyphicon glyphicon-chevron-right" ng-click="TCtrl.browseClass(TCtrl.user_id, TCtrl.teacher.class_on, '+')"></a> 
 </div>
 
@@ -20,7 +20,7 @@
 			data-size="xs" data-show-caption="true" data-clear-value="0" data-clear-caption="Absent" value="0" />
 </div>
 
-<button class="btn btn-lg btn-primary btn-block" type="submit" name="action" value="Save">Save</button><br />
+<button class="btn btn-lg btn-bottom btn-block" type="submit" name="action" value="Save">Save</button><br />
 </div>
 </form>
 
