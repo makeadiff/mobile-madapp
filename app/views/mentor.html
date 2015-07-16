@@ -21,13 +21,32 @@ title="Cancel Class" ng-click="MCtrl.cancelClass(class)"></button>
 
 <h3 class="level-name">Class {{class.grade}} {{class.level_name}}</h3>
 
+<div class="pull-right cancel-area" ng-show="(class.class_status == '0')">
+<select ng-model="class.cancel_option" class="cancel-option">
+	<optgroup label="Internal(MAD)">
+		<option value="in-volunteer-unavailable">Volunteer unavailability</option>
+		<option value="in-volunteer-engaged">Volunteer engaged with other events</option>
+		<option value="in-other">Other</option>
+	</optgroup>
+	<optgroup label="External(CA)">
+		<option value="ext-children-out">Children not in the shelter</option>
+		<option value="ext-children-doing-chores">Children engaged with center chores</option>
+		<option value="ext-children-have-events">Children engaged with center events</option>
+		<option value="ext-children-unwell">Children are unwell</option>
+		<option value="ext-other">Other</option>
+	</optgroup>
+</select><br />
+
+<textarea class="cancel-reason" rows="2" cols="25" ng-model="class.cancel_reason" ng-show="(class.cancel_option == 'in-other' || class.cancel_option == 'ext-other')"></textarea>
+</div>
+
 <div class="teachers">
 <div class="teacher" ng-repeat="teacher in class.teachers" class="row">
-<div class="pull-right">
-<span class="status"><input  id="attendance-{{teacher.id}}" type="checkbox" name="status[{{teacher.id}}]" ng-model="teacher.status" title="Attendance" /></span>
-<span class="zero-hour" ng-show="teacher.status"> | ZH <input  id="zero-hour-{{teacher.id}}" type="checkbox" name="zero-hour[{{teacher.id}}]" 
-ng-model="teacher.zero_hour_attendance" title="Zero Hour" /></span>
+<div class="pull-right attendance-area" ng-show="(class.class_status == '1')">
+<span class="status"><input id="attendance-{{teacher.id}}" type="checkbox" name="status[{{teacher.id}}]" ng-model="teacher.status" title="Attendance" /></span>
+<span class="zero-hour" ng-show="teacher.status"> | ZH <input  id="zero-hour-{{teacher.id}}" type="checkbox" name="zero-hour[{{teacher.id}}]" ng-model="teacher.zero_hour_attendance" title="Zero Hour" /></span>
 </div>
+
 
 <span ng-class="{'substituted': (teacher.substitute_id != '0'), 'teacher-name':true}" ng-click="MCtrl.showSubstitute({{teacher.id}}, {{teacher}})"><span class="glyphicon glyphicon-user user-icon"></span> {{teacher.name}}</span>
 <div id="substitute-{{teacher.id}}" class="substitute-area" ng-show="teacher.substitute_id">
