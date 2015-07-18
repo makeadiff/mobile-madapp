@@ -17,7 +17,7 @@ angular.module('mobileApp')
     this.loginUser = function(user) {
     	$http({
             method: 'GET',
-            url: 'http://localhost/Projects/Madapp/index.php/api/user_login',
+            url: base_url + 'user_login',
             params: {email: user.username, password: user.password}
     	}).success(function(data) {
     		if(data.success) {

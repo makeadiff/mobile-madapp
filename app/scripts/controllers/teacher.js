@@ -12,9 +12,6 @@ angular.module('mobileApp')
   	var TeacherCtrl = this;
   	var user_id = user_service.getUserId();
 
-  	var base_url = "http://localhost/Projects/Madapp/index.php/api/";
-  	var key = "am3omo32hom4lnv32vO";
-
   	jQuery(".student-participation").rating();
   	TeacherCtrl.user_id = user_id;
 

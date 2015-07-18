@@ -12,8 +12,6 @@ angular.module('mobileApp')
   	var MentorCtrl = this;
   	var user = user_service.getUser();
   	var user_id = user.user_id;
-  	var base_url = "http://localhost/Projects/Madapp/index.php/api/";
-  	var key = "am3omo32hom4lnv32vO";
 
   	MentorCtrl.load = function() {
 	  	$http({
