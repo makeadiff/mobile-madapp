@@ -9,7 +9,8 @@
  * Main module of the application.
  */
 
-var base_url = "http://localhost/Projects/Madapp/index.php/api/";
+//var base_url = "http://localhost/Projects/Madapp/index.php/api/";
+var base_url = "http://makeadiff.in/madapp/index.php/api/";
 var key = "am3omo32hom4lnv32vO";
 
 angular
