@@ -9,7 +9,7 @@
  */
 angular.module('mobileApp')
   .controller('LoginCtrl', ['$scope', '$http', '$location', 'UserService', function ($scope, $http, $location, user_service) {
-
+    loaded();
     var LoginCtrl = this;
     LoginCtrl.user = false;
     LoginCtrl.error = "";

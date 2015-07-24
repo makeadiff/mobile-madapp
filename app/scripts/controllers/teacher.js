@@ -24,6 +24,7 @@ angular.module('mobileApp')
 	}
 
 	TeacherCtrl.openClass = function(data) {
+		loaded();
 		if(data.error) {
 			if(data.error == "No classes found.") {
 				$location.path("/message").search({"error": data.error});
@@ -61,7 +62,7 @@ angular.module('mobileApp')
 				"3": "Normal",
 				"4": "Interested",
 				"5": "Excited",
-			}});
+			}}).rating("refresh", {disabled: true, showClear: false});
 		}, 100);
 	}
 
@@ -72,11 +73,13 @@ angular.module('mobileApp')
 			students[i].participation = Number(ele.val());
 		}
 
+		loading();
 		$http({
 	        method: 'GET',
 	        url: base_url + 'class_save_student_participation',
 	        params: {"user_id": user_id, "key": key, "students": students, "class_id": class_id}
 		}).success(function(data) {
+			loaded();
 			growl.addSuccessMessage("Information Updated.", {ttl: 3000});
 		}).error(error);
 	}
@@ -88,6 +91,7 @@ angular.module('mobileApp')
 		else class_on.setDate(class_on.getDate() - 7);
 		var mysql_format = (class_on.getYear() + 1900) +  "-" + pad(class_on.getMonth() + 1, 2) + "-" + pad(class_on.getDate(), 2);
 
+		loading();
 		$http({
 			method: 'GET',
 			url: base_url + 'get_class_on',

@@ -50,7 +50,9 @@
 .teacher-name {
 	font-weight: bold;
 }
-
+.cancel-option {
+	width:200px;
+}
 
 /*
 #all-teachers {

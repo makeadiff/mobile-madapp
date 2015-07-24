@@ -84,5 +84,13 @@ angular
   });
 
 function error() {
+  loaded();
   alert("Error!");
 }
+function loading() {
+  angular.element("#loading").show();
+}
+function loaded() {
+  angular.element("#loading").hide();
+}
+loading();

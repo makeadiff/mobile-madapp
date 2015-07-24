@@ -14,6 +14,7 @@ angular.module('mobileApp')
   	var user_id = user.user_id;
 
   	MentorCtrl.load = function() {
+  		loading();
 	  	$http({
 	        method: 'GET',
 	        url: base_url + 'class_get_last_batch',
@@ -30,6 +31,8 @@ angular.module('mobileApp')
 	}
 
 	MentorCtrl.openBatch = function(data) {
+		loaded();
+
 		if(data.error) {
 			$location.path("/message").search({"error": data.error});
 			return;
@@ -67,11 +70,13 @@ angular.module('mobileApp')
 	}
 
 	MentorCtrl.save = function(batch_id, class_on, classes) {
+		loading();
 		$http({
 	        method: 'GET',
 	        url: base_url + 'class_save',
 	        params: {user_id: user_id, key: key, class_data: angular.toJson(classes)}
 		}).success(function(data) {
+			loaded();
 			growl.addSuccessMessage("Information Updated.", {ttl: 3000});
 		}).error(error);
 	}
@@ -134,6 +139,7 @@ angular.module('mobileApp')
 		else class_on.setDate(class_on.getDate() - 7);
 		var mysql_format = (class_on.getYear() + 1900) +  "-" + pad(class_on.getMonth() + 1, 2) + "-" + pad(class_on.getDate(), 2);
 
+		loading();
 		$http({
 			method: 'GET',
 			url: base_url + 'open_batch',
