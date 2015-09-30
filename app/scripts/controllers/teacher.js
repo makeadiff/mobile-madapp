@@ -62,7 +62,7 @@ angular.module('mobileApp')
 				"3": "Normal",
 				"4": "Interested",
 				"5": "Excited",
-			}}).rating("refresh", {disabled: true, showClear: false});
+			}}).rating("refresh", {showClear: false});
 		}, 100);
 	}
 
