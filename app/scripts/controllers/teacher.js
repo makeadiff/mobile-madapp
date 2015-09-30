@@ -62,7 +62,7 @@ angular.module('mobileApp')
 				"3": "Normal",
 				"4": "Interested",
 				"5": "Excited",
-			}}).rating("refresh");
+			}}).rating("refresh", {showCaption: true}); // Make sure this option is passed with the refresh command. Else, its not updating on new data.
 		}, 100);
 	}
 
