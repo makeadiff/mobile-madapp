@@ -37,10 +37,12 @@ angular.module('mobileApp')
 		TeacherCtrl.teacher = data;
 
 		var current_teacher;
+		var current_teacher_credit;
 		var other_teacher;
 		for(var i = 0; i<data.teachers.length; i++) {
 			if(data.teachers[i].current_user) {
 				current_teacher = data.teachers[i].name;
+				current_teacher_credit = data.teachers[i].credit;
 			} else {
 				if(other_teacher) other_teacher += "," + data.teachers[i].name;
 				else other_teacher = data.teachers[i].name;
@@ -51,6 +53,7 @@ angular.module('mobileApp')
 		}
 
 		TeacherCtrl.current_teacher = current_teacher;
+		TeacherCtrl.current_teacher_credit = current_teacher_credit;
 		TeacherCtrl.other_teacher = other_teacher;
 
 		// Wait a small time before applying the makeup.
