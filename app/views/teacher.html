@@ -1,8 +1,8 @@
 <div class="container" ng-controller="TeacherCtrl as TCtrl" ng-init="TCtrl.load()">
 
 <div id="class-details" class="row">
+<h4 class="teacher-credits">Credit: {{TCtrl.current_teacher_credit}}</h4>
 <h3>{{TCtrl.current_teacher}}</h3>
-<h4>Credit: {{TCtrl.current_teacher_credit}}</h4>
 <h4 ng-show="TCtrl.other_teacher">Co Teacher: {{TCtrl.other_teacher}}</h4>
 <strong>Center:</strong> <span class="info">{{TCtrl.teacher.center_name}}</span><br />
 <strong>Class Date:</strong>
