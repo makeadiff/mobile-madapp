@@ -20,3 +20,20 @@
 .teacher-credits {
 	float: right;
 }
+
+.cancelled {
+	background: 
+		/* On "top" */
+	  repeating-linear-gradient(
+	    45deg,
+	    transparent,
+	    transparent 10px,
+	    #555 10px,
+	    #555 20px
+	  );
+}
+
+.cancelled * {
+	opacity: 0.8;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
+}

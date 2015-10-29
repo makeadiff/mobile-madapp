@@ -13,7 +13,7 @@
 
 <form method="post" role="form" ng-submit="TCtrl.save(TCtrl.teacher.id, TCtrl.teacher.students)">
 <input type="hidden" name="class_id" value="{{TCtrl.teacher.id}}" />
-<div id="students">
+<div id="students" class="{{TCtrl.teacher.status}}">
 <div class="student" ng-repeat="student in TCtrl.teacher.students" class="row">
 <span class="attendance"></span>
 <span class="student-name">{{student.name}}</span>
@@ -21,7 +21,7 @@
 			data-size="xs" data-show-caption="true" data-clear-value="0" data-clear-caption="Absent" value="0" />
 </div>
 
-<button class="btn btn-lg btn-bottom btn-block" type="submit" name="action" value="Save">Save</button><br />
+<button class="btn btn-lg btn-bottom btn-block" type="submit" name="action" value="Save"  ng-disabled="TCtrl.teacher.status == 'cancelled'">Save</button><br />
 </div>
 </form>
 

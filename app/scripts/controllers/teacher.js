@@ -36,6 +36,9 @@ angular.module('mobileApp')
 		}
 		TeacherCtrl.teacher = data;
 
+		var cancelled = false;
+		if(TeacherCtrl.teacher.status == 'cancelled') cancelled = true;
+
 		var current_teacher;
 		var current_teacher_credit;
 		var other_teacher;
@@ -65,7 +68,7 @@ angular.module('mobileApp')
 				"3": "Attentive",
 				"4": "Involved",
 				"5": "Participative",
-			}}).rating("refresh", {showCaption: true}); // Make sure this option is passed with the refresh command. Else, its not updating on new data.
+			}}).rating("refresh", {showCaption: true, disabled: cancelled}); // Make sure this option is passed with the refresh command. Else, its not updating on new data.
 		}, 100);
 	}
 
