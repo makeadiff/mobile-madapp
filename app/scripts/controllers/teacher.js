@@ -9,18 +9,28 @@
  */
 angular.module('mobileApp')
   .controller('TeacherCtrl', ['$scope', '$location', '$http', 'growl', 'UserService', function ($scope, $location, $http, growl, user_service) {
-  	var TeacherCtrl = this;
-  	var user_id = user_service.getUserId();
+	var TeacherCtrl = this;
+	var user = user_service.getUser();
+	var user_id = user_service.getUserId();
 
-  	jQuery(".student-participation").rating();
-  	TeacherCtrl.user_id = user_id;
+	jQuery(".student-participation").rating();
+	TeacherCtrl.user_id = user_id;
 
-  	TeacherCtrl.load = function() {
-	  	$http({
-	        method: 'GET',
-	        url: base_url + 'class_get_last',
-	        params: {user_id: user_id, key: key}
-		}).success(TeacherCtrl.openClass).error(error);
+	TeacherCtrl.load = function() {
+		if(user.active_class) {
+			$http({
+				method: 'GET',
+				url: base_url + 'open_class',
+				params: {class_id: user.active_class, key: key}
+			}).success(TeacherCtrl.openClass).error(error);
+
+		} else {
+			$http({
+				method: 'GET',
+				url: base_url + 'class_get_last',
+				params: {user_id: user_id, key: key}
+			}).success(TeacherCtrl.openClass).error(error);
+		}
 	}
 
 	TeacherCtrl.openClass = function(data) {
@@ -81,16 +91,16 @@ angular.module('mobileApp')
 
 		loading();
 		$http({
-	        method: 'GET',
-	        url: base_url + 'class_save_student_participation',
-	        params: {"user_id": user_id, "key": key, "students": students, "class_id": class_id}
+			method: 'GET',
+			url: base_url + 'class_save_student_participation',
+			params: {"user_id": user_id, "key": key, "students": students, "class_id": class_id}
 		}).success(function(data) {
 			loaded();
 			growl.addSuccessMessage("Information Updated.", {ttl: 3000});
 		}).error(error);
 	}
-    
-    TeacherCtrl.browseClass = function(uid, class_on_date, direction) {
+	
+	TeacherCtrl.browseClass = function(uid, class_on_date, direction) {
 		var class_on = new Date(class_on_date.split(" ")[0]);
 
 		if(direction == "+") class_on.setDate(class_on.getDate() + 7);
@@ -101,7 +111,7 @@ angular.module('mobileApp')
 		$http({
 			method: 'GET',
 			url: base_url + 'get_class_on',
-			params: {"user_id": uid, "key": key, "class_on": mysql_format}
+			params: {"user_id": uid, "key": key, "class_on": mysql_format, "level_id": TeacherCtrl.teacher.level_id, "batch_id": TeacherCtrl.teacher.batch_id}
 		}).success(TeacherCtrl.openClass).error(error);
 	}
 

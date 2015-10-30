@@ -19,7 +19,7 @@
 <button class="btn btn-default btn-xs pull-right glyphicon glyphicon-remove-sign" name="cancel" id="cancel-button-{{class.id}}" 
 title="Cancel Class" ng-click="MCtrl.cancelClass(class)"></button>
 
-<h3 class="level-name">Class {{class.grade}} {{class.level_name}}</h3>
+<h3 class="level-name" ng-click="MCtrl.gotoClass(class)">Class {{class.grade}} {{class.level_name}}</h3>
 
 <div class="pull-right cancel-area" ng-show="(class.class_status == '0')">
 <select ng-model="class.cancel_option" class="cancel-option">

@@ -16,6 +16,10 @@ angular.module('mobileApp')
             $localStorage.logged_in = true;
         }
 
+        user.setUserData = function(name, value) {
+            $localStorage.user[name] = value;
+        }
+
         user.isLoggedIn = function() {
             return $localStorage.logged_in;
         }

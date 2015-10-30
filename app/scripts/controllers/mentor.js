@@ -9,22 +9,32 @@
  */
 angular.module('mobileApp')
   .controller('MentorCtrl', ['$scope', '$http', '$location', 'growl', 'UserService', function ($scope, $http, $location, growl, user_service) {
-  	var MentorCtrl = this;
-  	var user = user_service.getUser();
-  	var user_id = user.user_id;
+	var MentorCtrl = this;
+	var user = user_service.getUser();
+	var user_id = user.user_id;
 
-  	MentorCtrl.load = function() {
-  		loading();
-	  	$http({
-	        method: 'GET',
-	        url: base_url + 'class_get_last_batch',
-	        params: {user_id: user_id, key: key}
-		}).success(MentorCtrl.openBatch).error(error);
+	MentorCtrl.load = function() {
+		loading();
+
+		if(user.active_batch) {
+			$http({
+				method: 'GET',
+				url: base_url + 'class_get_batch',
+				params: {batch_id: user.active_batch, key: key}
+			}).success(MentorCtrl.openBatch).error(error);
+
+		} else {
+			$http({
+				method: 'GET',
+				url: base_url + 'class_get_last_batch',
+				params: {user_id: user_id, key: key}
+			}).success(MentorCtrl.openBatch).error(error);
+		}
 
 		$http({
-	        method: 'GET',
-	        url: base_url + 'user_get_teachers',
-	        params: {city_id: user.city_id, key: key}
+			method: 'GET',
+			url: base_url + 'user_get_teachers',
+			params: {city_id: user.city_id, key: key}
 		}).success(function(data) {
 			MentorCtrl.all_teachers = data.teachers;
 		});
@@ -72,9 +82,9 @@ angular.module('mobileApp')
 	MentorCtrl.save = function(batch_id, class_on, classes) {
 		loading();
 		$http({
-	        method: 'GET',
-	        url: base_url + 'class_save',
-	        params: {user_id: user_id, key: key, class_data: angular.toJson(classes)}
+			method: 'GET',
+			url: base_url + 'class_save',
+			params: {user_id: user_id, key: key, class_data: angular.toJson(classes)}
 		}).success(function(data) {
 			loaded();
 			growl.addSuccessMessage("Information Updated.", {ttl: 3000});
@@ -147,11 +157,14 @@ angular.module('mobileApp')
 		}).success(MentorCtrl.openBatch).error(error);
 	}
 
-    
+	MentorCtrl.gotoClass = function(class_data) {
+		user_service.setUserData("active_class", class_data.id);
+		$location.path("/teacher");
+	}
 }]);
 
 function pad(num, size) {
-    var s = num+"";
-    while (s.length < size) s = "0" + s;
-    return s;
+	var s = num+"";
+	while (s.length < size) s = "0" + s;
+	return s;
 }
