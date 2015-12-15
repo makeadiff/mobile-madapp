@@ -9,8 +9,8 @@
  * Main module of the application.
  */
 
-// var base_url = "http://localhost/Projects/Madapp/index.php/api/";
-var base_url = "http://makeadiff.in/madapp/index.php/api/";
+var base_url = "http://localhost/Projects/Madapp/index.php/api/";
+// var base_url = "http://makeadiff.in/madapp/index.php/api/";
 var key = "am3omo32hom4lnv32vO";
 
 angular
@@ -88,9 +88,10 @@ angular
       });
   });
 
-function error() {
+function error(message) {
   loaded();
-  alert("Error!");
+  if(!message) message = "Please try again after a while";
+  alert("Error: " + message);
 }
 function loading() {
   angular.element("#loading").show();

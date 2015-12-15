@@ -53,6 +53,9 @@
 .cancel-option {
 	width:200px;
 }
+.cancel-button {
+	z-index: 101;
+}
 
 /*
 #all-teachers {

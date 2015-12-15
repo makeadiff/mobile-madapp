@@ -16,7 +16,7 @@
 <div class="classes">
 <div class="class" ng-repeat="class in MCtrl.mentor.classes" ng-class="(class.class_status == '1' ? 'active' : 'cancelled')">
 <div class="class-box" id="class-{{class.id}}">
-<button class="btn btn-default btn-xs pull-right glyphicon glyphicon-remove-sign" name="cancel" id="cancel-button-{{class.id}}" 
+<button class="btn btn-default btn-xs pull-right glyphicon glyphicon-remove-sign cancel-button" name="cancel" id="cancel-button-{{class.id}}" 
 title="Cancel Class" ng-click="MCtrl.cancelClass(class)"></button>
 
 <h3 class="level-name" ng-click="MCtrl.gotoClass(class)">Class {{class.grade}} {{class.level_name}}</h3>
@@ -24,7 +24,8 @@ title="Cancel Class" ng-click="MCtrl.cancelClass(class)"></button>
 <div class="pull-right cancel-area" ng-show="(class.class_status == '0')">
 <select ng-model="class.cancel_option" class="cancel-option">
 	<optgroup label="Internal(MAD)">
-		<option value="in-volunteer-unavailable">Volunteer unavailability</option>
+		<option value="in-volunteer-unavailable">Volunteer Absent</option>
+		<option value="in-volunteer-unassigned">Volunteer Unassigned</option>
 		<option value="in-volunteer-engaged">Volunteer engaged with other events</option>
 		<option value="in-other">Other</option>
 	</optgroup>

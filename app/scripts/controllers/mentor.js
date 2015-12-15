@@ -13,6 +13,50 @@ angular.module('mobileApp')
 	var user = user_service.getUser();
 	var user_id = user.user_id;
 
+	// Use x-www-form-urlencoded Content-Type
+	$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+
+	/**
+	* The workhorse; converts an object to x-www-form-urlencoded serialization.
+	* @param {Object} obj
+	* @return {String}
+	*/ 
+	var param = function(obj) {
+		var query = '', name, value, fullSubName, subName, subValue, innerObj, i;
+		  
+		for(name in obj) {
+		  value = obj[name];
+			
+		  if(value instanceof Array) {
+			for(i=0; i<value.length; ++i) {
+			  subValue = value[i];
+			  fullSubName = name + '[' + i + ']';
+			  innerObj = {};
+			  innerObj[fullSubName] = subValue;
+			  query += param(innerObj) + '&';
+			}
+		  }
+		  else if(value instanceof Object) {
+			for(subName in value) {
+			  subValue = value[subName];
+			  fullSubName = name + '[' + subName + ']';
+			  innerObj = {};
+			  innerObj[fullSubName] = subValue;
+			  query += param(innerObj) + '&';
+			}
+		  }
+		  else if(value !== undefined && value !== null)
+			query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
+		}
+		  
+		return query.length ? query.substr(0, query.length - 1) : query;
+	};
+
+	// Override $http service's default transformRequest
+	$http.defaults.transformRequest = [function(data) {
+		return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
+	}];
+
 	MentorCtrl.load = function() {
 		loading();
 
@@ -82,18 +126,22 @@ angular.module('mobileApp')
 	MentorCtrl.save = function(batch_id, class_on, classes) {
 		loading();
 		$http({
-			method: 'GET',
+			method: 'POST',
 			url: base_url + 'class_save',
-			params: {user_id: user_id, key: key, class_data: angular.toJson(classes)}
+			data: {user_id: user_id, key: key, class_data: angular.toJson(classes)},
 		}).success(function(data) {
 			loaded();
-			growl.addSuccessMessage("Information Updated.", {ttl: 3000});
+			if(data.success) {
+				growl.addSuccessMessage("Information Updated.", {ttl: 3000});
+			} else {
+				error(data.error);
+			}
 		}).error(error);
 	}
 
 	MentorCtrl.cancelClass = function(class_info, reverse) {
 		var status = class_info.class_status;
-		if(reverse) status = (status == "1") ? "0" : "1"; // This is needed when lodaing.
+		if(reverse) status = (status == "1") ? "0" : "1"; // This is needed when loading.
 		var button_text = "";
 
 		if(status == "1") {
