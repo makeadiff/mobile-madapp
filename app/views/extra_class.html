@@ -1,0 +1,28 @@
+<div class="container" ng-controller="ExtraClassCtrl as ECtrl" ng-init="ECtrl.load()">
+
+<div class="row">
+<h3>Create Extra Class</h3>
+</div>
+
+<form method="post" role="form" ng-submit="ECtrl.save(ECtrl.batch_id, ECtrl.levels)">
+
+<!-- https://angular-ui.github.io/bootstrap/ - use this for date picker -->
+<p class="input-group">
+<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+<span class="input-group-btn">
+<button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+</span>
+</p>
+
+
+<div class="levels">
+<h4>Select Class Sections</h4>
+<div class="level" ng-repeat="level in ECtrl.levels" class="row">
+<input name="level[{{level.id}}]" id="level-{{level.id}}" type="checkbox" /> <label for="level-{{level.id}}">{{level.grade}} {{level.name}}</label>
+</div>
+</div>
+
+<button class="btn btn-lg btn-bottom btn-block" type="submit" name="action" value="Save">Save</button><br />
+</form>
+
+</div>

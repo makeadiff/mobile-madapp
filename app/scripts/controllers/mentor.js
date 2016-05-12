@@ -16,6 +16,12 @@ angular.module('mobileApp')
 	// Use x-www-form-urlencoded Content-Type
 	$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 
+	$('.kc_fab_wrapper').kc_fab([{
+		"url":"#/extra_class",
+		"bgcolor":"#03A9F4",
+		"icon":"+"
+	}]);
+
 	/**
 	* The workhorse; converts an object to x-www-form-urlencoded serialization.
 	* @param {Object} obj
@@ -100,6 +106,8 @@ angular.module('mobileApp')
 
 		MentorCtrl.mentor = data;
 		MentorCtrl.mentor.name = user.name;
+
+		user_service.setUserData("active_batch", data.batch_id); // Need this for exta class creation.
 
 		setTimeout(function() {
 			for(var index in data.classes) {

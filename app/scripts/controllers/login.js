@@ -28,7 +28,7 @@ angular.module('mobileApp')
 				if((connections.teacher_at.length + connections.mentor_at.length) > 1) {
 					
 					$location.path("/connections");
-
+ 
 				} else {
 					if(LoginCtrl.user.mentor == "1") {
 						$location.path("/mentor");

@@ -14,6 +14,8 @@
     <!-- build:css(.tmp) styles/thirdparty.css -->
     <link rel="stylesheet" href="styles/themes/darkly.css" />
     <link rel="stylesheet" href="bower_components/angular-growl/build/angular-growl.min.css" />
+    <link rel="stylesheet" href="bower_components/kc_fab/dist/css/kc.fab.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
@@ -43,6 +45,8 @@
     <div ng-view=""></div>
     </div>
 
+    <div class="kc_fab_wrapper"></div>
+
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -57,6 +61,8 @@
     <script src="bower_components/ngstorage/ngStorage.js"></script>
     <script src="bower_components/bootstrap-star-rating/js/star-rating.min.js"></script>
     <script src="bower_components/angular-growl/build/angular-growl.js"></script>
+    <script src="bower_components/kc_fab/dist/js/kc.fab.js"></script>
+
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -69,6 +75,7 @@
     <script src="scripts/controllers/mentor.js"></script>
     <script src="scripts/controllers/message.js"></script>
     <script src="scripts/controllers/connections.js"></script>
+    <script src="scripts/controllers/extra_class.js"></script>
 
     <script src="scripts/services/userservice.js"></script>
     <script src="scripts/directives/checkuser.js"></script>
