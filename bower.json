@@ -13,7 +13,8 @@
     "ngstorage": "~0.3.6",
     "bootstrap-star-rating": "~3.5.3",
     "angular-growl": "~0.4.0",
-    "kc_fab": "*"
+    "kc_fab": "*",
+    "ngDatepicker": "*"
   },
   "devDependencies": {
     "angular-mocks": "^1.3.0"

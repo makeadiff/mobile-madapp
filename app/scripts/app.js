@@ -22,7 +22,8 @@ angular
 	'ngSanitize',
 	'ngTouch',
 	'ngStorage',
-	'angular-growl'
+	'angular-growl',
+	'jkuri.datepicker'
   ])
   .config(function ($routeProvider) {
 	$routeProvider
