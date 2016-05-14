@@ -1,6 +1,6 @@
 <div class="container" ng-controller="MentorCtrl as MCtrl" ng-init="MCtrl.load()">
 
-<div id="class-details" class="row">
+<div id="class-details" class="row ng-class:MCtrl.mentor.classes[0].class_type">
 <h3>{{MCtrl.mentor.name}}</h3>
 <strong>Center:</strong> <span class="info">{{MCtrl.mentor.center_name}}</span><br />
 <strong>Class Date:</strong>

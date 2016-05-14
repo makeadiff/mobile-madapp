@@ -3,7 +3,7 @@
 <div id="connections" class="row">
 <h3 class="teacher-name">{{CCtrl.user.name}}</h3>
 
-<p>You have multiple upcoming classes - choose one...</p>
+<p>Your classes...</p>
 
 <div class="classes">
 
@@ -15,7 +15,7 @@
 	</div>
 </div>
 
-<div class="mentor_at" ng-show="CCtrl.user.connections.teacher_at">
+<div class="teacher_at" ng-show="CCtrl.user.connections.teacher_at">
 	<h4>Teacher Classes</h4>
 	<div class="btn-group-vertical" role="group">
 	<button ng-repeat="con in CCtrl.user.connections.teacher_at" class="btn btn-primary" name="choose" id="class-{{con.id}}" 

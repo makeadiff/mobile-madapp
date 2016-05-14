@@ -66,7 +66,17 @@ angular.module('mobileApp')
 	MentorCtrl.load = function() {
 		loading();
 
-		if(user.active_batch) {
+	  	var options = $location.search();
+	  	console.log(options);
+
+	  	if(options.batch_id && options.class_on) {
+	  		$http({
+				method: 'GET',
+				url: base_url + 'class_get_batch',
+				params: {batch_id: options.batch_id, 'class_on': options.class_on, key: key}
+			}).success(MentorCtrl.openBatch).error(error);
+
+	  	} else if(user.active_batch) {
 			$http({
 				method: 'GET',
 				url: base_url + 'class_get_batch',
@@ -201,15 +211,16 @@ angular.module('mobileApp')
 
 	MentorCtrl.browseClass = function(batch_id, class_on, direction) {
 		var class_on = new Date(class_on);
-		if(direction == "+") class_on.setDate(class_on.getDate() + 7);
-		else class_on.setDate(class_on.getDate() - 7);
+
+		// if(direction == "+") class_on.setDate(class_on.getDate() + 7);
+		// else class_on.setDate(class_on.getDate() - 7);
 		var mysql_format = (class_on.getYear() + 1900) +  "-" + pad(class_on.getMonth() + 1, 2) + "-" + pad(class_on.getDate(), 2);
 
 		loading();
 		$http({
 			method: 'GET',
 			url: base_url + 'open_batch',
-			params: {"user_id": user_id, "key": key, "batch_id": batch_id, "class_on": mysql_format}
+			params: {"user_id": user_id, "key": key, "batch_id": batch_id, "class_from": mysql_format, "direction": direction}
 		}).success(MentorCtrl.openBatch).error(error);
 	}
 

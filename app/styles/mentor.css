@@ -57,6 +57,10 @@
 	z-index: 101;
 }
 
+.extra {
+	background-color: #008080 !important;
+}
+
 /*
 #all-teachers {
 	display: none;
