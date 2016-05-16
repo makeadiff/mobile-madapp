@@ -37,3 +37,12 @@
 	opacity: 0.8;
     filter: alpha(opacity=80); /* For IE8 and earlier */
 }
+
+.directions {
+	cursor: pointer;
+}
+
+.check_for_understanding_label {
+	font-size: 120%;
+	margin-bottom: 0;
+}

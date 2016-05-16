@@ -45,6 +45,7 @@ angular.module('mobileApp')
 			return;
 		}
 		TeacherCtrl.teacher = data;
+		TeacherCtrl.teacher.check_for_understanding = Number(TeacherCtrl.teacher.check_for_understanding);
 
 		var cancelled = false;
 		if(TeacherCtrl.teacher.status == 'cancelled') cancelled = true;
@@ -71,18 +72,20 @@ angular.module('mobileApp')
 
 		// Wait a small time before applying the makeup.
 		setTimeout(function() {
-			$(".rating").rating({starCaptions: {
+			$(".check_for_understanding").rating("refresh", {showCaption: false, disabled: cancelled, showClear: false});
+
+			$(".participation").rating({starCaptions: {
 				"0": "Absent",
 				"1": "Disruptive",
 				"2": "Distracted",
 				"3": "Attentive",
 				"4": "Involved",
 				"5": "Participative",
-			}}).rating("refresh", {showCaption: true, disabled: cancelled}); // Make sure this option is passed with the refresh command. Else, its not updating on new data.
+			}}).rating("refresh", {showCaption: true, disabled: cancelled}); // Make sure this option is passed with the refresh command. Else, its not updating on new data.;
 		}, 100);
 	}
 
-	TeacherCtrl.save = function(class_id, students) {
+	TeacherCtrl.save = function(class_id, students, check_for_understanding) {
 		// Stupid hack to make sure that the absent students are marked as 0. Right now due to some conflict between angular and star-rateings, its not happening.
 		for (var i in students) {
 			var ele = $("#participation-" + i);
@@ -93,7 +96,7 @@ angular.module('mobileApp')
 		$http({
 			method: 'GET',
 			url: base_url + 'class_save_student_participation',
-			params: {"user_id": user_id, "key": key, "students": students, "class_id": class_id}
+			params: {"user_id": user_id, "key": key, "students": students, "check_for_understanding": check_for_understanding, "class_id": class_id}
 		}).success(function(data) {
 			loaded();
 			growl.addSuccessMessage("Information Updated.", {ttl: 3000});
