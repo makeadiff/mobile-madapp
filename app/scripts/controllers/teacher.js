@@ -106,15 +106,13 @@ angular.module('mobileApp')
 	TeacherCtrl.browseClass = function(uid, class_on_date, direction) {
 		var class_on = new Date(class_on_date.split(" ")[0]);
 
-		if(direction == "+") class_on.setDate(class_on.getDate() + 7);
-		else class_on.setDate(class_on.getDate() - 7);
 		var mysql_format = (class_on.getYear() + 1900) +  "-" + pad(class_on.getMonth() + 1, 2) + "-" + pad(class_on.getDate(), 2);
 
 		loading();
 		$http({
 			method: 'GET',
-			url: base_url + 'get_class_on',
-			params: {"user_id": uid, "key": key, "class_on": mysql_format, "level_id": TeacherCtrl.teacher.level_id, "batch_id": TeacherCtrl.teacher.batch_id}
+			url: base_url + 'browse_class',
+			params: {"key": key, "class_from": mysql_format, "level_id": TeacherCtrl.teacher.level_id, "batch_id": TeacherCtrl.teacher.batch_id, "direction": direction}
 		}).success(TeacherCtrl.openClass).error(error);
 	}
 
