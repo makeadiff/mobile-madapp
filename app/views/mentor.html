@@ -49,7 +49,7 @@ title="Cancel Class" ng-click="MCtrl.cancelClass(class)"></button>
 </div>
 
 
-<span ng-class="{'substituted': (teacher.substitute_id != '0'), 'teacher-name':true}" ng-click="MCtrl.showSubstitute({{teacher.id}}, {{teacher}})"><span class="glyphicon glyphicon-user user-icon"></span> {{teacher.name}}</span>
+<span ng-class="{'substituted': (teacher.substitute_id != '0'), 'teacher-name':true}" ng-click="MCtrl.showSubstitute(teacher.id,teacher)"><span class="glyphicon glyphicon-user user-icon"></span> {{teacher.name}}</span>
 <div id="substitute-{{teacher.id}}" class="substitute-area" ng-show="teacher.substitute_id">
 <label>Substitute: </label>
 <select name="substitute[{{teacher.id}}]" ng-model="teacher.substitute_id" id="sub-{{teacher.id}}">

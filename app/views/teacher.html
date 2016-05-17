@@ -1,15 +1,19 @@
 <div class="container" ng-controller="TeacherCtrl as TCtrl" ng-init="TCtrl.load()">
 
-<form method="post" role="form" ng-submit="TCtrl.save(TCtrl.teacher.id, TCtrl.teacher.students, TCtrl.teacher.check_for_understanding)">
+<form method="post" role="form" ng-submit="TCtrl.save(TCtrl.teacher.id, TCtrl.teacher.students, TCtrl.teacher.check_for_understanding,TCtrl.teacher.class_satisfaction)">
 <div id="class-details" class="row">
 <h4 class="teacher-credits" ng-show="TCtrl.current_teacher_credit">Credit: {{TCtrl.current_teacher_credit}}</h4>
 <h3>{{TCtrl.current_teacher}}</h3>
 <h4 ng-show="TCtrl.other_teacher">Co Teacher: {{TCtrl.other_teacher}}</h4>
 <!-- Add level name/grade here -->
 
-<h5 class="check_for_understanding_label">Check for Understading...</h5>
+<h5 class="check_for_understanding_label">Check for Understading</h5>
 <input type="number" name="check_for_understanding" id="check_for_understanding" ng-model="TCtrl.teacher.check_for_understanding" class="rating check_for_understanding" min="0" max="5" step="1" 
 			data-size="sm" data-show-caption="true" data-clear-value="0" data-clear-caption="Unknown" value="0" />
+
+<h5 class="check_for_understanding_label">Class Satisfaction</h5>
+<input type="number" name="class_satisfaction" id="class_satisfaction" ng-model="TCtrl.teacher.class_satisfaction" class="rating class_satisfaction" min="0" max="5" step="1"
+	   data-size="sm" data-show-caption="true" data-clear-value="0" data-clear-caption="Unknown" value="0" />
 
 <strong>Center:</strong> <span class="info">{{TCtrl.teacher.center_name}}</span><br />
 <strong>Class Date:</strong>
