@@ -1,9 +1,11 @@
 <div class="container" ng-controller="ConnectionCtrl as CCtrl">
 
 <div id="connections" class="row">
-<h3 class="teacher-name">{{CCtrl.user.name}}</h3>
+<h3 class="teacher-name">Hi,&nbsp;{{CCtrl.user.name}}</h3>
 
-<p>Your classes...</p>
+<br>
+<h4>Select your class : </h4>
+<br>
 
 <div class="classes">
 
@@ -14,6 +16,8 @@
 		title="{{con.class_time}}" ng-click="CCtrl.mentorClass(con.batch_id)">{{con.center_name}}, <span ng-bind="formatDate(con.class_on) | date:'MMMM d EEE, hh:mm a'"></span></button>
 	</div>
 </div>
+
+<br>
 
 <div class="teacher_at" ng-show="CCtrl.user.connections.teacher_at">
 	<h4>Teacher Classes</h4>

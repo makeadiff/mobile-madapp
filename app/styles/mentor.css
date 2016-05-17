@@ -14,7 +14,7 @@
 	padding:10px;
 	border-top: 1px solid #25a5a3;
 }
-.class:n1 {
+.class:first-child {
 	border-top: 0px solid #25a5a3;
 }
 .class-box h3 {

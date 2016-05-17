@@ -17,6 +17,10 @@
 	padding:10px;
 	border-top: 1px solid #25a5a3;
 }
+
+.student:first-child {
+	border-top: 0px solid #25a5a3;
+}
 .teacher-credits {
 	float: right;
 }
