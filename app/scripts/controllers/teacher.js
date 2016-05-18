@@ -11,6 +11,11 @@ angular.module('mobileApp')
   .controller('TeacherCtrl', ['$scope', '$location', '$http', 'growl', 'UserService', function ($scope, $location, $http, growl, user_service) {
 	var TeacherCtrl = this;
 	var user = user_service.getUser();
+	if(!user) {
+		$location.path("/login");
+		growl.addErrorMessage("Please login to continue", {ttl: 3000});
+		return false;
+	}
 	var user_id = user_service.getUserId();
 
 	jQuery(".student-participation").rating();
@@ -45,8 +50,7 @@ angular.module('mobileApp')
 			return;
 		}
 		TeacherCtrl.teacher = data;
-		TeacherCtrl.teacher.check_for_understanding = Number(TeacherCtrl.teacher.check_for_understanding);
-		TeacherCtrl.teacher.class_satisfaction= Number(TeacherCtrl.teacher.class_satisfaction);
+		TeacherCtrl.teacher.class_satisfaction = Number(TeacherCtrl.teacher.class_satisfaction);
 
 		var cancelled = false;
 		if(TeacherCtrl.teacher.status == 'cancelled') cancelled = true;
@@ -54,12 +58,13 @@ angular.module('mobileApp')
 		var current_teacher;
 		var current_teacher_credit;
 		var other_teacher;
-		for(var i = 0; i<data.teachers.length; i++) {
+
+		for(var i = 0; i < data.teachers.length; i++) {
 			if(data.teachers[i].current_user) {
 				current_teacher = data.teachers[i].name;
 				current_teacher_credit = data.teachers[i].credit;
 			} else {
-				if(other_teacher) other_teacher += "," + data.teachers[i].name;
+				if(other_teacher) other_teacher += ", " + data.teachers[i].name;
 				else other_teacher = data.teachers[i].name;
 			}
 		}
@@ -73,7 +78,6 @@ angular.module('mobileApp')
 
 		// Wait a small time before applying the makeup.
 		setTimeout(function() {
-			$(".check_for_understanding").rating("refresh", {showCaption: false, disabled: cancelled, showClear: false});
 			$(".class_satisfaction").rating("refresh", {showCaption: false, disabled: cancelled, showClear: false});
 
 			$(".participation").rating({starCaptions: {
@@ -87,18 +91,17 @@ angular.module('mobileApp')
 		}, 100);
 	}
 
-	TeacherCtrl.save = function(class_id, students, check_for_understanding,class_satisfaction) {
+	TeacherCtrl.save = function(class_id, students, class_satisfaction) {
 		// Stupid hack to make sure that the absent students are marked as 0. Right now due to some conflict between angular and star-rateings, its not happening.
 		for (var i in students) {
-			var ele = $("#participation-" + i);
-			students[i].participation = Number(ele.val());
+			students[i].participation = Number($("#participation-" + i).val());
 		}
 
 		loading();
 		$http({
 			method: 'GET',
 			url: base_url + 'class_save_student_participation',
-			params: {"user_id": user_id, "key": key, "students": students, "check_for_understanding": check_for_understanding, "class_satisfaction": class_satisfaction, "class_id": class_id}
+			params: {"user_id": user_id, "key": key, "students": students, "class_satisfaction": class_satisfaction, "class_id": class_id}
 		}).success(function(data) {
 			loaded();
 			growl.addSuccessMessage("Information Updated.", {ttl: 3000});

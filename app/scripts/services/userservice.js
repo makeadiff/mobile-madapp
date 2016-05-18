@@ -25,10 +25,15 @@ angular.module('mobileApp')
         }
 
         user.getUserId = function() {
+            if(!$localStorage.user) return 0;
+            if(!$localStorage.user.user_id == "undefined") return 0;
+
             return $localStorage.user.user_id;
         }
 
         user.getUser = function() {
+            if(!$localStorage.user) return false;
+            
             return $localStorage.user;
         }
 
