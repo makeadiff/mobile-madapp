@@ -1,17 +1,13 @@
 <div class="container" ng-controller="TeacherCtrl as TCtrl" ng-init="TCtrl.load()">
 
-<form method="post" role="form" ng-submit="TCtrl.save(TCtrl.teacher.id, TCtrl.teacher.students, TCtrl.teacher.check_for_understanding,TCtrl.teacher.class_satisfaction)">
+<form method="post" role="form" ng-submit="TCtrl.save(TCtrl.teacher.id, TCtrl.teacher.students, TCtrl.teacher.class_satisfaction)">
 <div id="class-details" class="row">
 <h4 class="teacher-credits" ng-show="TCtrl.current_teacher_credit">Credit: {{TCtrl.current_teacher_credit}}</h4>
 <h3>{{TCtrl.current_teacher}}</h3>
 <h4 ng-show="TCtrl.other_teacher">Co Teacher: {{TCtrl.other_teacher}}</h4>
-<!-- Add level name/grade here -->
+<h4>Level: {{TCtrl.teacher.level}}</h4>
 
-<h5 class="check_for_understanding_label">Check for Understading</h5>
-<input type="number" name="check_for_understanding" id="check_for_understanding" ng-model="TCtrl.teacher.check_for_understanding" class="rating check_for_understanding" min="0" max="5" step="1" 
-			data-size="sm" data-show-caption="true" data-clear-value="0" data-clear-caption="Unknown" value="0" />
-
-<h5 class="check_for_understanding_label">Class Satisfaction</h5>
+<h5 class="class_satisfaction_label">Class Satisfaction</h5>
 <input type="number" name="class_satisfaction" id="class_satisfaction" ng-model="TCtrl.teacher.class_satisfaction" class="rating class_satisfaction" min="0" max="5" step="1"
 	   data-size="sm" data-show-caption="true" data-clear-value="0" data-clear-caption="Unknown" value="0" />
 
@@ -25,11 +21,18 @@
 
 <input type="hidden" name="class_id" value="{{TCtrl.teacher.id}}" />
 <div id="students" class="{{TCtrl.teacher.status}}"> 
-<div class="student" ng-repeat="student in TCtrl.teacher.students" class="row">
-<span class="attendance"></span>
-<span class="student-name">{{student.name}}</span>
-<input type="number" name="participation[{{student.id}}]" id="participation-{{student.id}}" ng-model="student.participation" class="rating participation" min="0" max="5" step="1" 
-			data-size="xs" data-show-caption="true" data-clear-value="0" data-clear-caption="Absent" value="0" />
+
+<div class="student row" ng-repeat="student in TCtrl.teacher.students">
+	<span class="attendance"></span>
+	<div class="row">
+		<span class="student-name">{{student.name}}</span>
+		<input type="number" name="participation[{{student.id}}]" id="participation-{{student.id}}" ng-model="student.participation" class="rating participation" min="0" max="5" step="1" 
+				data-size="xs" data-show-caption="true" data-clear-value="0" data-clear-caption="Absent" value="0" />
+
+		<strong>Check for Understading</strong>
+		<input type="checkbox" ng-switch-toggle-simple ng-model="student.check_for_understanding" id="check_for_understanding-{{student.id}}" text-on="Yes" text-off="No" theme="candy"/>
+	</div>
+
 </div>
 
 <button class="btn btn-lg btn-bottom btn-block" type="submit" name="action" value="Save"  ng-disabled="TCtrl.teacher.status == 'cancelled'">Save</button><br />

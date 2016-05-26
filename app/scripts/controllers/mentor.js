@@ -11,6 +11,11 @@ angular.module('mobileApp')
   .controller('MentorCtrl', ['$scope', '$http', '$location', 'growl', 'UserService', function ($scope, $http, $location, growl, user_service) {
 	var MentorCtrl = this;
 	var user = user_service.getUser();
+	if(!user) {
+		$location.path("/login");
+		growl.addErrorMessage("Please login to continue", {ttl: 3000});
+		return false;
+	}
 	var user_id = user.user_id;
 
 	// Use x-www-form-urlencoded Content-Type
