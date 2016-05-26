@@ -78,7 +78,14 @@ angular.module('mobileApp')
 
 		// Wait a small time before applying the makeup.
 		setTimeout(function() {
-			$(".class_satisfaction").rating("refresh", {showCaption: false, disabled: cancelled, showClear: false});
+			$(".class_satisfaction").rating({starCaptions: {
+				"0": "No Data",
+				"1": "Dissatisfied",
+				"2": "Less Satisfied",
+				"3": "Satisfied",
+				"4": "Very Satisfied",
+				"5": "Completely Satisfied",
+			}}).rating("refresh", {showCaption: true, disabled: cancelled, showClear: false});
 
 			$(".participation").rating({starCaptions: {
 				"0": "Absent",

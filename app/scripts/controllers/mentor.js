@@ -72,7 +72,6 @@ angular.module('mobileApp')
 		loading();
 
 	  	var options = $location.search();
-	  	console.log(options);
 
 	  	if(options.batch_id && options.class_on) {
 	  		$http({
