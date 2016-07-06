@@ -24,7 +24,7 @@ title="Cancel Class" ng-click="MCtrl.cancelClass(class)"></button>
 <div class="pull-right cancel-area" ng-show="(class.class_status == '0')">
 <select ng-model="class.cancel_option" class="cancel-option">
 	<optgroup label="Internal(MAD)">
-		<option value="in-volunteer-unavailable">Volunteer Absent</option>
+		<!-- <option value="in-volunteer-unavailable">Volunteer Absent</option> -->
 		<option value="in-volunteer-unassigned">Volunteer Unassigned</option>
 		<option value="in-volunteer-engaged">Volunteer engaged with other events</option>
 		<option value="in-other">Other</option>
@@ -44,8 +44,8 @@ title="Cancel Class" ng-click="MCtrl.cancelClass(class)"></button>
 <div class="teachers">
 <div class="teacher" ng-repeat="teacher in class.teachers" class="row">
 <div class="pull-right attendance-area" ng-show="(class.class_status == '1')">
+<span class="zero-hour" ng-show="teacher.status"> ZH <input  id="zero-hour-{{teacher.id}}" type="checkbox" name="zero-hour[{{teacher.id}}]" ng-model="teacher.zero_hour_attendance" title="Zero Hour" /> | </span>
 <span class="status"><input id="attendance-{{teacher.id}}" type="checkbox" name="status[{{teacher.id}}]" ng-model="teacher.status" title="Attendance" /></span>
-<span class="zero-hour" ng-show="teacher.status"> | ZH <input  id="zero-hour-{{teacher.id}}" type="checkbox" name="zero-hour[{{teacher.id}}]" ng-model="teacher.zero_hour_attendance" title="Zero Hour" /></span>
 </div>
 
 

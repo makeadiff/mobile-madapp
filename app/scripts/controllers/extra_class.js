@@ -101,7 +101,12 @@ angular.module('mobileApp')
 		if(data.success) {
 			$location.path("/mentor").search({batch_id: batch_id, class_on: class_on});
 
-			growl.addSuccessMessage("Added the Extra Class.", {ttl: 3000});
+			if(data.classes.length == 0) {
+				growl.addSuccessMessage("Classes already exist on that day", {ttl: 3000});
+			} else {
+				growl.addSuccessMessage("Added the Extra Class.", {ttl: 3000});
+			}
+
 		} else
 			growl.addErrorMessage("Couldn't add the extra class.", {ttl: 3000});
 

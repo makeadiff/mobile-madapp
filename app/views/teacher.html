@@ -1,6 +1,6 @@
 <div class="container" ng-controller="TeacherCtrl as TCtrl" ng-init="TCtrl.load()">
 
-<form method="post" role="form" ng-submit="TCtrl.save(TCtrl.teacher.id, TCtrl.teacher.students, TCtrl.teacher.class_satisfaction)">
+<form method="post" role="form" ng-submit="TCtrl.save(TCtrl.teacher.id, TCtrl.teacher.students, TCtrl.teacher.class_satisfaction)" class="{{TCtrl.teacher.status}}">
 <div id="class-details" class="row">
 <h4 class="teacher-credits" ng-show="TCtrl.current_teacher_credit">Credit: {{TCtrl.current_teacher_credit}}</h4>
 <h3>{{TCtrl.current_teacher}}</h3>
@@ -26,11 +26,13 @@
 	<span class="attendance"></span>
 	<div class="row">
 		<span class="student-name">{{student.name}}</span>
-		<input type="number" name="participation[{{student.id}}]" id="participation-{{student.id}}" ng-model="student.participation" class="rating participation" min="0" max="5" step="1" 
+		<input type="number" name="participation[{{student.id}}]" id="participation-{{student.id}}" ng-model="student.participation" 
+				class="rating participation" min="0" max="5" step="1" 
 				data-size="xs" data-show-caption="true" data-clear-value="0" data-clear-caption="Absent" value="0" />
 
 		<strong>Check for Understading</strong>
-		<input type="checkbox" ng-switch-toggle-simple ng-model="student.check_for_understanding" id="check_for_understanding-{{student.id}}" text-on="Yes" text-off="No" theme="candy"/>
+		<input type="checkbox" ng-switch-toggle-simple ng-model="student.check_for_understanding" id="check_for_understanding-{{student.id}}"  
+				text-on="Yes" text-off="No" theme="candy" />
 	</div>
 
 </div>
