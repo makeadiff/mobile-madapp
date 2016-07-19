@@ -9,7 +9,7 @@
 
 <h5 class="class_satisfaction_label">Class Satisfaction</h5>
 <input type="number" name="class_satisfaction" id="class_satisfaction" ng-model="TCtrl.teacher.class_satisfaction" class="rating class_satisfaction" min="0" max="5" step="1"
-	   data-size="sm" data-show-caption="true" data-clear-value="0" data-clear-caption="Unknown" value="0" />
+	   data-size="xs" data-show-caption="true" data-clear-value="0" data-clear-caption="Unknown" value="0" />
 
 <strong>Center:</strong> <span class="info">{{TCtrl.teacher.center_name}}</span><br />
 <strong>Class Date:</strong>
@@ -31,13 +31,13 @@
 				data-size="xs" data-show-caption="true" data-clear-value="0" data-clear-caption="Absent" value="0" />
 
 		<strong>Check for Understading</strong>
-		<input type="checkbox" ng-switch-toggle-simple ng-model="student.check_for_understanding" id="check_for_understanding-{{student.id}}"  
-				text-on="Yes" text-off="No" theme="candy" />
+		<toggle-switch ng-model="student.check_for_understanding" id="check_for_understanding-{{student.id}}" is-disabled="TCtrl.teacher.status == 'cancelled'"
+				on-label="Yes" off-label="No"></toggle-switch>
 	</div>
 
 </div>
 
-<button class="btn btn-lg btn-bottom btn-block" type="submit" name="action" value="Save"  ng-disabled="TCtrl.teacher.status == 'cancelled'">Save</button><br />
+<button class="btn btn-lg btn-bottom btn-block" type="submit" name="action" value="Save" ng-disabled="TCtrl.teacher.status == 'cancelled'">Save</button><br />
 </div>
 </form>
 

@@ -1,90 +1,89 @@
 <!doctype html>
 <html class="no-js">
   <head>
-    <meta charset="utf-8">
-    <title>MobApp</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap-star-rating/css/star-rating.min.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/thirdparty.css -->
-    <link rel="stylesheet" type="text/css" href="styles/themes/darkly.css" />
-    <link rel="stylesheet" type="text/css" href="bower_components/angular-growl/build/angular-growl.min.css" />
-    <link rel="stylesheet" type="text/css" href="bower_components/kc_fab/dist/css/kc.fab.css" />
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="bower_components/ngDatepicker/src/css/ngDatepicker.css" />
-    <link rel="stylesheet" type="text/css" href="directive/ng-switch-toggle/ng-switch-toggle.css" />
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
+	<meta charset="utf-8">
+	<title>MobApp</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<!-- build:css(.) styles/vendor.css -->
+	<!-- bower:css -->
+	<link rel="stylesheet" href="bower_components/bootstrap-star-rating/css/star-rating.min.css" />
+	<!-- endbower -->
+	<!-- endbuild -->
+	<!-- build:css(.tmp) styles/thirdparty.css -->
+	<link rel="stylesheet" type="text/css" href="styles/themes/darkly.css" />
+	<link rel="stylesheet" type="text/css" href="bower_components/angular-growl/build/angular-growl.min.css" />
+	<link rel="stylesheet" type="text/css" href="bower_components/kc_fab/dist/css/kc.fab.css" />
+	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="bower_components/ngDatepicker/src/css/ngDatepicker.css" />
+	<link rel="stylesheet" type="text/css" href="bower_components/angular-bootstrap-toggle-switch/style/bootstrap3/angular-toggle-switch-bootstrap-3.css" />
+	<!-- endbuild -->
+	<!-- build:css(.tmp) styles/main.css -->
+	<link rel="stylesheet" href="styles/main.css">
+	<!-- endbuild -->
   </head>
   <body ng-app="mobileApp">
   <div id="loading">loading...</div>
 
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+	<!--[if lt IE 7]>
+	  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div class="header">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#/connections"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;MADApp</a>
-          </div>
-          
-        </div>
-      </div>
-    </div>
-    <div growl></div>
+	<!-- Add your site or application content here -->
+	<div class="header">
+	  <div class="navbar navbar-default" role="navigation">
+		<div class="container">
+		  <div class="navbar-header">
+			<a class="navbar-brand" href="#/connections"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;MADApp</a>
+		  </div>
+		  
+		</div>
+	  </div>
+	</div>
+	<div growl></div>
 
-    <div id="content" class="container">
-    <div ng-view=""></div>
-    </div>
+	<div id="content" class="container">
+	<div ng-view=""></div>
+	</div>
 
-    <div class="kc_fab_wrapper"></div>
+	<div class="kc_fab_wrapper"></div>
 
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/ngstorage/ngStorage.js"></script>
-    <script src="bower_components/bootstrap-star-rating/js/star-rating.min.js"></script>
-    <script src="bower_components/angular-growl/build/angular-growl.js"></script>
-    <script src="bower_components/kc_fab/dist/js/kc.fab.js"></script>
-    <script type="text/javascript" src="bower_components/ngDatepicker/src/js/ngDatepicker.min.js"></script>
-    <script src="bower_components/moment/moment.js"></script>
-    <script src="directive/ng-switch-toggle/ng-switch-toggle.js"></script>
+	<!-- build:js(.) scripts/vendor.js -->
+	<!-- bower:js -->
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="bower_components/angular-animate/angular-animate.js"></script>
+	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+	<script src="bower_components/angular-resource/angular-resource.js"></script>
+	<script src="bower_components/angular-route/angular-route.js"></script>
+	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+	<script src="bower_components/angular-touch/angular-touch.js"></script>
+	<script src="bower_components/ngstorage/ngStorage.js"></script>
+	<script src="bower_components/bootstrap-star-rating/js/star-rating.min.js"></script>
+	<script src="bower_components/angular-growl/build/angular-growl.js"></script>
+	<script src="bower_components/kc_fab/dist/js/kc.fab.js"></script>
+	<script type="text/javascript" src="bower_components/ngDatepicker/src/js/ngDatepicker.min.js"></script>
+	<script src="bower_components/moment/moment.js"></script>
+	<script src="bower_components/angular-bootstrap-toggle-switch/angular-toggle-switch.min.js"></script>
+	<!-- endbower -->
+	<!-- endbuild -->
 
-    <!-- endbower -->
-    <!-- endbuild -->
+	<!-- build:js({.tmp,app}) scripts/scripts.js -->
+	<script src="scripts/app.js"></script>
+	<script src="scripts/controllers/main.js"></script>
+	<script src="scripts/controllers/about.js"></script>
+	<script src="scripts/controllers/login.js"></script>
+	<script src="scripts/controllers/teacher.js"></script>
+	<script src="scripts/controllers/mentor.js"></script>
+	<script src="scripts/controllers/message.js"></script>
+	<script src="scripts/controllers/connections.js"></script>
+	<script src="scripts/controllers/extra_class.js"></script>
 
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/about.js"></script>
-    <script src="scripts/controllers/login.js"></script>
-    <script src="scripts/controllers/teacher.js"></script>
-    <script src="scripts/controllers/mentor.js"></script>
-    <script src="scripts/controllers/message.js"></script>
-    <script src="scripts/controllers/connections.js"></script>
-    <script src="scripts/controllers/extra_class.js"></script>
-
-    <script src="scripts/services/userservice.js"></script>
-    <script src="scripts/directives/checkuser.js"></script>
-    <!-- endbuild -->
+	<script src="scripts/services/userservice.js"></script>
+	<script src="scripts/directives/checkuser.js"></script>
+	<!-- endbuild -->
 
 <script>
 // Include the UserVoice JavaScript SDK (only needed once on a page)

@@ -24,7 +24,7 @@ angular
 	'ngStorage',
 	'angular-growl',
 	'jkuri.datepicker',
-	'ngSwitchToggle'
+	'toggle-switch'
   ])
   .config(function ($routeProvider) {
 	$routeProvider
