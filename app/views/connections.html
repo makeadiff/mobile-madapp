@@ -23,7 +23,7 @@
 	<h4>Teacher Classes</h4>
 	<div class="btn-group-vertical" role="group">
 	<button ng-repeat="con in CCtrl.user.connections.teacher_at" class="btn btn-primary" name="choose" id="class-{{con.id}}" 
-		title="{{con.class_time}}" ng-click="CCtrl.teachClass(con.class_id)">{{con.center_name}},  <span ng-bind="formatDate(con.class_on) | date:'MMMM d EEE, hh:mm a'"></span></button>
+		title="{{con.class_time}}" ng-click="CCtrl.teachClass(con.class_id)">{{con.center_name}},  {{con.level}} - <span ng-bind="formatDate(con.class_on) | date:'MMMM d EEE, hh:mm a'"></span></button>
 	</div>
 </div>
 

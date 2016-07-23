@@ -1,0 +1,36 @@
+#top-container {
+	padding: 0;
+}
+
+.student-details {
+	padding: 0;
+}
+#class-details {
+	padding: 0 20px 10px 20px;
+	background-color: #23bbb9;
+	color: #000;
+	margin:0;
+}
+.info {
+	color:#fff;
+}
+#class-details h3 {
+	margin:5px 0;
+}
+
+#report-table tr {
+	height: 50px;
+}
+#report-table tr.header {
+	background-color: #23bbb9;
+	color: #000;
+}
+
+#report-table td, #report-table th {
+	text-align: center;
+}
+
+#report-table td.student-name {
+	text-align: left;
+	padding-left: 5px;
+}

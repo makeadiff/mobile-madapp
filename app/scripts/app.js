@@ -78,6 +78,30 @@ angular
 		controller: 'ExtraClassCtrl',
 		restricted : true
 	  })
+	  .when('/report_absenteeism', {
+		templateUrl: 'views/report_absenteeism.html',
+		controller: 'ReportAbsenteeismCtrl',
+		restricted : true,
+		resolve: {
+		  style : function() {
+			if( !angular.element('link#report-css').length) {
+			  angular.element('head').append('<link id="report-css" href="styles/report.css" rel="stylesheet">');
+			}
+		  }
+		}
+	  })
+	  .when('/report', {
+		templateUrl: 'views/report.html',
+		controller: 'ReportCtrl',
+		restricted : true,
+		resolve: {
+		  style : function() {
+			if( !angular.element('link#report-css').length) {
+			  angular.element('head').append('<link id="report-css" href="styles/report.css" rel="stylesheet">');
+			}
+		  }
+		}
+	  })
 	  .when('/login', {
 		templateUrl: 'views/login.html',
 		controller: 'LoginCtrl',

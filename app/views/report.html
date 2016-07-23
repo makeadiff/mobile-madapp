@@ -1,0 +1,20 @@
+<div class="container" ng-controller="ReportCtrl as RCtrl" id="top-container">
+
+<div id="class-details" class="row">
+<h3>{{RCtrl.title}}</h3>
+
+<h4>{{RCtrl.user.name}}</h4>
+<strong>Center:</strong> <span class="info">{{RCtrl.user.connections.teacher_at[0].center_name}}</span><br />
+<strong>Level:</strong> <span class="info">{{RCtrl.user.connections.teacher_at[0].level}}</span><br />
+</div>
+
+<div class="student-details" class="row" ng-show="RCtrl.report">
+<table id="report-table">
+<tr class="header"><th></th><th>Last 6<br />Classes</th><th>Last 30<br />Classes</th></tr>
+
+<tr ng-repeat="student in RCtrl.report"><td class="student-name">{{student.name}}</td><td>{{student.six[0].sum}}</td><td>{{student.all[0].sum}}</td></tr>
+
+</table>
+
+</div>
+</div>
