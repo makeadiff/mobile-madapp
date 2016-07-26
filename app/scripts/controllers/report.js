@@ -54,12 +54,28 @@ angular.module('mobileApp')
 		}).success(ReportCtrl.showReport).error(error);
   	}
 
+  	ReportCtrl.childParticipation = function() {
+  		ReportCtrl.title = 'Child Participation Report';
+
+		var connect = ReportCtrl._findConnection();
+		if(!connect) return;
+		loading();
+
+		$http({
+			method: 'GET',
+			url: base_url + 'report_child_participation',
+			params: {level_id: connect.level_id, key: key}
+		}).success(ReportCtrl.showReport).error(error);
+  	}
+
+
 
 	ReportCtrl.load = function() {
 		loaded();
 
 		if(params.name == "student_absenteeism") ReportCtrl.studentAbsenteeism();
 		else if(params.name == "check_for_understanding") ReportCtrl.checkForUnderstanding();
+		else if(params.name == "child_participation") ReportCtrl.childParticipation();
 	}
 
 	ReportCtrl.showReport = function(data) {
