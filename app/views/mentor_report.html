@@ -1,0 +1,28 @@
+<div class="container" ng-controller="MentorReportCtrl as MRCtrl" id="top-container">
+
+<div id="class-details" class="row">
+<h3>{{MRCtrl.title}}</h3>
+
+<h4>{{MRCtrl.user.name}}</h4>
+<strong>Center:</strong> <span class="info">{{MRCtrl.user.connections.mentor_at[0].center_name}}</span><br />
+<strong>Batch:</strong> <span class="info">{{MRCtrl.user.connections.mentor_at[0].batch_name}}</span><br />
+</div>
+
+<div class="teacher-details" class="row" ng-show="MRCtrl.report">
+<table id="report-table">
+<tr class="header"><th></th><th>Last 6<br />Classes</th><th>Last 30<br />Classes</th></tr>
+
+<tr ng-repeat-start="level in MRCtrl.report">
+<td colspan="3" class="level-name">{{level.name}}</td>
+</tr>
+
+<tr ng-repeat="teacher in level.teachers">
+<td class="teacher-name">{{teacher.name}}</td><td>{{teacher.six[0].sum}}</td><td>{{teacher.all[0].sum}}</td>
+</tr>
+
+<tr class="hide" ng-repeat-end></tr>
+
+</table>
+
+</div>
+</div>

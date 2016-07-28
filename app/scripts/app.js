@@ -78,9 +78,9 @@ angular
 		controller: 'ExtraClassCtrl',
 		restricted : true
 	  })
-	  .when('/report_absenteeism', {
-		templateUrl: 'views/report_absenteeism.html',
-		controller: 'ReportAbsenteeismCtrl',
+	  .when('/mentor_report', {
+		templateUrl: 'views/mentor_report.html',
+		controller: 'MentorReportCtrl',
 		restricted : true,
 		resolve: {
 		  style : function() {

@@ -30,7 +30,16 @@
 	text-align: center;
 }
 
-#report-table td.student-name {
+#report-table td.student-name, #report-table td.teacher-name, #report-table td.level-name {
 	text-align: left;
 	padding-left: 5px;
+}
+
+.level-name {
+	border-top: 1px solid #fff;
+	font-weight: bold;
+}
+
+.hide {
+	display: none;
 }
