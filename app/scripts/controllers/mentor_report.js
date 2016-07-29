@@ -32,8 +32,6 @@ angular.module('mobileApp')
 		if(!connect) return;
 		loading();
 
-		console.log(connect, user); // return;
-
 		$http({
 			method: 'GET',
 			url: base_url + 'mentor_report_zero_hour_attendance',
@@ -41,11 +39,27 @@ angular.module('mobileApp')
 		}).success(MentorReportCtrl.showReport).error(error);
   	}
 
+
+  	MentorReportCtrl.classSatisfaction = function() {
+  		MentorReportCtrl.title = 'Class Satisfaction Report';
+
+		var connect = MentorReportCtrl._findConnection();
+		if(!connect) return;
+		loading();
+
+		$http({
+			method: 'GET',
+			url: base_url + 'mentor_class_satisfaction',
+			params: {batch_id: connect.batch_id, key: key}
+		}).success(MentorReportCtrl.showReport).error(error);
+  	}
+
+
 	MentorReportCtrl.load = function() {
 		loaded();
 
 		if(params.name == "zero_hour_attendance") MentorReportCtrl.zeroHourAttendance();
-		// else if(params.name == "check_for_understanding") MentorReportCtrl.checkForUnderstanding();
+		else if(params.name == "class_satisfaction") MentorReportCtrl.classSatisfaction();
 		// else if(params.name == "child_participation") MentorReportCtrl.childParticipation();
 	}
 
