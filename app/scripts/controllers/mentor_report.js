@@ -24,6 +24,7 @@ angular.module('mobileApp')
   		$location.path('/login')
   	}
   	MentorReportCtrl.user = user;
+  	MentorReportCtrl.data_unit = 'teachers';
 
   	MentorReportCtrl.zeroHourAttendance = function() {
   		MentorReportCtrl.title = 'Zero Hour Attendance Report';
@@ -54,13 +55,46 @@ angular.module('mobileApp')
 		}).success(MentorReportCtrl.showReport).error(error);
   	}
 
+  	MentorReportCtrl.childParticipation = function() {
+  		MentorReportCtrl.title = 'Child Participation Report';
+
+		var connect = MentorReportCtrl._findConnection();
+		if(!connect) return;
+		loading();
+
+		MentorReportCtrl.data_unit = 'students';
+
+		$http({
+			method: 'GET',
+			url: base_url + 'mentor_child_participation',
+			params: {batch_id: connect.batch_id, key: key}
+		}).success(MentorReportCtrl.showReport).error(error);
+  	}
+
+
+  	MentorReportCtrl.checkForUnderstanding = function() {
+  		MentorReportCtrl.title = 'Check for Understanding Report';
+
+		var connect = MentorReportCtrl._findConnection();
+		if(!connect) return;
+		loading();
+
+		MentorReportCtrl.data_unit = 'students';
+
+		$http({
+			method: 'GET',
+			url: base_url + 'mentor_child_cfu',
+			params: {batch_id: connect.batch_id, key: key}
+		}).success(MentorReportCtrl.showReport).error(error);
+  	}
 
 	MentorReportCtrl.load = function() {
 		loaded();
 
 		if(params.name == "zero_hour_attendance") MentorReportCtrl.zeroHourAttendance();
 		else if(params.name == "class_satisfaction") MentorReportCtrl.classSatisfaction();
-		// else if(params.name == "child_participation") MentorReportCtrl.childParticipation();
+		else if(params.name == "child_participation") MentorReportCtrl.childParticipation();
+		else if(params.name == "check_for_understanding") MentorReportCtrl.checkForUnderstanding();
 	}
 
 	MentorReportCtrl.showReport = function(data) {

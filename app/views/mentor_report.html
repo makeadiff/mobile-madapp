@@ -16,8 +16,8 @@
 <td colspan="3" class="level-name">{{level.name}}</td>
 </tr>
 
-<tr ng-repeat="teacher in level.teachers">
-<td class="teacher-name">{{teacher.name}}</td><td>{{teacher.six[0].sum}}</td><td>{{teacher.all[0].sum}}</td>
+<tr ng-repeat="unit in level[MRCtrl.data_unit]">
+<td class="teacher-name">{{unit.name}}</td><td>{{unit.six[0].sum}}</td><td>{{unit.all[0].sum}}</td>
 </tr>
 
 <tr class="hide" ng-repeat-end></tr>
