@@ -25,7 +25,7 @@ angular.module('mobileApp')
   	}
   	ReportCtrl.user = user;
 
-  	ReportCtrl.studentAbsenteeism = function() {
+  	ReportCtrl.studentAttendance = function() {
   		ReportCtrl.title = 'Absenteeism Report';
 
 		var connect = ReportCtrl._findConnection();
@@ -73,7 +73,7 @@ angular.module('mobileApp')
 	ReportCtrl.load = function() {
 		loaded();
 
-		if(params.name == "student_absenteeism") ReportCtrl.studentAbsenteeism();
+		if(params.name == "student_attendance") ReportCtrl.studentAttendance();
 		else if(params.name == "check_for_understanding") ReportCtrl.checkForUnderstanding();
 		else if(params.name == "child_participation") ReportCtrl.childParticipation();
 	}

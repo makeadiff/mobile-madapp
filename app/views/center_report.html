@@ -1,0 +1,27 @@
+<div class="container" ng-controller="CenterReportCtrl as CRCtrl" id="top-container">
+
+<div id="class-details" class="row">
+<h3>{{CRCtrl.title}}</h3>
+
+<h4>{{CRCtrl.user.name}}</h4>
+<strong>Center:</strong> <span class="info">{{CRCtrl.user.connections.mentor_at[0].center_name}}</span><br />
+</div>
+
+<div class="teacher-details" class="row" ng-show="CRCtrl.report">
+<table id="report-table">
+<tr class="header"><th></th><th>Last 6<br />Classes</th><th>Last 30<br />Classes</th></tr>
+
+<tr ng-repeat-start="level in CRCtrl.report">
+<td colspan="3" class="level-name">{{level.name}}</td>
+</tr>
+
+<tr ng-repeat="unit in level[CRCtrl.data_unit]">
+<td class="teacher-name">{{unit.name}}</td><td><span class="rating {{unit.six[0].rating}}">{{unit.six[0].sum}}</span></td><td><span class="rating {{unit.six[0].rating}}">{{unit.all[0].sum}}</span></td>
+</tr>
+
+<tr class="hide" ng-repeat-end></tr>
+
+</table>
+
+</div>
+</div>

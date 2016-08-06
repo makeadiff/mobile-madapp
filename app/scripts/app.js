@@ -90,6 +90,18 @@ angular
 		  }
 		}
 	  })
+	  .when('/center_report', {
+		templateUrl: 'views/center_report.html',
+		controller: 'CenterReportCtrl',
+		restricted : true,
+		resolve: {
+		  style : function() {
+			if( !angular.element('link#report-css').length) {
+			  angular.element('head').append('<link id="report-css" href="styles/report.css" rel="stylesheet">');
+			}
+		  }
+		}
+	  })
 	  .when('/report', {
 		templateUrl: 'views/report.html',
 		controller: 'ReportCtrl',

@@ -43,3 +43,19 @@
 .hide {
 	display: none;
 }
+
+.rating {
+	font-weight: bold;
+	color: #fff;
+	padding: 0 20px;
+}
+
+.green {
+	background-color: darkgreen;
+}
+.yellow {
+	background-color: orange;
+}
+.red {
+	background-color: red;
+}
