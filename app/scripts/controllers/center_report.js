@@ -44,27 +44,45 @@ angular.module('mobileApp')
   	}
 
 
-  // 	CenterReportCtrl.checkForUnderstanding = function() {
-  // 		CenterReportCtrl.title = 'Check for Understanding Report';
+  	CenterReportCtrl.checkForUnderstanding = function() {
+  		CenterReportCtrl.title = 'Check for Understanding Report';
 
-		// var connect = CenterReportCtrl._findConnection();
-		// if(!connect) return;
-		// loading();
+		var connect = CenterReportCtrl._findConnection();
+		if(!connect) return;
+		loading();
 
-		// CenterReportCtrl.data_unit = 'students';
+		CenterReportCtrl.data_unit = 'students';
 
-		// $http({
-		// 	method: 'GET',
-		// 	url: base_url + 'mentor_child_cfu',
-		// 	params: {batch_id: connect.batch_id, key: key}
-		// }).success(CenterReportCtrl.showReport).error(error);
-  // 	}
+		$http({
+			method: 'GET',
+			url: base_url + 'center_child_cfu',
+			params: {center_id: connect.center_id, key: key}
+		}).success(CenterReportCtrl.showReport).error(error);
+  	}
+
+  	CenterReportCtrl.volunteerSubsitutions = function() {
+  		CenterReportCtrl.title = 'Volunteer Substitutions Report';
+
+		var connect = CenterReportCtrl._findConnection();
+		if(!connect) return;
+		loading();
+
+		CenterReportCtrl.data_unit = 'teachers';
+
+		$http({
+			method: 'GET',
+			url: base_url + 'center_volunteer_subsitutions',
+			params: {center_id: connect.center_id, key: key}
+		}).success(CenterReportCtrl.showReport).error(error);
+  	}
+
 
 	CenterReportCtrl.load = function() {
 		loaded();
 
 		if(params.name == "child_participation") CenterReportCtrl.childParticipation();
 		else if(params.name == "check_for_understanding") CenterReportCtrl.checkForUnderstanding();
+		else if(params.name == "volunteer_substitutions") CenterReportCtrl.volunteerSubsitutions();
 	}
 
 	CenterReportCtrl.showReport = function(data) {
