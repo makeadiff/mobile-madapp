@@ -18,7 +18,8 @@
 
 	<h5>Reports</h5>
 	<ul>
-	<li ng-repeat="(report_key, report_data) in CCtrl.reports.mentor"><a href="#/mentor_report?name={{report_key}}">{{report_data.name}}</a></li>
+	<li ng-repeat="(report_key, report_data) in CCtrl.reports.mentor"><a href="#/mentor_report?name={{report_key}}">{{report_data.name}}</a> 
+		<span class='issue-count badge'>{{report_data.issue_count}}</span></li>
 	</ul>
 </div>
 

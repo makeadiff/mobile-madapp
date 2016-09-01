@@ -53,6 +53,17 @@ angular.module('mobileApp')
 				params: {level_id: connect.teacher.level_id, key: key}
 			}).success(ConnectionCtrl.countProblems).error(error);
 		}
+
+		if(connect.mentor.batch_id) {
+			loading();
+			$http({
+				method: 'GET',
+				url: base_url + 'mentor_report_aggregate',
+				params: {batch_id: connect.mentor.batch_id, key: key}
+			}).success(ConnectionCtrl.countProblems).error(error);
+		}
+
+			
 	}
 
 	ConnectionCtrl.countProblems = function(data) {
@@ -60,6 +71,12 @@ angular.module('mobileApp')
 		if(data.report_name == 'teacher_report_aggregate') {
 			for(var key in data.reports) {
 				ConnectionCtrl.reports.teacher[key].issue_count = data.reports[key];
+			}
+		}
+		if(data.report_name == 'mentor_report_aggregate') {
+			for(var key in data.reports) {
+				console.log(key)
+				ConnectionCtrl.reports.mentor[key].issue_count = data.reports[key];
 			}
 		}
 	}
