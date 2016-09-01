@@ -1,4 +1,4 @@
-<div class="container" ng-controller="ReportCtrl as RCtrl" id="top-container">
+<div class="container" ng-controller="TeacherReportCtrl as RCtrl" id="top-container">
 
 <div id="class-details" class="row">
 <h3>{{RCtrl.title}}</h3>
@@ -12,7 +12,8 @@
 <table id="report-table">
 <tr class="header"><th></th><th>Last 6<br />Classes</th><th>Last 30<br />Classes</th></tr>
 
-<tr ng-repeat="student in RCtrl.report"><td class="student-name">{{student.name}}</td><td>{{student.six[0].sum}}</td><td>{{student.all[0].sum}}</td></tr>
+<tr ng-repeat="student in RCtrl.report"><td class="student-name">{{student.name}}</td>
+		<td><span class="rating {{student.six[0].rating}}">{{student.six[0].sum}}</span></td><td><span class="rating {{student.all[0].rating}}">{{student.all[0].sum}}</span></td></tr>
 
 </table>
 

@@ -2,11 +2,7 @@
 
 <div id="connections" class="row">
 <h3 class="teacher-name">Hi,&nbsp;{{CCtrl.user.name}}</h3>
-
-<br>
-<h4>Select your class...</h4>
-<br>
-
+<br />
 <div class="classes">
 
 <div class="mentor_at" ng-show="CCtrl.user.connections.mentor_at">
@@ -16,13 +12,11 @@
 		title="{{con.class_time}}" ng-click="CCtrl.mentorClass(con.batch_id)">{{con.center_name}}, <span ng-bind="formatDate(con.class_on) | date:'MMMM d EEE, hh:mm a'"></span></button>
 	</div>
 
-<!-- 	<h5>Reports</h5>
+	<h5>Reports</h5>
 	<ul>
-	<li><a href="#/mentor_report?name=zero_hour_attendance">Zero Hour Attendance</a></li>
-	<li><a href="#/mentor_report?name=class_satisfaction">Class Satisfaction</a></li>
-	<li><a href="#/mentor_report?name=child_participation">Child Participation</a></li>
-	<li><a href="#/mentor_report?name=check_for_understanding">Check For Understanding</a></li>
-	</ul> -->
+	<li ng-repeat="(report_key, report_data) in CCtrl.reports.mentor"><a href="#/mentor_report?name={{report_key}}">{{report_data.name}}</a> 
+		<span class='issue-count badge'>{{report_data.issue_count}}</span></li>
+	</ul>
 </div>
 
 <br>
@@ -34,12 +28,11 @@
 		title="{{con.class_time}}" ng-click="CCtrl.teachClass(con.class_id)">{{con.center_name}},  {{con.level}} - <span ng-bind="formatDate(con.class_on) | date:'MMMM d EEE, hh:mm a'"></span></button>
 	</div>
 
-<!-- 	<h5>Reports</h5>
+	<h5>Reports</h5>
 	<ul>
-	<li><a href="#/report?name=student_attendance">Student Attendance</a></li>
-	<li><a href="#/report?name=check_for_understanding">Check for Understanding</a></li>
-	<li><a href="#/report?name=child_participation">Child Participation</a></li>
-	</ul> -->
+	<li ng-repeat="(report_key, report_data) in CCtrl.reports.teacher"><a href="#/teacher_report?name={{report_key}}">{{report_data.name}}</a> 
+		<span class='issue-count badge'>{{report_data.issue_count}}</span></li>
+	</ul>
 </div>
 
 </div>

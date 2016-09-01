@@ -25,18 +25,41 @@ angular.module('mobileApp')
 				user_service.setUser(LoginCtrl.user);
 				var connections = data.connections;
 
-				if((connections.teacher_at.length + connections.mentor_at.length) > 1) {
-					
-					$location.path("/connections");
- 
-				} else {
-					if(LoginCtrl.user.mentor == "1") {
-						$location.path("/mentor");
-					} else {
-						$location.path("/teacher");
+				// Decide where to redirect the user to...
+				var now = moment();
+
+				if(connections.teacher_at.length) { // User is a teacher
+					for(var i=0; i<connections.teacher_at.length; i++) {
+						var difference_in_days = now.diff(moment(connections.teacher_at[i].class_on), 'days');
+
+						if(!difference_in_days) { // Class is happening TODAY. Show the teacher page...
+							$location.path("/teacher").search({"class_id": connections.teacher_at[i].class_id});
+							return;
+						}
 					}
+
+					// No classes happening today - go to the reports page.
+					$location.path("/connections");
+					return;
 				}
 
+				if(connections.teacher_at.length) { // User is a mentor
+					for(var i=0; i<connections.mentor_at.length; i++) {
+						var difference_in_days = now.diff(moment(connections.mentor_at[i].class_on), 'days');
+
+						if(!difference_in_days) { // Class is happening TODAY. Show the mentor page...
+							$location.path("/mentor").search({"batch_id": connections.mentor_at[i].batch_id});
+							return;
+						}
+					}
+
+					// No classes happening today - go to the reports page.
+					$location.path("/connections");
+					return;
+				}
+				
+				// No positive matches - re-direct to common page.
+				$location.path("/connections");
 			} else {
 				LoginCtrl.error = data.error;
 			}

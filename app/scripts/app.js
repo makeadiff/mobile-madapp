@@ -102,9 +102,9 @@ angular
 		  }
 		}
 	  })
-	  .when('/report', {
-		templateUrl: 'views/report.html',
-		controller: 'ReportCtrl',
+	  .when('/teacher_report', {
+		templateUrl: 'views/teacher_report.html',
+		controller: 'TeacherReportCtrl',
 		restricted : true,
 		resolve: {
 		  style : function() {
