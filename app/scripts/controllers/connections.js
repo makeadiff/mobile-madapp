@@ -45,6 +45,7 @@ angular.module('mobileApp')
 		var connect = ConnectionCtrl._findConnection();
 		if(!connect) return;
 
+		// If the user is a teacher, show the teacher reports.
 		if(connect.teacher.level_id) {
 			loading();
 			$http({
@@ -54,6 +55,7 @@ angular.module('mobileApp')
 			}).success(ConnectionCtrl.countProblems).error(error);
 		}
 
+		// If user is a mentor, show mentor reports.  
 		if(connect.mentor.batch_id) {
 			loading();
 			$http({
@@ -62,8 +64,6 @@ angular.module('mobileApp')
 				params: {batch_id: connect.mentor.batch_id, key: key}
 			}).success(ConnectionCtrl.countProblems).error(error);
 		}
-
-			
 	}
 
 	ConnectionCtrl.countProblems = function(data) {
@@ -75,7 +75,6 @@ angular.module('mobileApp')
 		}
 		if(data.report_name == 'mentor_report_aggregate') {
 			for(var key in data.reports) {
-				console.log(key)
 				ConnectionCtrl.reports.mentor[key].issue_count = data.reports[key];
 			}
 		}
