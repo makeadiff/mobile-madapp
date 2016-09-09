@@ -59,13 +59,13 @@ angular.module('mobileApp')
 
   	MentorReportCtrl.childParticipation = function() {
   		MentorReportCtrl.title = 'Child Participation Report';
-  		MentorReportCtrl.description = 'Number of classes with three or more child participation in this batch';
+  		MentorReportCtrl.description = 'Number of children with three or more participation in this batch';
 
 		var connect = MentorReportCtrl._findConnection();
 		if(!connect) return;
 		loading();
 
-		MentorReportCtrl.data_unit = 'students';
+		MentorReportCtrl.data_unit = 'teachers';
 
 		$http({
 			method: 'GET',
@@ -77,17 +77,17 @@ angular.module('mobileApp')
 
   	MentorReportCtrl.checkForUnderstanding = function() {
   		MentorReportCtrl.title = 'Check for Understanding Report';
-  		MentorReportCtrl.description = 'Number clases that the students undersood in this batch';
+  		MentorReportCtrl.description = 'Number of students who understood the class in this batch';
 
 		var connect = MentorReportCtrl._findConnection();
 		if(!connect) return;
 		loading();
 
-		MentorReportCtrl.data_unit = 'students';
+		MentorReportCtrl.data_unit = 'teachers';
 
 		$http({
 			method: 'GET',
-			url: base_url + 'mentor_child_cfu',
+			url: base_url + 'mentor_child_check_for_understanding',
 			params: {batch_id: connect.batch_id, key: key}
 		}).success(MentorReportCtrl.showReport).error(error);
   	}
@@ -104,7 +104,9 @@ angular.module('mobileApp')
 	MentorReportCtrl.showReport = function(data) {
 		loaded();
 		MentorReportCtrl.report = data.report;
+		MentorReportCtrl.max_class_count = data.max_class_count;
 
+		console.log(data.report)
 	}
 
 	MentorReportCtrl._findConnection = function() {

@@ -11,10 +11,10 @@
 
 <div class="student-details" class="row" ng-show="RCtrl.report">
 <table id="report-table">
-<tr class="header"><th></th><th>Last 6<br />Classes</th><th>Last 30<br />Classes</th></tr>
+<tr class="header"><th></th><th>Last {{RCtrl.report[0].six.total}}<br />Classes</th><th>Last {{RCtrl.report[0].all.total}}<br />Classes</th></tr>
 
 <tr ng-repeat="student in RCtrl.report"><td class="student-name">{{student.name}}</td>
-		<td><span class="rating {{student.six[0].rating}}">{{student.six[0].sum}}</span></td><td><span class="rating {{student.all[0].rating}}">{{student.all[0].sum}}</span></td></tr>
+		<td><span class="rating {{student.six.rating}}">{{student.six.sum}}</span></td><td><span class="rating {{student.all.rating}}">{{student.all.sum}}</span></td></tr>
 
 </table>
 
