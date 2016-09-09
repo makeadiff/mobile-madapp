@@ -28,6 +28,7 @@ angular.module('mobileApp')
 
   	MentorReportCtrl.zeroHourAttendance = function() {
   		MentorReportCtrl.title = 'Zero Hour Attendance Report';
+  		MentorReportCtrl.description = 'Attendance for zero hour in this batch';
 
 		var connect = MentorReportCtrl._findConnection();
 		if(!connect) return;
@@ -43,6 +44,7 @@ angular.module('mobileApp')
 
   	MentorReportCtrl.classSatisfaction = function() {
   		MentorReportCtrl.title = 'Class Satisfaction Report';
+  		MentorReportCtrl.description = 'Class satisfaction for all the classes in this batch';
 
 		var connect = MentorReportCtrl._findConnection();
 		if(!connect) return;
@@ -57,6 +59,7 @@ angular.module('mobileApp')
 
   	MentorReportCtrl.childParticipation = function() {
   		MentorReportCtrl.title = 'Child Participation Report';
+  		MentorReportCtrl.description = 'Number of classes with three or more child participation in this batch';
 
 		var connect = MentorReportCtrl._findConnection();
 		if(!connect) return;
@@ -74,6 +77,7 @@ angular.module('mobileApp')
 
   	MentorReportCtrl.checkForUnderstanding = function() {
   		MentorReportCtrl.title = 'Check for Understanding Report';
+  		MentorReportCtrl.description = 'Number clases that the students undersood in this batch';
 
 		var connect = MentorReportCtrl._findConnection();
 		if(!connect) return;

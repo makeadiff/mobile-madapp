@@ -29,6 +29,7 @@ angular.module('mobileApp')
 
   	CenterReportCtrl.childParticipation = function() {
   		CenterReportCtrl.title = 'Child Participation Report';
+  		CenterReportCtrl.description = 'Shows number of students who\'s participation is more than three in this center';
 
 		var connect = CenterReportCtrl._findConnection();
 		if(!connect) return;
@@ -46,6 +47,7 @@ angular.module('mobileApp')
 
   	CenterReportCtrl.checkForUnderstanding = function() {
   		CenterReportCtrl.title = 'Check for Understanding Report';
+  		CenterReportCtrl.description = 'Shows number of students who\'s participation is more than three in this center';
 
 		var connect = CenterReportCtrl._findConnection();
 		if(!connect) return;
@@ -62,6 +64,7 @@ angular.module('mobileApp')
 
   	CenterReportCtrl.volunteerSubsitutions = function() {
   		CenterReportCtrl.title = 'Volunteer Substitutions Report';
+  		CenterReportCtrl.description = 'Number of Substitutions in this center';
 
 		var connect = CenterReportCtrl._findConnection();
 		if(!connect) return;

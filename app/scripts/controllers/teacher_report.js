@@ -26,7 +26,8 @@ angular.module('mobileApp')
   	TeacherReportCtrl.user = user;
 
   	TeacherReportCtrl.studentAttendance = function() {
-  		TeacherReportCtrl.title = 'Absenteeism Report';
+  		TeacherReportCtrl.title = 'Attendance Report';
+  		TeacherReportCtrl.description = 'Shows the number of classes that the student attended.';
 
 		var connect = TeacherReportCtrl._findConnection();
 		if(!connect) return;
@@ -35,13 +36,14 @@ angular.module('mobileApp')
 		$http({
 			method: 'GET',
 			url: base_url + 'teacher_report_student_attendance',
-			params: {level_id: connect.level_id, key: key}
+			params: {level_id: connect.level_id, batch_id: connect.batch_id, key: key}
 		}).success(TeacherReportCtrl.showReport).error(error);
   	}
 
 
   	TeacherReportCtrl.checkForUnderstanding = function() {
   		TeacherReportCtrl.title = 'Check for Understanding Report';
+  		TeacherReportCtrl.description = 'Shows the number of classes that the student undertood.';
 
 		var connect = TeacherReportCtrl._findConnection();
 		if(!connect) return;
@@ -56,6 +58,7 @@ angular.module('mobileApp')
 
   	TeacherReportCtrl.childParticipation = function() {
   		TeacherReportCtrl.title = 'Child Participation Report';
+  		TeacherReportCtrl.description = 'Shows the number of classes where the student participation is three or more.';
 
 		var connect = TeacherReportCtrl._findConnection();
 		if(!connect) return;

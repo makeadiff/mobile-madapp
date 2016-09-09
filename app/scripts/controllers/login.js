@@ -18,7 +18,7 @@ angular.module('mobileApp')
 		$http({
 			method: 'GET',
 			url: base_url + 'user_login',
-			params: {email: user.username, password: user.password}
+			params: {email: user.username, password: user.password, key: key}
 		}).success(function(data) {
 			if(data.success) {
 				LoginCtrl.user = data;
