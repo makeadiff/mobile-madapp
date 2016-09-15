@@ -43,7 +43,7 @@ angular.module('mobileApp')
 					return;
 				}
 
-				if(connections.teacher_at.length) { // User is a mentor
+				if(connections.mentor_at.length) { // User is a mentor
 					for(var i=0; i<connections.mentor_at.length; i++) {
 						var difference_in_days = now.diff(moment(connections.mentor_at[i].class_on), 'days');
 

@@ -14,7 +14,7 @@
 <tr class="header"><th></th><th>Last {{RCtrl.report[0].six.total}}<br />Classes</th><th>Last {{RCtrl.report[0].all.total}}<br />Classes</th></tr>
 
 <tr ng-repeat="student in RCtrl.report"><td class="student-name">{{student.name}}</td>
-		<td><span class="rating {{student.six.rating}}">{{student.six.sum}}</span></td><td><span class="rating {{student.all.rating}}">{{student.all.sum}}</span></td></tr>
+		<td><span class="rating {{student.six.rating}}">{{student.six.percentage}}%</span></td><td><span class="rating {{student.all.rating}}">{{student.all.percentage}}%</span></td></tr>
 
 </table>
 
