@@ -1,4 +1,3 @@
-
 body {
   padding: 0;
 }
@@ -169,4 +168,18 @@ ul.horizontal li {
 
 .btn-bottom {
   background-color: #23bbb9;
+}
+
+
+.badge-error {
+  background-color: #b94a48;
+}
+.badge-error:hover {
+  background-color: #953b39;
+}
+.badge-warning {
+  background-color: #f89406;
+}
+.badge-warning:hover {
+  background-color: #c67605;
 }

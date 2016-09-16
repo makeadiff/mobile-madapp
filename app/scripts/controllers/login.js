@@ -25,25 +25,33 @@ angular.module('mobileApp')
 				user_service.setUser(LoginCtrl.user);
 				var connections = data.connections;
 
-				// Decide where to redirect the user to...
-				var now = moment();
+				if(connections.teacher_at.length && connections.mentor_at.length) { // User is a teacher AND mentor
+					$location.path("/connections"); // Show Teacher/metor choice page
+					return;
 
-				if(connections.teacher_at.length) { // User is a teacher
+				} else if(connections.teacher_at.length) {
+					if(connections.teacher_at.length == 1) { // Just one class, go there.
+						$location.path("/teacher").search({"class_id": connections.teacher_at[0].class_id});
+						return;
+					}
+
+					// If there are more than one class the user is teaching - find if any class happens today - if so, redirect to that class.
 					for(var i=0; i<connections.teacher_at.length; i++) {
 						var difference_in_days = now.diff(moment(connections.teacher_at[i].class_on), 'days');
 
-						if(!difference_in_days) { // Class is happening TODAY. Show the teacher page...
+						if(!difference_in_days) { // Class is happening TODAY. Show the mentor page...
 							$location.path("/teacher").search({"class_id": connections.teacher_at[i].class_id});
 							return;
 						}
 					}
 
-					// No classes happening today - go to the reports page.
-					$location.path("/connections");
-					return;
-				}
+				} else if(connections.mentor_at.length) { // User is a mentor
+					if(connections.mentor_at.length == 1) {
+						$location.path("/mentor").search({"batch_id": connections.mentor_at[0].batch_id});
+						return;
+					}
 
-				if(connections.mentor_at.length) { // User is a mentor
+					// If there are more than one class the user is mentoring - find if any class happens today - if so, redirect to that class.
 					for(var i=0; i<connections.mentor_at.length; i++) {
 						var difference_in_days = now.diff(moment(connections.mentor_at[i].class_on), 'days');
 
@@ -52,14 +60,11 @@ angular.module('mobileApp')
 							return;
 						}
 					}
-
-					// No classes happening today - go to the reports page.
-					$location.path("/connections");
-					return;
 				}
-				
-				// No positive matches - re-direct to common page.
-				$location.path("/connections");
+
+				user_service.unsetUser();
+				$location.path("/message").search({"error": "Only teachers and mentors can use this app so far. Sorry."});
+				return;
 			} else {
 				LoginCtrl.error = data.error;
 			}

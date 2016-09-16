@@ -10,7 +10,7 @@
 angular.module('mobileApp')
   .controller('ConnectionCtrl', ['$scope', '$location', '$http', 'UserService', function ($scope, $location, $http, user_service) {
 	var ConnectionCtrl = this;
-	
+
 	if(user_service.isLoggedIn()) {
   		var user = user_service.getUser();
   		if(!user) {
@@ -24,70 +24,22 @@ angular.module('mobileApp')
   		$location.path('/login')
   	}
   	ConnectionCtrl.user = user;
-	
-	ConnectionCtrl.reports = {
-		"teacher": {
-				"student_attendance"		: {"name" : "Student Attendance", "issue_count" : 0},
-				"check_for_understanding"	: {"name" : "Check For Understanding", "issue_count" : 0},
-				"child_participation"		: {"name" : "Child Participation", "issue_count" : 0}
-			},
-		"mentor": {
-				// "student_attendance"		: {"name" : "Student Attendance", "issue_count" : 0},
-				"check_for_understanding"	: {"name" : "Check For Understanding", "issue_count" : 0},
-				"child_participation"		: {"name" : "Child Participation", "issue_count" : 0},
-				// "teacher_satisfaction"	: {"name" : "Teacher Satisfaction", "issue_count" : 0},
-				"zero_hour_attendance"		: {"name" : "Zero Hour Attendance", "issue_count" : 0},
-				"class_satisfaction"		: {"name" : "Class Satisfaction", "issue_count" : 0}
-		}
-	};
 
 	ConnectionCtrl.load = function() {
+		loaded();
 		var connect = ConnectionCtrl._findConnection();
 		if(!connect) return;
-
-		// If the user is a teacher, show the teacher reports.
-		if(connect.teacher.level_id) {
-			loading();
-			$http({
-				method: 'GET',
-				url: base_url + 'teacher_report_aggregate',
-				params: {level_id: connect.teacher.level_id, key: key}
-			}).success(ConnectionCtrl.countProblems).error(error);
-		}
-
-		// If user is a mentor, show mentor reports.  
-		if(connect.mentor.batch_id) {
-			loading();
-			$http({
-				method: 'GET',
-				url: base_url + 'mentor_report_aggregate',
-				params: {batch_id: connect.mentor.batch_id, key: key}
-			}).success(ConnectionCtrl.countProblems).error(error);
-		}
-	}
-
-	ConnectionCtrl.countProblems = function(data) {
-		loaded();
-		if(data.report_name == 'teacher_report_aggregate') {
-			for(var key in data.reports) {
-				ConnectionCtrl.reports.teacher[key].issue_count = data.reports[key];
-			}
-		}
-		if(data.report_name == 'mentor_report_aggregate') {
-			for(var key in data.reports) {
-				ConnectionCtrl.reports.mentor[key].issue_count = data.reports[key];
-			}
-		}
 	}
 
 	ConnectionCtrl.mentorClass = function(batch_id) {
 		user_service.setUserData("active_batch", batch_id);
-		$location.path("/mentor");
+		$location.path("/mentor").search({"batch_id": batch_id});
 	}
 
 	ConnectionCtrl.teachClass = function(class_id) {
+		console.log(class_id);
 		user_service.setUserData("active_class", class_id);
-		$location.path("/teacher");
+		$location.path("/teacher").search({"class_id": class_id});
 	}
 
 	$scope.formatDate = function(date){
@@ -98,7 +50,7 @@ angular.module('mobileApp')
 
 	ConnectionCtrl._findConnection = function() {
 		var connect = {};
-		if(!user.connections) return false;
+		if(!user || !user.connections) return false;
 
 		if(user.connections.mentor_at.length)
 			connect['mentor'] = user.connections.mentor_at[0];

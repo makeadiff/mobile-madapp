@@ -116,6 +116,11 @@ angular
 		  }
 		}
 	  })
+	  .when('/reports', {
+		templateUrl: 'views/reports.html',
+		controller: 'ReportCtrl',
+		restricted : true,
+	  })
 	  .when('/login', {
 		templateUrl: 'views/login.html',
 		controller: 'LoginCtrl',

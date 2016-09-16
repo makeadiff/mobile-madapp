@@ -35,7 +35,9 @@
 	  <div class="navbar navbar-default" role="navigation">
 		<div class="container">
 		  <div class="navbar-header">
-			<a class="navbar-brand" href="#/connections"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;MADApp</a>
+			<a class="navbar-brand" href="#/connections"><span class="glyphicon glyphicon-home"></span> MADApp</a>
+			<a class="navbar-brand" href="#/reports" ng-show="user_service.isLoggedIn()"><span class="glyphicon glyphicon-stats"></span> Reports</a>
+			<a class="navbar-brand" href="http://makeadiff.in/madapp/tutorial/faq.html"><span class="glyphicon glyphicon-question-sign"></span> FAQ</a>
 		  </div>
 		  
 		</div>
@@ -83,6 +85,7 @@
 	<script src="scripts/controllers/teacher_report.js"></script>
 	<script src="scripts/controllers/mentor_report.js"></script>
 	<script src="scripts/controllers/center_report.js"></script>
+	<script src="scripts/controllers/reports.js"></script>
 
 	<script src="scripts/services/userservice.js"></script>
 	<script src="scripts/directives/checkuser.js"></script>
