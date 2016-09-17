@@ -5,26 +5,24 @@
 <br />
 <div class="classes">
 
-<div class="mentor_at" ng-show="CCtrl.user.connections.mentor_at">
+<div class="mentor_at" ng-show="CCtrl.user.connections.mentor_at.length">
 	<h4>Mentor Classes</h4>
 	<div class="btn-group-vertical" role="group">
 	<button ng-repeat="con in CCtrl.user.connections.mentor_at" class="btn btn-primary" name="choose" id="class-{{con.id}}" 
 		title="{{con.class_time}}" ng-click="CCtrl.mentorClass(con.batch_id)">{{con.center_name}}, <span ng-bind="formatDate(con.class_on) | date:'MMMM d EEE, hh:mm a'"></span></button>
 	</div>
+	<br />
 </div>
 
-<br>
-
-<div class="teacher_at" ng-show="CCtrl.user.connections.teacher_at">
+<div class="teacher_at" ng-show="CCtrl.user.connections.teacher_at.length">
 	<h4>Teacher Classes</h4>
 	<div class="btn-group-vertical" role="group">
 	<button ng-repeat="con in CCtrl.user.connections.teacher_at" class="btn btn-primary" name="choose" id="class-{{con.id}}" 
-		title="{{con.class_time}}" ng-click="CCtrl.teachClass(con.class_id)">{{con.class_id}} {{con.center_name}},  {{con.level}} - <span ng-bind="formatDate(con.class_on) | date:'MMMM d EEE, hh:mm a'"></span></button>
+		title="{{con.class_time}}" ng-click="CCtrl.teachClass(con.class_id)">{{con.center_name}},  {{con.level}} - <span ng-bind="formatDate(con.class_on) | date:'MMMM d EEE, hh:mm a'"></span></button>
 	</div>
 </div>
 
 </div>
-
 
 </div>
 </div>

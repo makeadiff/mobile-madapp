@@ -17,6 +17,7 @@ angular.module('mobileApp')
 		return false;
 	}
 	var user_id = user_service.getUserId();
+	var options = $location.search();
 
 	jQuery(".student-participation").rating();
 	TeacherCtrl.user_id = user_id;
@@ -29,6 +30,12 @@ angular.module('mobileApp')
 				params: {class_id: user.active_class, key: key}
 			}).success(TeacherCtrl.openClass).error(error);
 
+		} else if(options.class_id) {
+			$http({
+				method: 'GET',
+				url: base_url + 'open_class',
+				params: {class_id: options.class_id, key: key}
+			}).success(TeacherCtrl.openClass).error(error);
 		} else {
 			$http({
 				method: 'GET',

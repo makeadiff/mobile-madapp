@@ -24,6 +24,7 @@ angular.module('mobileApp')
 				LoginCtrl.user = data;
 				user_service.setUser(LoginCtrl.user);
 				var connections = data.connections;
+				var now = new moment();
 
 				if(connections.teacher_at.length && connections.mentor_at.length) { // User is a teacher AND mentor
 					$location.path("/connections"); // Show Teacher/metor choice page
