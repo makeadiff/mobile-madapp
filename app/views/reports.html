@@ -1,0 +1,39 @@
+<div class="container" ng-controller="ReportCtrl as RCtrl">
+
+<div id="connections" class="row">
+<h2>Reports</h2>
+<div class="classes">
+
+<div class="mentor_at" ng-show="RCtrl.user.connections.mentor_at">
+	<h3>Mentor Classes</h3>
+	<div ng-repeat="con in RCtrl.user.connections.mentor_at" id="class-{{con.id}}">
+	<h4>{{con.center_name}}, <span ng-bind="formatDate(con.class_on) | date:'MMMM d EEE, hh:mm a'"></span></h4>
+	</div>
+
+	<h5>Reports</h5>
+	<ul>
+	<li ng-repeat="(report_key, report_data) in RCtrl.reports.mentor"><a href="#/mentor_report?name={{report_key}}">{{report_data.name}}</a> 
+		<span class='issue-count badge badge-error'>{{report_data.issue_count}}</span></li>
+	</ul>
+</div>
+
+<br>
+
+<div class="teacher_at" ng-show="RCtrl.user.connections.teacher_at">
+	<h3>Teacher Classes</h3>
+	<div ng-repeat="con in RCtrl.user.connections.teacher_at" id="class-{{con.id}}">
+	<h4>{{con.center_name}}, <span ng-bind="formatDate(con.class_on) | date:'MMMM d EEE, hh:mm a'"></span></h4>
+	</div>
+
+	<h5>Reports</h5>
+	<ul>
+	<li ng-repeat="(report_key, report_data) in RCtrl.reports.teacher"><a href="#/teacher_report?name={{report_key}}">{{report_data.name}}</a> 
+		<span class='issue-count badge badge-error'>{{report_data.issue_count}}</span></li>
+	</ul>
+</div>
+
+</div>
+
+
+</div>
+</div>
