@@ -10,9 +10,10 @@
 angular.module('mobileApp')
   .controller('ReportCtrl', ['$scope', '$location', '$http', 'UserService', function ($scope, $location, $http, user_service) {
 	var ReportCtrl = this;
+
 	
 	if(user_service.isLoggedIn()) {
-  		var user = user_service.getUser();
+		var user = user_service.getUser();
   		if(!user) {
   			$location.path("/login");
   			growl.addErrorMessage("Please login to continue", {ttl: 3000});
@@ -23,6 +24,7 @@ angular.module('mobileApp')
   	} else {
   		$location.path('/login')
   	}
+
   	ReportCtrl.user = user;
 	
 	ReportCtrl.reports = {
@@ -46,7 +48,7 @@ angular.module('mobileApp')
 		if(!connect) return;
 
 		// If the user is a teacher, show the teacher reports.
-		if(connect.teacher.level_id) {
+		if(connect.teacher && connect.teacher.level_id) {
 			loading();
 			$http({
 				method: 'GET',
@@ -56,7 +58,7 @@ angular.module('mobileApp')
 		}
 
 		// If user is a mentor, show mentor reports.  
-		if(connect.mentor.batch_id) {
+		if(connect.mentor && connect.mentor.batch_id) {
 			loading();
 			$http({
 				method: 'GET',

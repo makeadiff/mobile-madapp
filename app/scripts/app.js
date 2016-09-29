@@ -12,12 +12,12 @@
 
 var base_url = "http://makeadiff.in/madapp/index.php/api/";
 if(location.href.toString().match(/localhost/) || location.href.toString().match(/192\.168\./)) {
-	  base_url = "http://localhost/makeadiff/madapp/index.php/api/";
+	  base_url = "http://localhost/madapp/index.php/api/";
 }
 
 var key = "am3omo32hom4lnv32vO";
 
-angular
+var mobileApp = angular
   .module('mobileApp', [
 	'ngAnimate',
 	'ngCookies',
@@ -152,3 +152,13 @@ function loaded() {
   angular.element("#loading").hide();
 }
 loading();
+
+mobileApp.run(['$localStorage','$rootScope',function ($localStorage,$rootScope) {
+        $rootScope.loginStatus = function() {
+        	if(!$localStorage.user) return 0;
+            if(!$localStorage.user.user_id == "undefined") return 0;
+            return $localStorage.user.user_id;
+            
+        };
+    }
+]);

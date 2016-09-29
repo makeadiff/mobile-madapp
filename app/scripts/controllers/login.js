@@ -14,6 +14,9 @@ angular.module('mobileApp')
 	LoginCtrl.user = false;
 	LoginCtrl.error = "";
 
+    // Logout the user 
+	user_service.unsetUser();
+ 
 	this.loginUser = function(user) {
 		$http({
 			method: 'GET',
@@ -75,5 +78,6 @@ angular.module('mobileApp')
 
 		});
 	}
-
+  
+  
 }]);

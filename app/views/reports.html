@@ -4,7 +4,7 @@
 <h2>Reports</h2>
 <div class="classes">
 
-<div class="mentor_at" ng-show="RCtrl.user.connections.mentor_at">
+<div class="mentor_at" ng-show="RCtrl.user.connections.mentor_at.length">
 	<h3>Mentor Classes</h3>
 	<div ng-repeat="con in RCtrl.user.connections.mentor_at" id="class-{{con.id}}">
 	<h4>{{con.center_name}}, <span ng-bind="formatDate(con.class_on) | date:'MMMM d EEE, hh:mm a'"></span></h4>
@@ -19,7 +19,7 @@
 
 <br>
 
-<div class="teacher_at" ng-show="RCtrl.user.connections.teacher_at">
+<div class="teacher_at" ng-show="RCtrl.user.connections.teacher_at.length">
 	<h3>Teacher Classes</h3>
 	<div ng-repeat="con in RCtrl.user.connections.teacher_at" id="class-{{con.id}}">
 	<h4>{{con.center_name}}, <span ng-bind="formatDate(con.class_on) | date:'MMMM d EEE, hh:mm a'"></span></h4>
