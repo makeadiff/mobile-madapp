@@ -181,7 +181,8 @@ ul.horizontal li {
 
 
 .badge-error {
-  background-color: #b94a48;
+  background-color: #b94a48 !important;
+  color: #fff !important;
 }
 .badge-error:hover {
   background-color: #953b39;

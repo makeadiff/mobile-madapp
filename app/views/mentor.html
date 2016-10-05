@@ -24,16 +24,18 @@ title="Cancel Class" ng-click="MCtrl.cancelClass(class)"></button>
 <div class="pull-right cancel-area" ng-show="(class.class_status == '0')">
 <select ng-model="class.cancel_option" class="cancel-option">
 	<optgroup label="Internal(MAD)">
-		<!-- <option value="in-volunteer-unavailable">Volunteer Absent</option> -->
-		<option value="in-volunteer-unassigned">Volunteer Unassigned</option>
-		<option value="in-volunteer-engaged">Volunteer engaged with other events</option>
+		<option value="in-volunteer-unavailable">Volunteer Unavailabe to take class</option>
+		<option value="in-volunteer-unassigned">Volunteer are yet to be recruited</option>
+		<option value="in-volunteer-engaged">MAD has an event</option>
 		<option value="in-other">Other</option>
 	</optgroup>
 	<optgroup label="External(CA)">
-		<option value="ext-children-out">Children not in the shelter</option>
-		<option value="ext-children-doing-chores">Children engaged with center chores</option>
+		<option value="ext-children-out-holiday">Children not back from holiday</option>
+		<option value="ext-children-doing-chores">Children are doing chores</option>
 		<option value="ext-children-have-events">Children engaged with center events</option>
+		<option value="ext-children-have-events-practice">Children are practicing for an event</option>
 		<option value="ext-children-unwell">Children are unwell</option>
+		<option value="ext-donor-visit">Donor Visit</option> 
 		<option value="ext-other">Other</option>
 	</optgroup>
 </select><br />
