@@ -160,5 +160,7 @@ mobileApp.run(['$localStorage','$rootScope',function ($localStorage,$rootScope) 
             return $localStorage.user.user_id;
             
         };
+
     }
 ]);
+

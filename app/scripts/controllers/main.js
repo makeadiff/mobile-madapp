@@ -23,3 +23,5 @@ angular.module('mobileApp')
   	}
     
 }]);
+
+ 

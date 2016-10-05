@@ -8,7 +8,7 @@
  * Controller of the mobileApp
  */
 angular.module('mobileApp')
-  .controller('ReportCtrl', ['$scope', '$location', '$http', 'UserService', function ($scope, $location, $http, user_service) {
+  .controller('ReportCtrl', ['$scope', '$location', '$http', 'UserService','ReportService', function ($scope, $location, $http, user_service,report_service) {
 	var ReportCtrl = this;
 
 	
@@ -26,7 +26,14 @@ angular.module('mobileApp')
   	}
 
   	ReportCtrl.user = user;
-	
+
+  	report_service.getReport(ReportCtrl);
+  	report_service.countProblems(ReportCtrl);
+  	report_service.iscountRed(ReportCtrl);
+  	report_service.load(ReportCtrl);
+
+
+	/*
 	ReportCtrl.reports = {
 		"teacher": {
 				"student_attendance"		: {"name" : "Student Attendance", "issue_count" : 0},
@@ -42,6 +49,7 @@ angular.module('mobileApp')
 				"class_satisfaction"		: {"name" : "Class Satisfaction", "issue_count" : 0}
 		}
 	};
+
 
 	ReportCtrl.load = function() {
 		var connect = ReportCtrl._findConnection();
@@ -73,6 +81,7 @@ angular.module('mobileApp')
 		if(data.report_name == 'teacher_report_aggregate') {
 			for(var key in data.reports) {
 				ReportCtrl.reports.teacher[key].issue_count = data.reports[key];
+				
 			}
 		}
 		if(data.report_name == 'mentor_report_aggregate') {
@@ -81,6 +90,37 @@ angular.module('mobileApp')
 			}
 		}
 	}
+
+	ReportCtrl.iscountRed = function(data){
+		loaded();
+		var count = 0;
+		var i = 0; // no. of metrics
+		if(data.report_name == 'teacher_report_aggregate') {
+			for(var key in data.reports) {
+				if(ReportCtrl.reports.teacher[key].issue_count > 0){
+					count+=1;
+				}
+		    i = i+1;		   
+			}
+		}
+		if(data.report_name == 'mentor_report_aggregate') {
+			for(var key in data.reports) {
+				if(ReportCtrl.reports.teacher[key].issue_count > 0){
+					count+=1;
+				}	
+			i=i+1;
+			}
+
+		}
+		if((count/i) > 0.25 ){
+			return true;
+			console.log('More than 25%');
+		}
+		else{
+			return false;
+			console.log('Less than 25%');
+		}
+	}; */
 
 	$scope.formatDate = function(date){
 		var date = date.split("-").join("/");
@@ -102,5 +142,7 @@ angular.module('mobileApp')
 	}
 
 	ReportCtrl.load();
+	
+	
 }]);
 

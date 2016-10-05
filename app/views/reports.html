@@ -22,7 +22,7 @@
 <div class="teacher_at" ng-show="RCtrl.user.connections.teacher_at.length">
 	<h3>Teacher Classes</h3>
 	<div ng-repeat="con in RCtrl.user.connections.teacher_at" id="class-{{con.id}}">
-	<h4>{{con.center_name}}, <span ng-bind="formatDate(con.class_on) | date:'MMMM d EEE, hh:mm a'"></span></h4>
+	<h4>{{con.center_name}}, <span ng-bind="Date(con.class_on) | date:'MMMM d EEE, hh:mm a'"></span></h4>
 	</div>
 
 	<h5>Reports</h5>
