@@ -5,6 +5,12 @@
 .student-details {
 	padding: 0;
 }
+
+a.link.ng-binding:hover{
+	text-decoration: none !important;
+	color: #f39c12;
+} 
+
 #class-details {
 	padding: 0 20px 10px 20px;
 	background-color: #23bbb9;
@@ -37,7 +43,6 @@
 }
 
 .level-name {
-	border-top: 1px solid #fff;
 	font-weight: bold;
 }
 
@@ -63,3 +68,19 @@
 .red {
 	background-color: #e06666;
 }
+
+/* Mentor report */
+
+/* @media (min-width: @screen-sm-min) { .label-default{ padding: 40px;} } */
+
+.label-default{
+	margin: 10px;
+	color: #222;
+	width: 200px;
+	max-width: 200px;
+ } 
+
+.legend_display {
+	padding-top: 20px;
+}
+

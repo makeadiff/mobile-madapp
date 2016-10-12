@@ -12,7 +12,7 @@
 
 var base_url = "http://makeadiff.in/madapp/index.php/api/";
 if(location.href.toString().match(/localhost/) || location.href.toString().match(/192\.168\./)) {
-	  base_url = "http://localhost/Projects/Madapp/index.php/api/";
+	  base_url = "/mad/madapp/index.php/api/";
 }
 
 var key = "am3omo32hom4lnv32vO";
@@ -121,6 +121,13 @@ var mobileApp = angular.module('mobileApp', [
 		templateUrl: 'views/reports.html',
 		controller: 'ReportCtrl',
 		restricted : true,
+		resolve: {
+		  style : function() {
+			if( !angular.element('link#report-css').length) {
+			  angular.element('head').append('<link id="report-css" href="styles/report.css" rel="stylesheet">');
+			}
+		  }
+		}
 	  })
 	  .when('/login', {
 		templateUrl: 'views/login.html',
