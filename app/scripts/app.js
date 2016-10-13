@@ -12,7 +12,7 @@
 
 var base_url = "http://makeadiff.in/madapp/index.php/api/";
 if(location.href.toString().match(/localhost/) || location.href.toString().match(/192\.168\./)) {
-	  base_url = "/mad/madapp/index.php/api/";
+	  base_url = "http://localhost/Projects/Madapp/index.php/api/";
 }
 
 var key = "am3omo32hom4lnv32vO";
@@ -157,6 +157,7 @@ function loading() {
 function loaded() {
   angular.element("#loading").hide();
 }
+
 
 mobileApp.run(['$localStorage','$rootScope', '$http',function ($localStorage,$rootScope, $http) {
         $rootScope.loginStatus = function() {

@@ -27,8 +27,9 @@
 
 	<h5>Reports</h5>
 	<ul>
-	<li ng-repeat="(report_key, report_data) in RCtrl.reports.teacher"><a href="#/teacher_report?name={{report_key}}" class = "link">{{report_data.name}}</a> 
-	<span ng-class="{'badge-error': report_data.issue_count > 0, 'badge': true, 'issue-count': true}">{{report_data.issue_count}}</span></li>
+	<li ng-repeat="(report_key, report_data) in RCtrl.reports.teacher">
+		<a href="#/teacher_report?name={{report_key}}">{{report_data.name}}</a> 
+		<span ng-class="{'badge-error': report_data.issue_count > 0, 'badge': true, 'issue-count': true}">{{report_data.issue_count}}</span></li>
 	</ul>
 </div>
 
