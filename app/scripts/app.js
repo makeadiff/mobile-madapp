@@ -160,22 +160,22 @@ function loaded() {
 
 
 mobileApp.run(['$localStorage','$rootScope', '$http',function ($localStorage,$rootScope, $http) {
-        $rootScope.loginStatus = function() {
-        	if(!$localStorage.user) return 0;
-            if(!$localStorage.user.user_id == "undefined") return 0;
-            return $localStorage.user.user_id;
-        };
+		$rootScope.loginStatus = function() {
+			if(!$localStorage.user) return 0;
+			if(typeof $localStorage.user.user_id == "undefined") return 0;
+			return $localStorage.user.user_id;
+		};
 
-        $rootScope.reportStatus = function() {
-        	if(typeof $rootScope.reportIssueCount != "undefined") return false;
-        	$rootScope.reportIssueCount = 0;
-        	$rootScope.reportIssuePercentage = 0;
-        	var user_id = $rootScope.loginStatus();
-        	if(!user_id) return false;
-        	var user = $localStorage.user;
+		$rootScope.reportStatus = function() {
+			if(typeof $rootScope.reportIssueCount != "undefined") return false;
+			$rootScope.reportIssueCount = 0;
+			$rootScope.reportIssuePercentage = 0;
+			var user_id = $rootScope.loginStatus();
+			if(!user_id) return false;
+			var user = $localStorage.user;
 
-        	if(!user.connections) return false;
-        	var connect = {};
+			if(!user.connections) return false;
+			var connect = {};
 
 			if(user.connections.mentor_at.length) connect['mentor'] = user.connections.mentor_at[0];
 			if(user.connections.teacher_at.length) connect['teacher'] = user.connections.teacher_at[0];
@@ -184,12 +184,13 @@ mobileApp.run(['$localStorage','$rootScope', '$http',function ($localStorage,$ro
 			var reports_count = 0;
 			var reports_with_issues = 0;
 
-			if(connect.teacher.level_id) {
+			if(connect.teacher && connect.teacher.level_id) {
 				$http({
 					method: 'GET',
 					url: base_url + 'teacher_report_aggregate',
 					params: {level_id: connect.teacher.level_id, key: key}
 				}).success(function(data) {
+					issue_count = 0;
 					for(var key in data.reports) {
 						issue_count += data.reports[key];
 						if(data.reports[key]) reports_with_issues++;
@@ -197,16 +198,19 @@ mobileApp.run(['$localStorage','$rootScope', '$http',function ($localStorage,$ro
 					}
 					$rootScope.reportIssueCount += issue_count;
 					$rootScope.reportIssuePercentage = Math.ceil(reports_with_issues / reports_count * 100);
+
 				}).error(error);
 			}
 
 			// If user is a mentor, show mentor reports.  
-			if(connect.mentor.batch_id) {
+			if(connect.mentor && connect.mentor.batch_id) {
 				$http({
 					method: 'GET',
 					url: base_url + 'mentor_report_aggregate',
 					params: {batch_id: connect.mentor.batch_id, key: key}
 				}).success(function(data) {
+					issue_count = 0;
+
 					for(var key in data.reports) {
 						issue_count += data.reports[key];
 						if(data.reports[key]) reports_with_issues++;
@@ -214,9 +218,10 @@ mobileApp.run(['$localStorage','$rootScope', '$http',function ($localStorage,$ro
 					}
 					$rootScope.reportIssueCount += issue_count;
 					$rootScope.reportIssuePercentage = Math.ceil(reports_with_issues / reports_count * 100);
+					
 				}).error(error);
 			}
-        }();
-    }
+		}();
+	}
 ]);
 
