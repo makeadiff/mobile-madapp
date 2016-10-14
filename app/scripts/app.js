@@ -202,7 +202,7 @@ mobileApp.run(['$localStorage','$rootScope', '$http',function ($localStorage,$ro
 				}).error(error);
 			}
 
-			// If user is a mentor, show mentor reports.  
+			// If user is a mentor, show mentor reports.
 			if(connect.mentor && connect.mentor.batch_id) {
 				$http({
 					method: 'GET',
@@ -218,7 +218,7 @@ mobileApp.run(['$localStorage','$rootScope', '$http',function ($localStorage,$ro
 					}
 					$rootScope.reportIssueCount += issue_count;
 					$rootScope.reportIssuePercentage = Math.ceil(reports_with_issues / reports_count * 100);
-					
+
 				}).error(error);
 			}
 		}();

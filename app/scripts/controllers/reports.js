@@ -46,7 +46,7 @@ angular.module('mobileApp')
 		if(!connect) return;
 
 		// If the user is a teacher, show the teacher reports.
-		if(connect.teacher.level_id) {
+		if(connect.teacher && connect.teacher.level_id) {
 			loading();
 			$http({
 				method: 'GET',
@@ -56,7 +56,7 @@ angular.module('mobileApp')
 		}
 
 		// If user is a mentor, show mentor reports.  
-		if(connect.mentor.batch_id) {
+		if(connect.mentor && connect.mentor.batch_id) {
 			loading();
 			$http({
 				method: 'GET',
