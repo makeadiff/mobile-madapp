@@ -14,11 +14,11 @@
 <tr class="header"><th></th><th>Last {{MRCtrl.max_class_count < 6 ? MRCtrl.max_class_count : 6}}<br />Classes</th><th>All Class<br />Till Date</th></tr>
 
 <tr ng-repeat-start="level in MRCtrl.report" class = "level-name">
-<td class="level-name">{{level.name}}</td> 
+<td class="level-name" nowrap="nowrap">{{level.name}}</td> 
 <!--<tr ng-repeat="unit in level[MRCtrl.data_unit]"> -->
-	<!--<td class="teacher-name">{{unit.name}}</td>-->
-	<td><span class="rating {{level[MRCtrl.data_unit][0].six.rating}}">{{level[MRCtrl.data_unit][0].six.percentage}}%</span></td>
-	<td><span class="rating {{level[MRCtrl.data_unit][0].all.rating}}">{{level[MRCtrl.data_unit][0].all.percentage}}%</span></td> 
+<!--<td class="teacher-name">{{unit.name}}</td>-->
+<td><span class="rating {{level[MRCtrl.data_unit][0].six.rating}}">{{level[MRCtrl.data_unit][0].six.total == 0 ? 'NA' : level[MRCtrl.data_unit][0].six.percentage+'%'}}</span></td>
+<td><span class="rating {{level[MRCtrl.data_unit][0].all.rating}}">{{level[MRCtrl.data_unit][0].all.total == 0 ? 'NA' : level[MRCtrl.data_unit][0].all.percentage+'%'}}</span></td> 
 </tr>
 
 <tr class="hide" ng-repeat-end></tr>

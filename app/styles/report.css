@@ -6,6 +6,25 @@
 	padding: 0;
 }
 
+.report-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.report-link a {
+	color: #000 !important;
+}
+.report-link {
+	display: block;
+	padding: 10px;
+	font-weight: bold;
+	background-color: #aaa;
+}
+.report-link:nth-child(2n) {
+	background-color: #ccc;
+}
+
 a.link.ng-binding:hover{
 	text-decoration: none !important;
 	color: #f39c12;

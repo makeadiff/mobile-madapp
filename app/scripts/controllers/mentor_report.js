@@ -105,8 +105,6 @@ angular.module('mobileApp')
 		loaded();
 		MentorReportCtrl.report = data.report;
 		MentorReportCtrl.max_class_count = data.max_class_count;
-
-		console.log(data.report)
 	}
 
 	MentorReportCtrl._findConnection = function() {
