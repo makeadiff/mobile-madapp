@@ -30,6 +30,7 @@ angular.module('mobileApp')
 				params: {class_id: user.active_class, key: key}
 			}).success(TeacherCtrl.openClass).error(error);
 
+		// Open a specific class. Need incase the mentor is browsing thru the classes. 
 		} else if(options.class_id) {
 			$http({
 				method: 'GET',

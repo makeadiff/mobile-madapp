@@ -12,7 +12,7 @@
 
 var base_url = "http://makeadiff.in/madapp/index.php/api/";
 if(location.href.toString().match(/localhost/) || location.href.toString().match(/192\.168\./)) {
-	  base_url = "http://localhost/Projects/Madapp/index.php/api/";
+	  base_url = "http://192.168.1.13/Projects/Madapp/index.php/api/";
 }
 
 var key = "am3omo32hom4lnv32vO";
@@ -33,12 +33,10 @@ var mobileApp = angular.module('mobileApp', [
 	$routeProvider
 	  .when('/', {
 		templateUrl: 'views/main.html',
-		controller: 'MainCtrl',
 		restricted : true
 	  })
 	  .when('/teacher', {
 		templateUrl: 'views/teacher.html',
-		controller: 'TeacherCtrl',
 		restricted : true,
 		resolve: {
 		  style : function() {
@@ -51,7 +49,6 @@ var mobileApp = angular.module('mobileApp', [
 	  })
 	  .when('/mentor', {
 		templateUrl: 'views/mentor.html',
-		controller: 'MentorCtrl',
 		restricted : true,
 		resolve: {
 		  style : function() {
@@ -63,27 +60,22 @@ var mobileApp = angular.module('mobileApp', [
 	  })
 	  .when('/about', {
 		templateUrl: 'views/about.html',
-		controller: 'AboutCtrl',
 		restricted : false
 	  })
 	  .when('/message', {
 		templateUrl: 'views/message.html',
-		controller: 'MessageCtrl',
 		restricted : false
 	  })
 	  .when('/connections', {
 		templateUrl: 'views/connections.html',
-		controller: 'ConnectionCtrl',
 		restricted : true
 	  })
 	  .when('/extra_class', {
 		templateUrl: 'views/extra_class.html',
-		controller: 'ExtraClassCtrl',
 		restricted : true
 	  })
 	  .when('/mentor_report', {
 		templateUrl: 'views/mentor_report.html',
-		controller: 'MentorReportCtrl',
 		restricted : true,
 		resolve: {
 		  style : function() {
@@ -95,7 +87,6 @@ var mobileApp = angular.module('mobileApp', [
 	  })
 	  .when('/center_report', {
 		templateUrl: 'views/center_report.html',
-		controller: 'CenterReportCtrl',
 		restricted : true,
 		resolve: {
 		  style : function() {
@@ -107,7 +98,6 @@ var mobileApp = angular.module('mobileApp', [
 	  })
 	  .when('/teacher_report', {
 		templateUrl: 'views/teacher_report.html',
-		controller: 'TeacherReportCtrl',
 		restricted : true,
 		resolve: {
 		  style : function() {
@@ -119,7 +109,6 @@ var mobileApp = angular.module('mobileApp', [
 	  })
 	  .when('/reports', {
 		templateUrl: 'views/reports.html',
-		controller: 'ReportCtrl',
 		restricted : true,
 		resolve: {
 		  style : function() {
@@ -129,9 +118,12 @@ var mobileApp = angular.module('mobileApp', [
 		  }
 		}
 	  })
+	  .when('/select_class', {
+		templateUrl: 'views/select_class.html',
+		restricted : true,
+	  })
 	  .when('/login', {
 		templateUrl: 'views/login.html',
-		controller: 'LoginCtrl',
 		restricted : false,
 		resolve: {
 		  style : function() {

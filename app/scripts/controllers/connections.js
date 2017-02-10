@@ -37,7 +37,6 @@ angular.module('mobileApp')
 	}
 
 	ConnectionCtrl.teachClass = function(class_id) {
-		console.log(class_id);
 		user_service.setUserData("active_class", class_id);
 		$location.path("/teacher").search({"class_id": class_id});
 	}
