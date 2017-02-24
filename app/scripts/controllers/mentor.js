@@ -36,6 +36,13 @@ angular.module('mobileApp')
 				params: {batch_id: options.batch_id, 'class_on': options.class_on, key: key}
 			}).success(MentorCtrl.openBatch).error(error);
 
+	  	} else if(options.batch_id) {
+	  		$http({
+				method: 'GET',
+				url: base_url + 'class_get_batch',
+				params: {batch_id: options.batch_id, key: key}
+			}).success(MentorCtrl.openBatch).error(error);
+
 	  	} else if(user.active_batch) {
 			$http({
 				method: 'GET',

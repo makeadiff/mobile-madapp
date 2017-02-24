@@ -79,6 +79,8 @@ angular.module('mobileApp')
 
 		if(SelectClassCtrl.selected_level) {
 			// Open batch
+			$location.path("/mentor").search({"batch_id": batch_id});
+			return;
 		}
 	}
 
@@ -86,7 +88,8 @@ angular.module('mobileApp')
 		SelectClassCtrl.selected_level = level_id;
 
 		if(SelectClassCtrl.selected_batch) {
-			// Open batch
+			$location.path("/mentor").search({"batch_id": SelectClassCtrl.selected_batch});
+			return;
 		}
 	}
 
