@@ -24,13 +24,8 @@ angular.module('mobileApp')
   	}
   	SelectClassCtrl.user = user;
   	SelectClassCtrl.selected_center = 0;
-  	SelectClassCtrl.selected_batch = 0;
-  	SelectClassCtrl.selected_level = 0;
 
 	SelectClassCtrl.load = function() {
-		//loaded();
-		// var connect = SelectClassCtrl._findConnection();
-		// if(!connect) return;
 		SelectClassCtrl.loadCenters();
 	}
 
@@ -56,85 +51,25 @@ angular.module('mobileApp')
 		loading();
 		SelectClassCtrl.selected_center = center_id;
 	  	SelectClassCtrl.selected_batch = 0;
-	  	SelectClassCtrl.selected_level = 0;
 		$http({
 			method: 'GET',
 			url: base_url + 'get_batches_and_levels_in_center',
 			params: {center_id: center_id, key: key}
-		}).success(SelectClassCtrl.showBatchsAndLevels).error(error);
+		}).success(SelectClassCtrl.showBatchs).error(error);
 	}
-	SelectClassCtrl.showBatchsAndLevels = function(data) {
+	SelectClassCtrl.showBatchs = function(data) {
 		loaded();
 		if(data.error) {
 			$location.path("/message").search({"error": data.error});
 			return;
 		}
 		SelectClassCtrl.batches = data.batches;
-		SelectClassCtrl.levels = data.levels;
-		SelectClassCtrl.connection = data.connection;
 	}
 
 	SelectClassCtrl.selectBatch = function(batch_id) {
-		SelectClassCtrl.selected_batch = batch_id;
-
-		if(SelectClassCtrl.selected_level) {
-			// Open batch
-			$location.path("/mentor").search({"batch_id": batch_id});
-			return;
-		}
-	}
-
-	SelectClassCtrl.selectLevel = function(level_id) {
-		SelectClassCtrl.selected_level = level_id;
-
-		if(SelectClassCtrl.selected_batch) {
-			$location.path("/mentor").search({"batch_id": SelectClassCtrl.selected_batch});
-			return;
-		}
-	}
-
-	SelectClassCtrl.isBatchActive = function(batch_id) {
-		var level_id = SelectClassCtrl.selected_level;
-
-		for(var i = 0; i<SelectClassCtrl.connection.length; i++) {
-			if(	   SelectClassCtrl.connection[i].level_id == level_id
-				&& SelectClassCtrl.connection[i].batch_id == batch_id) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	SelectClassCtrl.isLevelActive = function(level_id) {
-		var batch_id = SelectClassCtrl.selected_batch;
-
-		for(var i = 0; i<SelectClassCtrl.connection.length; i++) {
-			if(	   SelectClassCtrl.connection[i].batch_id == batch_id
-				&& SelectClassCtrl.connection[i].level_id == level_id) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-
-	$scope.formatDate = function(date){
-		var date = date.split("-").join("/");
-		var dateOut = new Date(date);
-		return dateOut;
-	};
-
-	SelectClassCtrl._findConnection = function() {
-		var connect = {};
-		if(!user || !user.connections) return false;
-
-		if(user.connections.mentor_at.length)
-			connect['mentor'] = user.connections.mentor_at[0];
-
-		if(user.connections.teacher_at.length)
-			connect['teacher'] = user.connections.teacher_at[0];
-
-		return connect;
+		// Open batch
+		$location.path("/mentor").search({"batch_id": batch_id});
+		return;
 	}
 
 	SelectClassCtrl.load();

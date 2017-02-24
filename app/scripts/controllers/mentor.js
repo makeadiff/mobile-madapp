@@ -110,10 +110,11 @@ angular.module('mobileApp')
 
 	MentorCtrl.save = function(batch_id, class_on, classes) {
 		loading();
+
 		$http({
 			method: 'POST',
 			url: base_url + 'class_save',
-			data: {user_id: user_id, key: key, class_data: angular.toJson(classes)},
+			params: {"user_id": user_id, "key": key, "class_data": angular.toJson(classes)},
 		}).success(function(data) {
 			loaded();
 			if(data.success) {
@@ -132,26 +133,11 @@ angular.module('mobileApp')
 		if(status == "1") {
 			class_info.class_status = "0";
 			button_text = "Un-Cancel Class";
-
-			for(var teacher_index in class_info.teachers) {
-				var teacher_id = class_info.teachers[teacher_index].id;
-				$("#zero-hour-" + teacher_id).prop("disabled", true);
-				$("#attendance-" + teacher_id).prop("disabled", true);
-				$("#sub-" + teacher_id).prop("disabled", true);
-			}
-			// growl.addSuccessMessage("Class cancelled.", {ttl: 3000});
 		} else {
 			class_info.class_status = "1";
-			button_text = ""; // Cancel Class
-
-			for(var teacher_index in class_info.teachers) {
-				var teacher_id = class_info.teachers[teacher_index].id;
-				$("#zero-hour-" + teacher_id).prop("disabled", false);
-				$("#attendance-" + teacher_id).prop("disabled", false);
-				$("#sub-" + teacher_id).prop("disabled", false);
-			}
+			button_text = "<span class='glyphicon glyphicon-remove-sign'></span> Cancel Class"; // Cancel Class
 		}
-		$("#cancel-button-"+class_info.id).text(button_text);
+		$("#cancel-button-"+class_info.id).html(button_text);
 
 	}
 
