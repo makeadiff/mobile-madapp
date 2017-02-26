@@ -48,14 +48,15 @@
 <div class="teachers">
 	<div class="teacher" ng-repeat="teacher in class.teachers" class="row">
 	<div class="pull-right attendance-area" ng-show="(class.class_status == '1')">
-	<toggle-switch ng-model="teacher.status" id="attendance-{{teacher.id}}" on-label="Present" off-label="Absent"></toggle-switch>
+	<toggle-switch ng-model="teacher.status" id="attendance-{{teacher.id}}" on-label="Present" off-label="Absent" class="switch-primary"></toggle-switch>
 	</div>
 
-	<span ng-class="{'substituted': (teacher.substitute_id != '0'), 'teacher-name':true}" 
-			ng-click="MCtrl.showSubstitute(teacher.id,teacher)" ng-show="class.class_status == '1'">
+	<span ng-class="{'substituted': (teacher.substitute_id != '0'), 'teacher-name':true}"
+			ng-click="MCtrl.showSubstitute(teacher)" ng-show="class.class_status == '1'">
+		<span ng-class="{'glyphicon':true, 'glyphicon-triangle-bottom': (teacher.show_substitute != '0'), 'glyphicon-triangle-right': (teacher.show_substitute == '0')}"></span>
 		<span class="glyphicon glyphicon-user user-icon"></span> {{teacher.name}}</span>
 
-	<div id="substitute-{{teacher.id}}" class="substitute-area" ng-show="teacher.substitute_id">
+	<div id="substitute-{{teacher.id}}" class="substitute-area" ng-show="teacher.show_substitute != 0">
 		<label>Substitute: </label>
 		<select name="substitute[{{teacher.id}}]" ng-model="teacher.substitute_id" id="sub-{{teacher.id}}">
 			<option ng-repeat="sub in MCtrl.all_teachers" value="{{sub.id}}">{{sub.name}}</option>

@@ -86,26 +86,20 @@ angular.module('mobileApp')
 
 		user_service.setUserData("active_batch", data.batch_id); // Need this for exta class creation.
 
-		setTimeout(function() {
-			for(var index in data.classes) {
-				var cls = data.classes[index];
-				
-				// Disable cancelled classes
-				if(cls.class_status == "0") {
-					MentorCtrl.cancelClass(cls, true);
-				}
+		for(var index in data.classes) {
+			var cls = data.classes[index];
 
-				// Show the substitue dropdown if a substitue is selected.
-				for(var inde in cls.teachers) {
-					var teach = cls.teachers[inde];
-					if(teach.substitute_id != "0") {
-						// This should be done by Angluar automatically. Both of these. But its not happening. So.
-						$("#substitute-" + teach.id).show();
-						$("#sub-" + teach.id).val(teach.substitute_id); 
-					}
-				}
+			// Disable cancelled classes
+			if(cls.class_status == "0") {
+				MentorCtrl.cancelClass(cls, true);
 			}
-		}, 200);
+
+			// Show the substitue dropdown if a substitue is selected.
+			for(var inde in cls.teachers) {
+				var teach = cls.teachers[inde];
+				MentorCtrl.mentor.classes[index].teachers[inde].show_substitute = teach.substitute_id; // By default don't show the subsitute area.
+			}
+		}
 	}
 
 	MentorCtrl.save = function(batch_id, class_on, classes) {
@@ -141,25 +135,11 @@ angular.module('mobileApp')
 
 	}
 
-	MentorCtrl.showSubstitute = function(user_id, teacher) {
-		for(var i in MentorCtrl.mentor.classes) {
-			var cls = MentorCtrl.mentor.classes[i];
-			for(var j in cls.teachers) {
-				var teach = cls.teachers[j];
-				if(teach.id == teacher.id) {
-					if(MentorCtrl.mentor.classes[i].teachers[j].substitute_id == "0") {
-						$("#substitute-"+user_id).toggle();
-
-					} else {
-						// When Hiding subs, unset the sub as well.
-						MentorCtrl.mentor.classes[i].teachers[j].substitute_id = "0";
-						MentorCtrl.mentor.classes[i].teachers[j].substitute = "";
-						$("#substitute-"+user_id).hide();
-					}
-					return;
-				}
-			}
-		}
+	MentorCtrl.showSubstitute = function(teacher) {
+		if(teacher.show_substitute != '0') // It can be 1 or substitute id
+			teacher.show_substitute = 0;
+		else
+			teacher.show_substitute = 1;
 	}
 
 	MentorCtrl.browseClass = function(batch_id, class_on, direction) {

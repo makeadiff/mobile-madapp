@@ -24,10 +24,6 @@
 	color:#25a5a3;
 }
 
-.substitute-area {
-	display: none;
-}
-
 .cancelled {
 	background: 
 		/* On "top" */
@@ -40,12 +36,12 @@
 	  );
 }
 
-.user-icon {
-	color: #97cc91;
+.teacher-name {
+	color: #fff;
 }
 
 .substituted {
-	color: #444 !important;
+	color: #888 !important;
 }
 .teacher-name {
 	font-weight: bold;
@@ -63,6 +59,9 @@
 
 .teachers {
 	margin-top:15px;
+}
+.teacher {
+	margin-top: 5px;
 }
 
 /*
