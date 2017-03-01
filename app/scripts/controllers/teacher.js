@@ -23,7 +23,15 @@ angular.module('mobileApp')
 	TeacherCtrl.user_id = user_id;
 
 	TeacherCtrl.load = function() {
-		if(user.active_class) {
+		// Open teacher view directly from select class page based on a batch_id and level_id
+		if(options.batch_id && options.level_id) {
+			$http({
+				method: 'GET',
+				url: base_url + 'browse_class',
+				params: {batch_id: options.batch_id, level_id: options.level_id, key: key, direction: 'l'}
+			}).success(TeacherCtrl.openClass).error(error);
+
+		} else if(user.active_class) {
 			$http({
 				method: 'GET',
 				url: base_url + 'open_class',
@@ -37,6 +45,7 @@ angular.module('mobileApp')
 				url: base_url + 'open_class',
 				params: {class_id: options.class_id, key: key}
 			}).success(TeacherCtrl.openClass).error(error);
+
 		} else {
 			$http({
 				method: 'GET',

@@ -16,7 +16,6 @@
 <h4>Choose Batch...</h4>
 <div class="btn-group-vertical" role="group">
 <button ng-repeat="batch in SCCtrl.batches" class="btn btn-primary ng-class:{'btn-info': (SCCtrl.selected_batch == batch.id) }" 
-	ng-disabled="SCCtrl.isBatchActive(batch.id)" id="batch-{{batch.id}}"
 	title="{{batch.name}}" ng-click="SCCtrl.selectBatch(batch.id)">{{batch.name}}</span></button>
 </div>
 </div>
@@ -25,7 +24,6 @@
 <h4>Choose Level...</h4>
 <div class="btn-group-vertical" role="group">
 <button ng-repeat="level in SCCtrl.levels" class="btn btn-primary ng-class:{'btn-info': (SCCtrl.selected_level == level.id) }" 
-	ng-disabled="SCCtrl.isLevelActive(level.id)" id="level-{{level.id}}"
 	title="{{level.name}}" ng-click="SCCtrl.selectLevel(level.id)">{{level.name}}</span></button>
 </div>
 </div>
