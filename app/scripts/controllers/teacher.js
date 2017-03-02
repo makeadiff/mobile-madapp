@@ -128,7 +128,7 @@ angular.module('mobileApp')
 			params: {"user_id": user_id, "key": key, "students": students, "class_satisfaction": class_satisfaction, "class_id": class_id}
 		}).success(function(data) {
 			loaded();
-			growl.addSuccessMessage("Information Updated.", {ttl: 3000});
+			growl.addSuccessMessage("Information updated by " + user.name + ".", {ttl: 3000});
 		}).error(error);
 	}
 	

@@ -112,7 +112,7 @@ angular.module('mobileApp')
 		}).success(function(data) {
 			loaded();
 			if(data.success) {
-				growl.addSuccessMessage("Information Updated.", {ttl: 3000});
+				growl.addSuccessMessage("Information updated by " + user.name + ".", {ttl: 3000});
 			} else {
 				error(data.error);
 			}
