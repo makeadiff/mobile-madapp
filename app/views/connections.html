@@ -1,8 +1,8 @@
 <div class="container" ng-controller="ConnectionCtrl as CCtrl">
 
 <div id="connections" class="row">
-<h3 class="teacher-name">Hi,&nbsp;{{CCtrl.user.name}}</h3>
-<br />
+<!-- <h3 class="teacher-name">Hi,&nbsp;{{CCtrl.user.name}}</h3><br /> -->
+
 <div class="classes">
 
 <div class="mentor_at" ng-show="CCtrl.user.connections.mentor_at.length">
@@ -22,9 +22,13 @@
 	</div>
 </div>
 
-<h4>Select Other Classes</h4>
+<h4>Select Another Classes</h4>
 
 <a class="btn btn-info" href="#select_class">Select Class</a>
+
+<h4>Extra Class</h4>
+
+<a class="btn btn-info" href="#extra_class">Create Extra Class</a>
 
 </div>
 

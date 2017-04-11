@@ -18,12 +18,6 @@ angular.module('mobileApp')
 	}
 	var user_id = user.user_id;
 
-	$('.kc_fab_wrapper').kc_fab([{
-		"url":"#/extra_class",
-		"bgcolor":"#03A9F4",
-		"icon":"+"
-	}]);
-
 	MentorCtrl.load = function() {
 		loading();
 
@@ -88,6 +82,7 @@ angular.module('mobileApp')
 
 		for(var index in data.classes) {
 			var cls = data.classes[index];
+			MentorCtrl.mentor.classes[index].index = index;
 
 			// Disable cancelled classes
 			if(cls.class_status == "0") {
@@ -97,9 +92,26 @@ angular.module('mobileApp')
 			// Show the substitue dropdown if a substitue is selected.
 			for(var inde in cls.teachers) {
 				var teach = cls.teachers[inde];
+				MentorCtrl.mentor.classes[index].teachers[inde].index = inde;
 				MentorCtrl.mentor.classes[index].teachers[inde].show_substitute = teach.substitute_id; // By default don't show the subsitute area.
 			}
 		}
+
+		// Work arounds for using this library.
+		window.setTimeout(function() {
+			$('.toggle-switch').bootstrapToggle({
+		      on: 'Present',
+		      off: 'Absent'
+		    });
+
+		    $('.toggle-switch').change(function() {
+		    	var id = $(this).prop("id");
+		    	var class_index = $("#" + id).attr('class-index');
+		    	var teacher_index = $("#" + id).attr('teacher-index');
+
+		    	MentorCtrl.mentor.classes[class_index].teachers[teacher_index].status = $(this).prop('checked');
+    		});
+		}, 500);
 	}
 
 	MentorCtrl.save = function(batch_id, class_on, classes) {
@@ -132,7 +144,6 @@ angular.module('mobileApp')
 			button_text = "<span class='glyphicon glyphicon-remove-sign'></span> Cancel Class"; // Cancel Class
 		}
 		$("#cancel-button-"+class_info.id).html(button_text);
-
 	}
 
 	MentorCtrl.showSubstitute = function(teacher) {

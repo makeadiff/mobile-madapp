@@ -48,7 +48,8 @@
 <div class="teachers">
 	<div class="teacher" ng-repeat="teacher in class.teachers" class="row">
 	<div class="pull-right attendance-area" ng-show="(class.class_status == '1')">
-	<toggle-switch ng-model="teacher.status" id="attendance-{{teacher.id}}" on-label="Present" off-label="Absent" class="switch-primary"></toggle-switch>
+	<input class="toggle-switch" ng-model="teacher.status" id="attendance-{{teacher.id}}" data-toggle="toggle" 
+			data-height="25" data-width="70" data-size="small" type="checkbox" value="1" class-index="{{class.index}}" teacher-index="{{teacher.index}}">
 	</div>
 
 	<span ng-class="{'substituted': (teacher.substitute_id != '0'), 'teacher-name':true}"

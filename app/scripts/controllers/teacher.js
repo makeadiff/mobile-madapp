@@ -116,7 +116,7 @@ angular.module('mobileApp')
 	}
 
 	TeacherCtrl.save = function(class_id, students, class_satisfaction) {
-		// Stupid hack to make sure that the absent students are marked as 0. Right now due to some conflict between angular and star-rateings, its not happening.
+		// Stupid hack to make sure that the absent students are marked as 0. Right now due to some conflict between angular and star-ratings, its not happening.
 		for (var i in students) {
 			students[i].participation = Number($("#participation-" + i).val());
 		}

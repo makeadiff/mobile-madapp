@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="bower_components/kc_fab/dist/css/kc.fab.css" />
 	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="bower_components/ngDatepicker/src/css/ngDatepicker.css" />
-	<link rel="stylesheet" type="text/css" href="bower_components/angular-bootstrap-toggle-switch/style/bootstrap3/angular-toggle-switch-bootstrap-3.css" />
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap-toggle/css/bootstrap-toggle.min.css" />
 	<!-- endbuild -->
 	<!-- build:css(.tmp) styles/main.css -->
 	<link rel="stylesheet" href="styles/main.css">
@@ -35,9 +35,10 @@
 	  <div class="navbar navbar-default" role="navigation">
 		<div class="container">
 		  <div class="navbar-header">
-			<a class="navbar-brand" href="#/connections"><span class="glyphicon glyphicon-home"></span> MADApp</a>
-			<a class="navbar-brand" href="#/reports" ng-show="loginStatus()"><span class="glyphicon glyphicon-stats"></span> 
-				Reports <span ng-class="{'badge-error': reportIssuePercentage > 25, 'badge': true}">{{reportIssueCount}}</span></a>
+			<a class="navbar-brand" href="#/connections"><span class="glyphicon glyphicon-home"></span> Home</a>
+			<!-- <a class="navbar-brand" href="#/select_class" ng-show="loginStatus()"><span class="glyphicon glyphicon-blackboard"></span> Update Different Class</a> -->
+			<!-- <a class="navbar-brand" href="#/reports" ng-show="loginStatus()"><span class="glyphicon glyphicon-stats"></span> 
+				Reports <span ng-class="{'badge-error': reportIssuePercentage > 25, 'badge': true}">{{reportIssueCount}}</span></a> -->
 			<a class="navbar-brand" href="http://makeadiff.in/madapp/tutorial/faq.html"><span class="glyphicon glyphicon-question-sign"></span> FAQ</a>
 		  </div>
 		  
@@ -67,10 +68,9 @@
 	<script src="bower_components/ngstorage/ngStorage.js"></script>
 	<script src="bower_components/bootstrap-star-rating/js/star-rating.min.js"></script>
 	<script src="bower_components/angular-growl/build/angular-growl.js"></script>
-	<script src="bower_components/kc_fab/dist/js/kc.fab.min.js"></script>
 	<script src="bower_components/moment/moment.js"></script>
 	<script src="bower_components/ngDatepicker/src/js/ngDatepicker.js"></script>
-	<script src="bower_components/angular-bootstrap-toggle-switch/angular-toggle-switch.js"></script>
+	<script src="bower_components/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
 	<!-- endbower -->
 	<!-- endbuild -->
 

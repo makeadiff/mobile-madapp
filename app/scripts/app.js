@@ -26,8 +26,7 @@ var mobileApp = angular.module('mobileApp', [
 	'ngTouch',
 	'ngStorage',
 	'angular-growl',
-	'jkuri.datepicker',
-	'toggle-switch'
+	'jkuri.datepicker'
   ])
   .config(function ($routeProvider) {
 	$routeProvider
