@@ -47,6 +47,8 @@ angular.module('mobileApp')
 			return;
 		}
 		SelectClassCtrl.centers = data.centers;
+
+		if(params.center_id) SelectClassCtrl.selectCenter(params.center_id);
 	}
 
 
@@ -73,9 +75,21 @@ angular.module('mobileApp')
 
 	SelectClassCtrl.selectBatch = function(batch_id) {
 		SelectClassCtrl.selected_batch = batch_id;
+		var access = false;
 
-		// If mentor, Open batch
-		if(SelectClassCtrl.user.connections.mentor_at.length) {
+		if(!access) {
+			for(var pos in SelectClassCtrl.user.positions) {
+				if(SelectClassCtrl.user.positions[pos] != 'volunteer') access = true; // Anything other than a volunteer gets a auto pass.
+			}
+		}
+		if(!access) {
+			for(var i in SelectClassCtrl.user.groups) {
+				if(SelectClassCtrl.user.groups[i] == "Mentors") access = true; // If its a volunteer, then it must be a mentor to pass.
+			}
+		}
+
+		// If the current user is any thing other than just a teacher, Open batch
+		if(access) {
 			$location.path("/mentor").search({"batch_id": batch_id});
 			return;
 		}

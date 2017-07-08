@@ -10,6 +10,12 @@
 	margin:5px 0;
 }
 
+.batch-direction {
+	font-size: 1.5em;
+}
+.batch-direction.glyphicon-chevron-right {
+	padding-left: 10px;
+}
 .class {
 	padding:10px;
 	border-top: 1px solid #25a5a3;
@@ -63,6 +69,7 @@
 .teacher {
 	margin-top: 5px;
 }
+
 
 /*
 #all-teachers {

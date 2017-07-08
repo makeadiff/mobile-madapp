@@ -12,7 +12,8 @@ angular.module('mobileApp')
 	var MentorCtrl = this;
 	var user = user_service.getUser();
 	if(!user) {
-		$location.path("/login");
+		// :TODO: Teachers shouldn't be able to access this by typing a mentor URL.
+		$location.path("/login"); 
 		growl.addErrorMessage("Please login to continue", {ttl: 3000});
 		return false;
 	}
@@ -76,6 +77,7 @@ angular.module('mobileApp')
 		}
 
 		MentorCtrl.mentor = data;
+		MentorCtrl.base_url = base_url;
 		MentorCtrl.mentor.name = user.name;
 
 		user_service.setUserData("active_batch", data.batch_id); // Need this for exta class creation.

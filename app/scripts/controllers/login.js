@@ -30,7 +30,7 @@ angular.module('mobileApp')
 				var now = new moment();
 
 				if(connections.teacher_at.length && connections.mentor_at.length) { // User is a teacher AND mentor
-					$location.path("/connections"); // Show Teacher/metor choice page
+					$location.path("/connections"); // Show Teacher/mentor choice page
 					return;
 
 				} else if(connections.teacher_at.length) {
@@ -64,10 +64,27 @@ angular.module('mobileApp')
 							return;
 						}
 					}
+				} else {
+					var access = 0;
+					for(var pos in data.positions) { 
+						if(data.positions[pos] != 'volunteer') access = 1; // Anything other than a volunteer gets a auto pass.
+					}
+
+					if(!access) {
+						for(var i in data.groups) {
+							if(data.groups[i] == "Mentors") access = 1; // If its a volunteer, then it must be a mentor to pass.
+							else if(data.groups[i] == "ES Volunteer") access = 1; // or a teacher
+						}
+					}
+
+					if(access) {
+						$location.path("/connections");
+						return;
+					}
 				}
 
 				user_service.unsetUser();
-				$location.path("/message").search({"error": "Only teachers and mentors can use this app so far. Sorry."});
+				$location.path("/message").search({"error": "You don't have the neccessary permissions to access the app."});
 				return;
 			} else {
 				LoginCtrl.error = data.error;

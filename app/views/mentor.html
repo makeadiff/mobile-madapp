@@ -1,12 +1,13 @@
 <div class="container" ng-controller="MentorCtrl as MCtrl" ng-init="MCtrl.load()">
 
 <div id="class-details" class="row ng-class:MCtrl.mentor.classes[0].class_type">
-<h3>{{MCtrl.mentor.name}}</h3>
 <strong>Center:</strong> <span class="info">{{MCtrl.mentor.center_name}}</span><br />
-<strong>Class Date:</strong>
-<a class="glyphicon glyphicon-chevron-left" ng-click="MCtrl.browseClass(MCtrl.mentor.batch_id, MCtrl.mentor.class_on, '-')"></a> 
-<span class="info">{{MCtrl.mentor.class_date}}, {{MCtrl.mentor.batch_name}}</span>
-<a class="glyphicon glyphicon-chevron-right" ng-click="MCtrl.browseClass(MCtrl.mentor.batch_id, MCtrl.mentor.class_on, '+')"></a> 
+<strong>Date:</strong>
+<a class="glyphicon glyphicon-chevron-left batch-direction" ng-click="MCtrl.browseClass(MCtrl.mentor.batch_id, MCtrl.mentor.class_on, '-')"></a> 
+	<span class="info">{{MCtrl.mentor.class_date}}, 
+	<a href="#select_class?center_id={{MCtrl.mentor.center_id}}" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-book"></span> 
+	{{MCtrl.mentor.batch_name}}</a></span>
+<a class="glyphicon glyphicon-chevron-right batch-direction" ng-click="MCtrl.browseClass(MCtrl.mentor.batch_id, MCtrl.mentor.class_on, '+')"></a> 
 </div>
 
 <form method="post" role="form" ng-submit="MCtrl.save(MCtrl.mentor.batch_id, MCtrl.mentor.class_on, MCtrl.mentor.classes)">
@@ -73,4 +74,7 @@
 <button class="btn btn-lg btn-bottom btn-block" type="submit" name="action" value="Save">Save</button><br />
 </form>
 
+<a href="{{MCtrl.base_url}}../classes/assign/{{MCtrl.mentor.center_id}}/{{MCtrl.mentor.batch_id}}" class="btn btn-primary btn-sm">
+<span class="glyphicon glyphicon-pencil"></span> Edit Batch Assignment
+</a>
 </div>
