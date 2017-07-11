@@ -23,12 +23,38 @@ angular.module('mobileApp')
   	} else {
   		$location.path('/login')
   	}
+  	user.classes_total = 0;
+  	user.classes_took = 0;
+  	user.classes_missed = 0;
   	ConnectionCtrl.user = user;
+  	ConnectionCtrl.show_summary = 0;
 
 	ConnectionCtrl.load = function() {
-		loaded();
+		if(user.connections.teacher_at.length) {
+			loading();
+			$http({
+				method: 'GET',
+				url: base_url + 'user_class_info',
+				params: {user_id: ConnectionCtrl.user.user_id, key: key}
+			}).success(ConnectionCtrl.userClassInfo).error(error);
+		} else {
+			loaded();
+		}
+
 		var connect = ConnectionCtrl._findConnection();
 		if(!connect) return;
+	}
+
+	ConnectionCtrl.showSummary = function() {
+		ConnectionCtrl.show_summary = ConnectionCtrl.show_summary ? 0 : 1;
+	}
+
+	ConnectionCtrl.userClassInfo = function(data) {
+		loaded();
+
+		ConnectionCtrl.user.classes_took = data.status_counts.attended;
+		ConnectionCtrl.user.classes_missed = data.status_counts.absent;
+		ConnectionCtrl.user.classes_total = data.status_counts.attended + data.status_counts.absent;
 	}
 
 	ConnectionCtrl.mentorClass = function(batch_id) {

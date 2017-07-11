@@ -1,6 +1,19 @@
 <div class="container" ng-controller="ConnectionCtrl as CCtrl">
 
 <div id="connections" class="row">
+
+<div class="card">
+<h4 ng-click="CCtrl.showSummary()">
+<span ng-class="{'glyphicon':true, 'glyphicon-triangle-bottom': (CCtrl.show_summary != '0'), 'glyphicon-triangle-right': (CCtrl.show_summary == '0')}"></span>
+Summary : <span id="class-summary">{{CCtrl.user.classes_total}} classes</span></h4>
+
+<div class="class-summary-area" ng-show="CCtrl.show_summary == '1'" style="padding-left: 24px">
+	You took <span class="class-metric">{{CCtrl.user.classes_took}}</span> classes<br />
+	You missed <span class="class-metric">{{CCtrl.user.classes_missed}}</span> classes
+</div>
+
+</div>
+
 <!-- <h3 class="teacher-name">Hi,&nbsp;{{CCtrl.user.name}}</h3><br /> -->
 
 <div class="classes">
