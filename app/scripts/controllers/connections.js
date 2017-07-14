@@ -28,6 +28,8 @@ angular.module('mobileApp')
   	user.classes_missed = 0;
   	ConnectionCtrl.user = user;
   	ConnectionCtrl.show_summary = 0;
+  	ConnectionCtrl.show_class_history = 0;
+  	ConnectionCtrl.show_unmarked_classes = 0;
 
 	ConnectionCtrl.load = function() {
 		if(user.connections.teacher_at.length) {
@@ -45,16 +47,15 @@ angular.module('mobileApp')
 		if(!connect) return;
 	}
 
-	ConnectionCtrl.showSummary = function() {
-		ConnectionCtrl.show_summary = ConnectionCtrl.show_summary ? 0 : 1;
-	}
-
 	ConnectionCtrl.userClassInfo = function(data) {
 		loaded();
 
-		ConnectionCtrl.user.classes_took = data.status_counts.attended;
-		ConnectionCtrl.user.classes_missed = data.status_counts.absent;
-		ConnectionCtrl.user.classes_total = data.status_counts.attended + data.status_counts.absent;
+		ConnectionCtrl.user.classes_took	= data.status_counts.attended;
+		ConnectionCtrl.user.classes_missed	= data.status_counts.absent;
+		ConnectionCtrl.user.classes_total	= data.status_counts.attended + data.status_counts.absent;
+		ConnectionCtrl.user.all_classes		= data.all_classes;
+		ConnectionCtrl.user.unmarked_classes= data.unmarked_classes;
+		ConnectionCtrl.user.unmarked_classes_length = Object.keys(ConnectionCtrl.user.unmarked_classes).length;
 	}
 
 	ConnectionCtrl.mentorClass = function(batch_id) {

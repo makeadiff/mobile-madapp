@@ -67,7 +67,14 @@ var mobileApp = angular.module('mobileApp', [
 	  })
 	  .when('/connections', {
 		templateUrl: 'views/connections.html',
-		restricted : true
+		restricted : true,
+		resolve: {
+		  style : function() {
+			if( !angular.element('link#connections-css').length) {
+			  angular.element('head').append('<link id="connections-css" href="styles/connections.css" rel="stylesheet">');
+			}
+		  }
+		}
 	  })
 	  .when('/extra_class', {
 		templateUrl: 'views/extra_class.html',

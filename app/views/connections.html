@@ -3,17 +3,45 @@
 <div id="connections" class="row">
 
 <div class="card">
-<h4 ng-click="CCtrl.showSummary()">
+<h4 ng-click="CCtrl.show_summary = CCtrl.show_summary ? 0 : 1;">
 <span ng-class="{'glyphicon':true, 'glyphicon-triangle-bottom': (CCtrl.show_summary != '0'), 'glyphicon-triangle-right': (CCtrl.show_summary == '0')}"></span>
 Summary : <span id="class-summary">{{CCtrl.user.classes_total}} classes</span></h4>
 
-<div class="class-summary-area" ng-show="CCtrl.show_summary == '1'" style="padding-left: 24px">
+<div class="card-area" ng-show="CCtrl.show_summary == '1'">
 	You took <span class="class-metric">{{CCtrl.user.classes_took}}</span> classes<br />
 	You missed <span class="class-metric">{{CCtrl.user.classes_missed}}</span> classes
 </div>
-
 </div>
 
+<div class="card" id="credit-card">
+<h4 ng-click="CCtrl.show_class_history = CCtrl.show_class_history ? 0 : 1;">
+<span ng-class="{'glyphicon':true, 'glyphicon-triangle-bottom': (CCtrl.show_class_history != '0'), 'glyphicon-triangle-right': (CCtrl.show_class_history == '0')}"></span>
+Credit : <span id="current-credit">{{CCtrl.user.credit}}</span></h4>
+
+<div class="card-area" ng-show="CCtrl.show_class_history == '1'">
+	<ul class="class-history">
+	<li ng-repeat="class in CCtrl.user.all_classes">{{class.center_name}}, {{class.level_grade}} {{class.level_name}} 
+		: {{formatDate(class.class_on) | date:'MMM d EEE, hh:mm a'}}
+		- <span class='label label-success' ng-show="class.status == 'attended'">Attended</span>
+		  <span class='label label-danger' ng-show="class.status == 'absent'"">Absent</span>
+	</li>
+	</ul>
+</div>
+</div>
+
+<div class="card" id="unmarked-card">
+<h4 ng-click="CCtrl.show_unmarked_classes = CCtrl.show_unmarked_classes ? 0 : 1;">
+<span ng-class="{'glyphicon':true, 'glyphicon-triangle-bottom': (CCtrl.show_unmarked_classes != '0'), 'glyphicon-triangle-right': (CCtrl.show_unmarked_classes == '0')}"></span>
+Classes not updated : <span id="current-credit">{{CCtrl.user.unmarked_classes_length}}</span></h4>
+
+<div class="card-area" ng-show="CCtrl.show_unmarked_classes == '1'">
+	<ul class="unmarked-classes">
+	<li ng-repeat="(id, date) in CCtrl.user.unmarked_classes" ng-click="CCtrl.teachClass(id)" class="btn btn-primary btn-sm">
+		{{formatDate(date) | date:'MMM d EEE, hh:mm a'}}
+	</li>
+	</ul>
+</div>
+</div>
 <!-- <h3 class="teacher-name">Hi,&nbsp;{{CCtrl.user.name}}</h3><br /> -->
 
 <div class="classes">

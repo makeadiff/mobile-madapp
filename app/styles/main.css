@@ -179,21 +179,6 @@ ul.horizontal li {
   background-color: #23bbb9;
 }
 
-.card {
-	border:1px solid #333;
-	padding: 5px;
-	/* Add shadows to create the "card" effect */
-	box-shadow: 0 4px 8px 0 #111;
-	transition: 0.1s;
-}
-/* On mouse-over, add a deeper shadow */
-.card:hover {
-	box-shadow: 0 8px 16px 0 #333;
-}
-.card h4 {
-	margin:0;
-}
-
 /* Add some padding inside the card container */
 .container {
 	padding: 2px 16px;
