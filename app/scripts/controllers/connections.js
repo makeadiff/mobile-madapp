@@ -29,7 +29,11 @@ angular.module('mobileApp')
   	ConnectionCtrl.user = user;
   	ConnectionCtrl.show_summary = 0;
   	ConnectionCtrl.show_class_history = 0;
-  	ConnectionCtrl.show_unmarked_classes = 0;
+  	ConnectionCtrl.show_student_data_not_updated = 0;
+  	ConnectionCtrl.show_class_student_data_not_updated = 0;
+  	ConnectionCtrl.show_class_teacher_data_not_updated = 0;
+  	ConnectionCtrl.show_class_volunteer_data_not_updated = 0;
+  	ConnectionCtrl.show_teachers_with_negative_credits = 0;
 
 	ConnectionCtrl.load = function() {
 		if(user.connections.teacher_at.length) {
@@ -39,10 +43,16 @@ angular.module('mobileApp')
 				url: base_url + 'user_class_info',
 				params: {user_id: ConnectionCtrl.user.user_id, key: key}
 			}).success(ConnectionCtrl.userClassInfo).error(error);
-		} else {
-			loaded();
 		}
-
+		if(user.connections.mentor_at.length) {
+			loading();
+			$http({
+				method: 'GET',
+				url: base_url + 'user_batch_info',
+				params: {user_id: ConnectionCtrl.user.user_id, key: key}
+			}).success(ConnectionCtrl.userBatchInfo).error(error);
+		}
+		
 		var connect = ConnectionCtrl._findConnection();
 		if(!connect) return;
 	}
@@ -54,8 +64,18 @@ angular.module('mobileApp')
 		ConnectionCtrl.user.classes_missed	= data.status_counts.absent;
 		ConnectionCtrl.user.classes_total	= data.status_counts.attended + data.status_counts.absent;
 		ConnectionCtrl.user.all_classes		= data.all_classes;
-		ConnectionCtrl.user.unmarked_classes= data.unmarked_classes;
-		ConnectionCtrl.user.unmarked_classes_length = Object.keys(ConnectionCtrl.user.unmarked_classes).length;
+		ConnectionCtrl.user.student_data_not_updated= data.student_data_not_updated;
+		ConnectionCtrl.user.student_data_not_updated_length = Object.keys(ConnectionCtrl.user.student_data_not_updated).length;
+	}
+
+	ConnectionCtrl.userBatchInfo = function(data) {
+		loaded();
+
+		ConnectionCtrl.user.batch_id	= data.batch_id;
+		ConnectionCtrl.user.volunteer_data_not_updated	= data.volunteer_data_not_updated;
+		ConnectionCtrl.user.classes_where_student_data_not_updated	= data.student_data_not_updated;
+		ConnectionCtrl.user.classes_where_student_data_not_updated_length = Object.keys(ConnectionCtrl.user.classes_where_student_data_not_updated).length;
+		ConnectionCtrl.user.teachers_with_negative_credits	= data.teachers_with_negative_credits;
 	}
 
 	ConnectionCtrl.mentorClass = function(batch_id) {
