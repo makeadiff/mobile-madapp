@@ -22,23 +22,23 @@ angular.module('mobileApp')
 	MentorCtrl.load = function() {
 		loading();
 
-	  	var options = $location.search();
+		var options = $location.search();
 
-	  	if(options.batch_id && options.class_on) {
-	  		$http({
+		if(options.batch_id && options.class_on) {
+			$http({
 				method: 'GET',
 				url: base_url + 'class_get_batch',
 				params: {batch_id: options.batch_id, 'class_on': options.class_on, key: key}
 			}).success(MentorCtrl.openBatch).error(error);
 
-	  	} else if(options.batch_id) {
-	  		$http({
+		} else if(options.batch_id) {
+			$http({
 				method: 'GET',
 				url: base_url + 'class_get_batch',
 				params: {batch_id: options.batch_id, key: key}
 			}).success(MentorCtrl.openBatch).error(error);
 
-	  	} else if(user.active_batch) {
+		} else if(user.active_batch) {
 			$http({
 				method: 'GET',
 				url: base_url + 'class_get_batch',
@@ -102,17 +102,17 @@ angular.module('mobileApp')
 		// Work arounds for using this library.
 		window.setTimeout(function() {
 			$('.toggle-switch').bootstrapToggle({
-		      on: 'Present',
-		      off: 'Absent'
-		    });
+			  on: 'Present',
+			  off: 'Absent'
+			});
 
-		    $('.toggle-switch').change(function() {
-		    	var id = $(this).prop("id");
-		    	var class_index = $("#" + id).attr('class-index');
-		    	var teacher_index = $("#" + id).attr('teacher-index');
+			$('.toggle-switch').change(function() {
+				var id = $(this).prop("id");
+				var class_index = $("#" + id).attr('class-index');
+				var teacher_index = $("#" + id).attr('teacher-index');
 
-		    	MentorCtrl.mentor.classes[class_index].teachers[teacher_index].status = $(this).prop('checked');
-    		});
+				MentorCtrl.mentor.classes[class_index].teachers[teacher_index].status = $(this).prop('checked');
+			});
 		}, 500);
 	}
 

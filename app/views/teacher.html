@@ -31,8 +31,11 @@
 				data-size="xs" data-show-caption="true" data-clear-value="0" data-clear-caption="Absent" value="0" />
 
 		<strong>Check for Understanding</strong>
-		<toggle-switch ng-model="student.check_for_understanding" id="check_for_understanding-{{student.id}}" is-disabled="TCtrl.teacher.status == 'cancelled'"
-				on-label="Yes" off-label="No"></toggle-switch>
+		<input class="toggle-switch" ng-model="student.check_for_understanding" id="check_for_understanding-{{student.id}}" data-toggle="toggle" 
+			data-height="25" data-width="70" data-size="small" type="checkbox" value="1" student-index="{{student.id}}" />
+
+		<!-- <toggle-switch ng-model="student.check_for_understanding" id="check_for_understanding-{{student.id}}" is-disabled="TCtrl.teacher.status == 'cancelled'"
+				on-label="Yes" off-label="No"></toggle-switch> -->
 	</div>
 
 </div>

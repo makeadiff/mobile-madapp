@@ -87,6 +87,12 @@ angular.module('mobileApp')
 		}
 		for(var i in TeacherCtrl.teacher.students) {
 			TeacherCtrl.teacher.students[i].participation = Number(TeacherCtrl.teacher.students[i].participation);
+
+			// Workaround for this to function. Not working by default. I think library issue.
+			if(TeacherCtrl.teacher.students[i].check_for_understanding)
+				$("#check_for_understanding-" + TeacherCtrl.teacher.students[i].id).bootstrapToggle('on');
+			else 
+				$("#check_for_understanding-" + TeacherCtrl.teacher.students[i].id).bootstrapToggle('off');
 		}
 
 		TeacherCtrl.current_teacher = current_teacher;
@@ -95,6 +101,18 @@ angular.module('mobileApp')
 
 		// Wait a small time before applying the makeup.
 		setTimeout(function() {
+			$('.toggle-switch').bootstrapToggle({
+			  on: 'Yes',
+			  off: 'No'
+			});
+
+			$('.toggle-switch').change(function() {
+				var id = $(this).prop("id");
+				var student_index = $("#" + id).attr('student-index');
+
+				TeacherCtrl.teacher.students[student_index].check_for_understanding = $(this).prop('checked');
+			});
+
 			$(".class_satisfaction").rating({starCaptions: {
 				"0": "No Data",
 				"1": "Dissatisfied",
@@ -112,7 +130,7 @@ angular.module('mobileApp')
 				"4": "Involved",
 				"5": "Participative",
 			}}).rating("refresh", {showCaption: true, disabled: cancelled}); // Make sure this option is passed with the refresh command. Else, its not updating on new data.;
-		}, 100);
+		}, 300);
 	}
 
 	TeacherCtrl.save = function(class_id, students, class_satisfaction) {
