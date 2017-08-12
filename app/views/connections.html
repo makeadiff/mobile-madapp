@@ -2,7 +2,7 @@
 
 <div id="connections" class="row">
 
-<div class="card">
+<div class="card" id="summary-card" ng-show="CCtrl.user.connections.teacher_at.length">
 <h4 ng-click="CCtrl.show_summary = CCtrl.show_summary ? 0 : 1;">
 <span ng-class="{'glyphicon':true, 'glyphicon-triangle-bottom': (CCtrl.show_summary != '0'), 'glyphicon-triangle-right': (CCtrl.show_summary == '0')}"></span>
 Summary : <span id="class-summary">{{CCtrl.user.classes_total}} classes</span></h4>
@@ -13,7 +13,7 @@ Summary : <span id="class-summary">{{CCtrl.user.classes_total}} classes</span></
 </div>
 </div>
 
-<div class="card" id="credit-card">
+<div class="card" id="credit-card" ng-show="CCtrl.user.connections.teacher_at.length">
 <h4 ng-click="CCtrl.show_class_history = CCtrl.show_class_history ? 0 : 1;">
 <span ng-class="{'glyphicon':true, 'glyphicon-triangle-bottom': (CCtrl.show_class_history != '0'), 'glyphicon-triangle-right': (CCtrl.show_class_history == '0')}"></span>
 Credit : <span class="item-count">{{CCtrl.user.credit}}</span></h4>
@@ -29,7 +29,7 @@ Credit : <span class="item-count">{{CCtrl.user.credit}}</span></h4>
 </div>
 </div>
 
-<div class="card" id="unmarked-card">
+<div class="card" id="unmarked-card" ng-show="CCtrl.user.connections.teacher_at.length">
 <h4 ng-click="CCtrl.show_student_data_not_updated = CCtrl.show_student_data_not_updated ? 0 : 1;">
 <span ng-class="{'glyphicon':true, 'glyphicon-triangle-bottom': (CCtrl.show_student_data_not_updated != '0'), 'glyphicon-triangle-right': (CCtrl.show_student_data_not_updated == '0')}"></span>
 Your Classes that are not updated : <span class="item-count">{{CCtrl.user.student_data_not_updated_length}}</span></h4>
@@ -43,7 +43,7 @@ Your Classes that are not updated : <span class="item-count">{{CCtrl.user.studen
 </div>
 </div>
 
-<div class="card" id="unmarked-class-batch-card">
+<div class="card" id="unmarked-class-batch-card" ng-show="CCtrl.user.connections.mentor_at.length">
 <h4 ng-click="CCtrl.show_class_student_data_not_updated = CCtrl.show_class_student_data_not_updated ? 0 : 1;">
 <span ng-class="{'glyphicon':true, 'glyphicon-triangle-bottom': (CCtrl.show_class_student_data_not_updated != '0'), 'glyphicon-triangle-right': (CCtrl.show_class_student_data_not_updated == '0')}"></span>
 Classes that are not updated by any teacher : <span class="item-count">{{CCtrl.user.classes_where_student_data_not_updated_length}}</span></h4>
@@ -57,7 +57,7 @@ Classes that are not updated by any teacher : <span class="item-count">{{CCtrl.u
 </div>
 </div>
 
-<div class="card" id="unmarked-batch-card">
+<div class="card" id="unmarked-batch-card" ng-show="CCtrl.user.connections.mentor_at.length">
 <h4 ng-click="CCtrl.show_class_volunteer_data_not_updated = CCtrl.show_class_volunteer_data_not_updated ? 0 : 1;">
 <span ng-class="{'glyphicon':true, 'glyphicon-triangle-bottom': (CCtrl.show_class_volunteer_data_not_updated != '0'), 'glyphicon-triangle-right': (CCtrl.show_class_volunteer_data_not_updated == '0')}"></span>
 Batches not updated : <span class="item-count">{{CCtrl.user.volunteer_data_not_updated.length}}</span></h4>
@@ -71,7 +71,7 @@ Batches not updated : <span class="item-count">{{CCtrl.user.volunteer_data_not_u
 </div>
 </div>
 
-<div class="card" id="negative-teachers-card">
+<div class="card" id="negative-teachers-card" ng-show="CCtrl.user.connections.mentor_at.length">
 <h4 ng-click="CCtrl.show_teachers_with_negative_credits = CCtrl.show_teachers_with_negative_credits ? 0 : 1;">
 <span ng-class="{'glyphicon':true, 'glyphicon-triangle-bottom': (CCtrl.show_teachers_with_negative_credits != '0'), 'glyphicon-triangle-right': (CCtrl.show_teachers_with_negative_credits == '0')}"></span>
 Teachers with Negative Credits : <span class="item-count">{{CCtrl.user.teachers_with_negative_credits.length}}</span></h4>
@@ -80,6 +80,20 @@ Teachers with Negative Credits : <span class="item-count">{{CCtrl.user.teachers_
 	<ul class="card-info-list">
 	<li ng-repeat="teacher in CCtrl.user.teachers_with_negative_credits">
 		{{teacher.name}} : {{teacher.credit}}
+	</li>
+	</ul>
+</div>
+</div>
+
+<div class="card" id="substitution-card" ng-show="CCtrl.user.connections.mentor_at.length">
+<h4 ng-click="CCtrl.show_substitution_info = CCtrl.show_substitution_info ? 0 : 1;">
+<span ng-class="{'glyphicon':true, 'glyphicon-triangle-bottom': (CCtrl.show_substitution_info != '0'), 'glyphicon-triangle-right': (CCtrl.show_substitution_info == '0')}"></span>
+Substitution : <span class="item-count">{{CCtrl.user.substitution_info.substitution_percentage}}%</span></h4>
+
+<div class="card-area" ng-show="CCtrl.show_substitution_info == '1'">
+	<ul class="card-info-list">
+	<li ng-repeat="cls in CCtrl.user.substitution_info.last_5_classes">
+		{{formatDate(cls.date) | date:'MMM d EEE, hh:mm a'}} : {{cls.percentage}} %
 	</li>
 	</ul>
 </div>

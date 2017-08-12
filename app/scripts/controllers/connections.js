@@ -34,6 +34,7 @@ angular.module('mobileApp')
   	ConnectionCtrl.show_class_teacher_data_not_updated = 0;
   	ConnectionCtrl.show_class_volunteer_data_not_updated = 0;
   	ConnectionCtrl.show_teachers_with_negative_credits = 0;
+  	ConnectionCtrl.show_substitution_info = 0;
 
 	ConnectionCtrl.load = function() {
 		if(user.connections.teacher_at.length) {
@@ -76,6 +77,7 @@ angular.module('mobileApp')
 		ConnectionCtrl.user.classes_where_student_data_not_updated	= data.student_data_not_updated;
 		ConnectionCtrl.user.classes_where_student_data_not_updated_length = Object.keys(ConnectionCtrl.user.classes_where_student_data_not_updated).length;
 		ConnectionCtrl.user.teachers_with_negative_credits	= data.teachers_with_negative_credits;
+		ConnectionCtrl.user.substitution_info = data.substitution_info;
 	}
 
 	ConnectionCtrl.mentorClass = function(batch_id) {
