@@ -122,7 +122,8 @@ angular.module('mobileApp')
 		$http({
 			method: 'POST',
 			url: base_url + 'class_save',
-			params: {"user_id": user_id, "key": key, "class_data": angular.toJson(classes)},
+			data: {"user_id": user_id, "key": key, "class_data": angular.toJson(classes)},
+    		headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		}).success(function(data) {
 			loaded();
 			if(data.success) {

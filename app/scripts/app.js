@@ -164,6 +164,21 @@ mobileApp.run(['$localStorage','$rootScope', '$http',function ($localStorage,$ro
 			return $localStorage.user.user_id;
 		};
 
+		$rootScope.$on("$stateChangeStart", function(event, curr, prev){
+			console.log("Test")
+		  if ($loginStatus.user) {
+		      window.Intercom("boot", {
+		        app_id: "xnngu157",
+		        email: $localStorage.user.email,
+		        name: $localStorage.user.name,
+		        user_id: $localStorage.user.user_id,
+		        widget: {
+		          activator: "#IntercomDefaultWidget"
+		        }
+		    });
+		 }
+		});
+
 		$rootScope.reportStatus = function() {
 			if(typeof $rootScope.reportIssueCount != "undefined") return false;
 			$rootScope.reportIssueCount = 0;
