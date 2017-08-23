@@ -49,6 +49,9 @@ angular.module('mobileApp')
 						}
 					}
 
+					$location.path("/connections");
+					return;
+
 				} else if(connections.mentor_at.length) { // User is a mentor
 					if(connections.mentor_at.length == 1) {
 						$location.path("/mentor").search({"batch_id": connections.mentor_at[0].batch_id});
