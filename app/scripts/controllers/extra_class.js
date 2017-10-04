@@ -12,52 +12,10 @@ angular.module('mobileApp')
 	var ExtraClassCtrl = this;
 	var user = user_service.getUser();
 	var user_id = user.user_id;
-
-	//Below code is to convert POST to GET request
-
-		// Use x-www-form-urlencoded Content-Type
-		$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-
-		/**
-		* The workhorse; converts an object to x-www-form-urlencoded serialization.
-		* @param {Object} obj
-		* @return {String}
-		*/
-		var param = function(obj) {
-			var query = '', name, value, fullSubName, subName, subValue, innerObj, i;
-
-			for(name in obj) {
-			  value = obj[name];
-
-			  if(value instanceof Array) {
-				for(i=0; i<value.length; ++i) {
-				  subValue = value[i];
-				  fullSubName = name + '[' + i + ']';
-				  innerObj = {};
-				  innerObj[fullSubName] = subValue;
-				  query += param(innerObj) + '&';
-				}
-			  }
-			  else if(value instanceof Object) {
-				for(subName in value) {
-				  subValue = value[subName];
-				  fullSubName = name + '[' + subName + ']';
-				  innerObj = {};
-				  innerObj[fullSubName] = subValue;
-				  query += param(innerObj) + '&';
-				}
-			  }
-			  else if(value !== undefined && value !== null)
-				query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
-			}
-
-			return query.length ? query.substr(0, query.length - 1) : query;
-		};
-
-		// Override $http service's default transformRequest
-		$http.defaults.transformRequest = [function(data) {
-			return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
-		}];
+	var batch_id = 0;
+	var params = $location.search();
+	if(user.active_batch) batch_id = user.active_batch;
+	else if(params.batch_id) batch_id = params.batch_id;
 
 	ExtraClassCtrl.load = function() {
 		loading();
@@ -65,7 +23,7 @@ angular.module('mobileApp')
 		$http({
 			method: 'GET',
 			url: base_url + 'all_levels_in_batch',
-			params: {batch_id: user.active_batch, key: key}
+			params: {"batch_id": batch_id, key: key}
 		}).success(ExtraClassCtrl.setLevels).error(error);
 
 	}
@@ -83,7 +41,6 @@ angular.module('mobileApp')
 
   ExtraClassCtrl.save = function() {
     var class_on = ExtraClassCtrl.class_on;
-    var batch_id = user.active_batch;
     var levels = [];
     for(var i in ExtraClassCtrl.levels) {
       var l = ExtraClassCtrl.levels[i];

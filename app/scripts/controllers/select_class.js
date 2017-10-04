@@ -88,6 +88,11 @@ angular.module('mobileApp')
 			}
 		}
 
+		if(params.action == "extra_class") {
+			$location.path("/extra_class").search({"batch_id": batch_id});
+			return;
+		}
+
 		// If the current user is any thing other than just a teacher, Open batch
 		if(access) {
 			$location.path("/mentor").search({"batch_id": batch_id});
