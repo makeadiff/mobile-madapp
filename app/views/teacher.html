@@ -18,6 +18,11 @@
 <a class="glyphicon glyphicon-chevron-right directions batch-direction" ng-click="TCtrl.browseClass(TCtrl.user_id, TCtrl.teacher.class_on, '+')"></a> 
 </div>
 
+<div ng-show="TCtrl.is_event" class='impact-survey-trigger'>
+	<span ng-repeat="(is_event_id, is_event_name) in TCtrl.is_event">
+		Please fill out the <a href="#impact_survey?is_event_id={{is_event_id}}">Impact Survey {{is_event_name}}</a> for your students.
+	</span>
+</div>
 
 <input type="hidden" name="class_id" value="{{TCtrl.teacher.id}}" />
 <div id="students" class="{{TCtrl.teacher.status}}"> 

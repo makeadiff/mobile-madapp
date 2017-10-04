@@ -10,6 +10,7 @@
 angular.module('mobileApp')
   .controller('TeacherCtrl', ['$scope', '$location', '$http', 'growl', 'UserService', function ($scope, $location, $http, growl, user_service) {
 	var TeacherCtrl = this;
+	TeacherCtrl.is_event = false;
 	var user = user_service.getUser();
 	if(!user) {
 		$location.path("/login");
@@ -53,6 +54,15 @@ angular.module('mobileApp')
 				params: {user_id: user_id, key: key}
 			}).success(TeacherCtrl.openClass).error(error);
 		}
+
+		$http({
+			method: 'GET',
+			url: base_url + 'active_is_event',
+			params: {teacher_id: user_id, key: key}
+		}).success(function(data) {
+			TeacherCtrl.is_event = data.is_event;
+		}).error(error);
+
 	}
 
 	TeacherCtrl.openClass = function(data) {
