@@ -40,6 +40,15 @@ angular.module('mobileApp')
 		}).success(function(data) {
 			ctrl.students = data.students;
 
+			$http({
+				method: 'GET',
+				url: base_url + 'is_existing_responses',
+				params: {is_event_id: ctrl.is_event_id, 'student_ids[]': Object.keys(data.students), key: key}
+			}).success(function(data) {
+				ctrl.response = data.response;
+				setTimeout(ctrl.makeup, 300);
+
+			}).error(error);
 		}).error(error);
 
 		$http({
@@ -78,10 +87,8 @@ angular.module('mobileApp')
 	ctrl.makeup = function() {
 		$(".response").rating("refresh", {showCaption: false, showClear: false});
 		$(".response").on("rating.change", ctrl.save);
+		// console.log("Applying Makeup");
 	}
-
-	// Wait a small time before applying the makeup.
-	setTimeout(ctrl.makeup, 300);
 
 	// Bug fix. Sometimes it doesn't get called - so, try again.
 	setTimeout(function() {
