@@ -72,7 +72,7 @@ angular.module('mobileApp')
 		$http({
 			method: 'GET',
 			url: base_url + 'active_is_event',
-			params: {level_id: data.level_id, key: key}
+			params: {level_id: data.level_id, teacher_id: user_id, key: key}
 		}).success(function(data) {
 			TeacherCtrl.is_event = data.is_event;
 		}).error(error);

@@ -43,7 +43,7 @@ angular.module('mobileApp')
 			$http({
 				method: 'GET',
 				url: base_url + 'is_existing_responses',
-				params: {is_event_id: ctrl.is_event_id, 'student_ids[]': Object.keys(data.students), key: key}
+				params: {is_event_id: ctrl.is_event_id, 'student_ids[]': Object.keys(data.students), teacher_id: user_id, key: key}
 			}).success(function(data) {
 				ctrl.response = data.response;
 				setTimeout(ctrl.makeup, 300);
