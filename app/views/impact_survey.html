@@ -1,0 +1,24 @@
+<div class="container" ng-controller="ImpactSurveyCtrl as ISCtrl" ng-init="ISCtrl.load()">
+<div id="class-details" class="row">
+<h3>Impact Survey</h3>
+<p>This survey is for the impact indicators of Ed Support. This will be run on a Monthly basis for you to be able to track the impact of your sessions on each child, which is a lot more than just academic scores. This will help you target what aspect to support the child with and accordingly plan for your interactions and weekly 2 hour session with the child.</p>
+<p>Rate each of these parameters on a scale of 1-10 for each child.</p>
+<p ng-show="ISCtrl.error" class='error'>{{ISCtrl.error}}</p>
+</div>
+
+<div class="student row" ng-repeat="(student_id, student_name) in ISCtrl.students">
+	<h2 class="student-name">{{student_name}}</h2>
+
+ 	<div ng-repeat="ques in ISCtrl.questions">
+		<span class="question">{{ques.question}}</span>
+		<input type="number" ng-model="ISCtrl.response[student_id][ques.id]" data-student-id="{{student_id}}" data-question-id="{{ques.id}}" class="rating response" 
+				min="0" max="10" step="1" data-stars="10" data-size="xs" data-clear-value="0" value="0" />
+
+	</div>
+
+	<hr />
+</div>
+
+<p>PS: Data is saved automatically</p>
+
+</div>

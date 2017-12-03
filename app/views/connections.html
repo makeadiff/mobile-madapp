@@ -46,7 +46,7 @@ Your Classes that are not updated : <span class="item-count badge badge-error">{
 <div class="card" id="unmarked-class-batch-card" ng-show="CCtrl.user.connections.mentor_at.length">
 <h4 ng-click="CCtrl.show_class_student_data_not_updated = CCtrl.show_class_student_data_not_updated ? 0 : 1;">
 <span ng-class="{'glyphicon':true, 'glyphicon-triangle-bottom': (CCtrl.show_class_student_data_not_updated != '0'), 'glyphicon-triangle-right': (CCtrl.show_class_student_data_not_updated == '0')}"></span>
-Classes that are not updated by any teacher : <span class="item-count badge badge-error">{{CCtrl.user.classes_where_student_data_not_updated_length}}</span></h4>
+Classes that are not updated by any teacher : <span class="badge badge-error item-count">{{CCtrl.user.classes_where_student_data_not_updated_length}}</span></h4>
 
 <div class="card-area" ng-show="CCtrl.show_class_student_data_not_updated == '1'">
 	<ul class="card-info-list">
@@ -60,7 +60,7 @@ Classes that are not updated by any teacher : <span class="item-count badge badg
 <div class="card" id="unmarked-batch-card" ng-show="CCtrl.user.connections.mentor_at.length">
 <h4 ng-click="CCtrl.show_class_volunteer_data_not_updated = CCtrl.show_class_volunteer_data_not_updated ? 0 : 1;">
 <span ng-class="{'glyphicon':true, 'glyphicon-triangle-bottom': (CCtrl.show_class_volunteer_data_not_updated != '0'), 'glyphicon-triangle-right': (CCtrl.show_class_volunteer_data_not_updated == '0')}"></span>
-Batches not updated : <span class="item-count badge badge-error">{{CCtrl.user.volunteer_data_not_updated.length}}</span></h4>
+Batches not updated : <span class="badge badge-error item-count">{{CCtrl.user.volunteer_data_not_updated.length}}</span></h4>
 
 <div class="card-area" ng-show="CCtrl.show_class_volunteer_data_not_updated == '1'">
 	<ul class="card-info-list">

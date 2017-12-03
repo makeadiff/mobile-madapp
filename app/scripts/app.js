@@ -128,6 +128,17 @@ var mobileApp = angular.module('mobileApp', [
 		templateUrl: 'views/select_class.html',
 		restricted : true,
 	  })
+	  .when('/impact_survey', {
+		templateUrl: 'views/impact_survey.html',
+		restricted : true,
+		resolve: {
+		  style : function() {
+			if( !angular.element('link#report-css').length) {
+			  angular.element('head').append('<link id="report-css" href="styles/report.css" rel="stylesheet">');
+			}
+		  }
+		}
+	  })
 	  .when('/login', {
 		templateUrl: 'views/login.html',
 		restricted : false,
@@ -165,7 +176,6 @@ mobileApp.run(['$localStorage','$rootScope', '$http',function ($localStorage,$ro
 		};
 
 		$rootScope.$on("$stateChangeStart", function(event, curr, prev){
-			console.log("Test")
 		  if ($loginStatus.user) {
 		      window.Intercom("boot", {
 		        app_id: "xnngu157",
