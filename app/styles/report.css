@@ -103,3 +103,9 @@ a.link.ng-binding:hover{
 	padding-top: 20px;
 }
 
+.question {
+	font-weight: bold;
+}
+.response-area {
+	margin-bottom: 20px;
+}

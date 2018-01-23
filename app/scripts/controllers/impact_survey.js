@@ -11,6 +11,7 @@ angular.module('mobileApp')
   .controller('ImpactSurveyCtrl', ['$scope', '$location', '$http', 'growl', 'UserService', function ($scope, $location, $http, growl, user_service) {
 	var ctrl = this;
 	ctrl.response = {};
+	ctrl.previous_response = {};
 	ctrl.is_event_id = 0;
 	ctrl.error = false;
 	var user = user_service.getUser();
@@ -78,8 +79,12 @@ angular.module('mobileApp')
 			url: base_url + 'is_save',
 			params: data
 		}).success(function(data) {
-			// console.log(data);
-			// ctrl.questions = data.questions;
+			if(!data.last_response) return;
+			
+			// Show last time's entered data for this. 
+			if(typeof ctrl.previous_response[student_id] == "undefined")
+				ctrl.previous_response[student_id] = {};
+			ctrl.previous_response[student_id][question_id] = "Last time, you rated this " + data.last_response + " out of 10";
 
 		}).error(error);
 	}

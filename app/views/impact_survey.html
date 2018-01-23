@@ -9,11 +9,11 @@
 <div class="student row" ng-repeat="(student_id, student_name) in ISCtrl.students">
 	<h2 class="student-name">{{student_name}}</h2>
 
- 	<div ng-repeat="ques in ISCtrl.questions">
+ 	<div ng-repeat="ques in ISCtrl.questions" class="response-area">
 		<span class="question">{{ques.question}}</span>
 		<input type="number" ng-model="ISCtrl.response[student_id][ques.id]" data-student-id="{{student_id}}" data-question-id="{{ques.id}}" class="rating response" 
 				min="0" max="10" step="1" data-stars="10" data-size="xs" data-clear-value="0" value="0" />
-
+		<span class="last-response">{{ISCtrl.previous_response[student_id][ques.id]}}</span>
 	</div>
 
 	<hr />
