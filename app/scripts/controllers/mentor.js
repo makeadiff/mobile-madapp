@@ -101,17 +101,36 @@ angular.module('mobileApp')
 
 		// Work arounds for using this library.
 		window.setTimeout(function() {
-			$('.toggle-switch').bootstrapToggle({
+			$('.ts-attendance').bootstrapToggle({
 			  on: 'Present',
 			  off: 'Absent'
 			});
 
-			$('.toggle-switch').change(function() {
+			$('.ts-attendance').change(function() {
 				var id = $(this).prop("id");
 				var class_index = $("#" + id).attr('class-index');
 				var teacher_index = $("#" + id).attr('teacher-index');
 
-				MentorCtrl.mentor.classes[class_index].teachers[teacher_index].status = $(this).prop('checked');
+				var attended = $(this).prop('checked');
+				MentorCtrl.mentor.classes[class_index].teachers[teacher_index].status = attended;
+				if(attended) {
+					$("#zero-hour-area-" + class_index + "-" + teacher_index).removeClass("ng-hide");
+				} else {
+					$("#zero-hour-area-" + class_index + "-" + teacher_index).addClass("ng-hide");
+				}
+			});
+
+			$('.ts-zero-hour').bootstrapToggle({
+			  on: 'Attended 0 Hour',
+			  off: 'Missed 0 Hour'
+			});
+
+			$('.ts-zero-hour').change(function() {
+				var id = $(this).prop("id");
+				var class_index = $("#" + id).attr('class-index');
+				var teacher_index = $("#" + id).attr('teacher-index');
+
+				MentorCtrl.mentor.classes[class_index].teachers[teacher_index].zero_hour_attendance = $(this).prop('checked');
 			});
 		}, 500);
 	}

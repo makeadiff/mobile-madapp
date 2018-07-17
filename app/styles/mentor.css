@@ -16,6 +16,15 @@
 .batch-direction.glyphicon-chevron-right {
 	padding-left: 10px;
 }
+
+.attendance-area {
+	text-align: right;
+}
+.zero-hour-area {
+	padding-top:3px;
+	display: block;
+}
+
 .class {
 	padding:10px;
 	border-top: 1px solid #25a5a3;
