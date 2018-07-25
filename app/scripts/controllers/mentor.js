@@ -28,35 +28,35 @@ angular.module('mobileApp')
 			$http({
 				method: 'GET',
 				url: base_url + 'class_get_batch',
-				params: {batch_id: options.batch_id, 'class_on': options.class_on, key: key}
+				params: {batch_id: options.batch_id, project_id: user.project_id, 'class_on': options.class_on, key: key}
 			}).success(MentorCtrl.openBatch).error(error);
 
 		} else if(options.batch_id) {
 			$http({
 				method: 'GET',
 				url: base_url + 'class_get_batch',
-				params: {batch_id: options.batch_id, key: key}
+				params: {batch_id: options.batch_id, project_id: user.project_id, key: key}
 			}).success(MentorCtrl.openBatch).error(error);
 
 		} else if(user.active_batch) {
 			$http({
 				method: 'GET',
 				url: base_url + 'class_get_batch',
-				params: {batch_id: user.active_batch, key: key}
+				params: {batch_id: user.active_batch, project_id: user.project_id, key: key}
 			}).success(MentorCtrl.openBatch).error(error);
 
 		} else {
 			$http({
 				method: 'GET',
 				url: base_url + 'class_get_last_batch',
-				params: {user_id: user_id, key: key}
+				params: {user_id: user_id, project_id: user.project_id, key: key}
 			}).success(MentorCtrl.openBatch).error(error);
 		}
 
 		$http({
 			method: 'GET',
 			url: base_url + 'user_get_teachers',
-			params: {city_id: user.city_id, key: key}
+			params: {city_id: user.city_id, project_id: user.project_id, key: key}
 		}).success(function(data) {
 			MentorCtrl.all_teachers = data.teachers;
 		});
