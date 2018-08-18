@@ -50,9 +50,7 @@ Classes that are not updated by any teacher : <span class="badge badge-error ite
 
 <div class="card-area" ng-show="CCtrl.show_class_student_data_not_updated == '1'">
 	<ul class="card-info-list">
-	<li ng-repeat="(id, date) in CCtrl.user.classes_where_student_data_not_updated" ng-click="CCtrl.teachClass(id)" class="btn btn-primary btn-sm">
-		{{formatDate(date) | date:'MMM d EEE, hh:mm a'}}
-	</li>
+	<li ng-repeat="(id, name) in CCtrl.user.classes_where_student_data_not_updated" ng-click="CCtrl.teachClass(id)" class="btn btn-primary btn-sm">{{name}}</li>
 	</ul>
 </div>
 </div>
