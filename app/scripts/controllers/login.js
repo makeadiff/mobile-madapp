@@ -75,7 +75,7 @@ angular.module('mobileApp')
 
 					if(!access) {
 						for(var i in data.groups) {
-							if(data.groups[i] == "Mentors") access = 1; // If its a volunteer, then it must be a mentor to pass.
+							if(data.groups[i] == "ES Mentors") access = 1; // If its a volunteer, then it must be a mentor to pass.
 							else if(data.groups[i] == "ES Volunteer") access = 1; // or a teacher
 						}
 					}
