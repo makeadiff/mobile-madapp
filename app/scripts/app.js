@@ -248,3 +248,9 @@ mobileApp.run(['$localStorage','$rootScope', '$http',function ($localStorage,$ro
 	}
 ]);
 
+// Add to homescreen service worker and event management
+if ('serviceWorker' in navigator) {
+	navigator.serviceWorker
+					 .register('./service-worker.js')
+					 .then(function() { console.log('Service Worker Registered'); });
+}
