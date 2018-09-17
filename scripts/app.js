@@ -11,9 +11,9 @@
 
 
 var base_url = "http://makeadiff.in/madapp/index.php/api/";
-if(location.href.toString().match(/localhost/) || location.href.toString().match(/192\.168\./)) {
-	  base_url = "http://192.168.1.13/Projects/Madapp/index.php/api/";
-}
+// if(location.href.toString().match(/localhost/) || location.href.toString().match(/192\.168\./)) {
+// 	  base_url = "http://192.168.1.13/Projects/Madapp/index.php/api/";
+// }
 
 var key = "am3omo32hom4lnv32vO";
 
