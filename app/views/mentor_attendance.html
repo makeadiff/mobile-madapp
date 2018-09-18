@@ -1,83 +1,16 @@
 <div class="container" ng-controller="MentorAtndCtrl as MACtrl" ng-init="MACtrl.load()">
 
 <div id="class-details" class="row">
-<!-- <strong>Center:</strong> <span class="info">{{MACtrl.mentor.center_name}}</span><br /> -->
-<strong>Date:</strong> <span class="info">{{MACtrl.date}}<br />
+<h3>{{MACtrl.center_name}}</h3>
+<strong>Class on :</strong> <span class="info">{{MACtrl.date}}<br />
+<p>Which mentor/fellow was onground to support you today...</p>
 </div>
 
-<div class="mentors">
-
-
-
+<div class="mentors" ng-repeat="mentor in MACtrl.mentors">
+	<input type="checkbox" class="mentor-attendance" id="mentor-{{mentor.id}}" data-mentor-id="{{mentor.id}}" ng-checked="MACtrl.attendance[mentor.id]" />
+	<label class="mentor-name" for="mentor-{{mentor.id}}">{{mentor.name}}</label><br />
 </div>
 
-<!-- <form method="post" role="form" ng-submit="MACtrl.save(MACtrl.mentor.batch_id, MACtrl.mentor.class_on, MACtrl.mentor.classes)">
-<input type="hidden" name="batch_id" value="{{MACtrl.mentor.batch_id}}" />
-<input type="hidden" name="class_on" value="{{MACtrl.mentor.class_on}}" />
+<button class="btn btn-lg btn-bottom btn-block" type="submit" name="action" value="Save" ng-click="MACtrl.save()">Save</button><br />
 
-<div class="classes">
-<div class="class" ng-repeat="class in MACtrl.mentor.classes" ng-class="(class.class_status == '1' ? 'active' : 'cancelled')">
-<div class="class-box" id="class-{{class.id}}">
-<button type="button" class="btn btn-default btn-xs pull-right cancel-button" name="cancel" id="cancel-button-{{class.id}}" 
-	title="Cancel Class" ng-click="MACtrl.cancelClass(class)"><span class="glyphicon glyphicon-remove-sign"></span> Cancel Class</button>
-
-<button class="btn btn-primary btn-xs class-open" id="class-open-{{class.id}}" ng-click="MACtrl.gotoClass(class)" 
-		ng-disabled="class.class_status == '0'">
-	<strong><span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span> Class {{class.grade}} {{class.level_name}}</strong></button>
-
-<div class="pull-right cancel-area" ng-show="(class.class_status == '0')">
-<select ng-model="class.cancel_option" class="cancel-option">
-	<optgroup label="Internal(MAD)">
-		<option value="in-volunteer-unavailable">Volunteer Unavailabe to take class</option>
-		<option value="in-volunteer-unassigned">Volunteer are yet to be recruited</option>
-		<option value="in-volunteer-engaged">MAD has an event</option>
-		<option value="in-other">Other</option>
-	</optgroup>
-	<optgroup label="External(CA)">
-		<option value="ext-children-out-holiday">Children not back from holiday</option>
-		<option value="ext-children-doing-chores">Children are doing chores</option>
-		<option value="ext-children-have-events">Children engaged with shelter events</option>
-		<option value="ext-children-have-events-practice">Children are practicing for an event</option>
-		<option value="ext-children-unwell">Children are unwell</option>
-		<option value="ext-donor-visit">Donor Visit</option> 
-		<option value="ext-other">Other</option>
-	</optgroup>
-</select><br />
-
-<textarea class="cancel-reason" rows="2" cols="25" ng-model="class.cancel_reason" ng-show="(class.cancel_option == 'in-other' || class.cancel_option == 'ext-other')"></textarea>
-</div>
-
-<div class="teachers">
-	<div class="teacher" ng-repeat="teacher in class.teachers" class="row">
-	<div class="pull-right attendance-area" ng-show="(class.class_status == '1')">
-	<input class="toggle-switch ts-attendance" ng-model="teacher.status" id="attendance-{{teacher.id}}" data-toggle="toggle" 
-			data-height="25" data-width="70" data-size="small" type="checkbox" value="1" class-index="{{class.index}}" teacher-index="{{teacher.index}}"><br />
-
-	<span ng-show="(teacher.status == true)" class="zero-hour-area" id="zero-hour-area-{{class.index}}-{{teacher.index}}">
-	<input class="toggle-switch ts-zero-hour" ng-model="teacher.zero_hour_attendance" id="zero-hour-{{teacher.id}}" data-toggle="toggle"
-			data-height="25" data-width="120" data-size="small" type="checkbox" value="1" class-index="{{class.index}}" teacher-index="{{teacher.index}}">
-	</span>
-	</div>
-
-	<span ng-class="{'substituted': (teacher.substitute_id != '0'), 'teacher-name':true}"
-			ng-click="MACtrl.showSubstitute(teacher)" ng-show="class.class_status == '1'">
-		<span ng-class="{'glyphicon':true, 'glyphicon-triangle-bottom': (teacher.show_substitute != '0'), 'glyphicon-triangle-right': (teacher.show_substitute == '0')}"></span>
-		<span class="glyphicon glyphicon-user user-icon"></span> {{teacher.name}}</span>
-
-	<div id="substitute-{{teacher.id}}" class="substitute-area" ng-show="teacher.show_substitute != 0">
-		<label>Substitute: </label>
-		<select name="substitute[{{teacher.id}}]" ng-model="teacher.substitute_id" id="sub-{{teacher.id}}">
-			<option ng-repeat="sub in MACtrl.all_teachers" value="{{sub.id}}">{{sub.name}}</option>
-		</select>
-	</div><br />
-	</div>
-</div>
-
-</div>
-</div>
-</div>
-
-<button class="btn btn-lg btn-bottom btn-block" type="submit" name="action" value="Save">Save</button><br />
-</form>
--->
 </div>

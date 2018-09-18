@@ -10,11 +10,11 @@
  */
 
 
-var base_url = "http://makeadiff.in/madapp/index.php/api/";
-var api_base_url = "https://makeadiff.in/api/v1/";
+var base_url = window.location.protocol + "//makeadiff.in/madapp/index.php/api/";
+var api_base_url = window.location.protocol + "//makeadiff.in/api/v1/";
 if(location.href.toString().match(/localhost/) || location.href.toString().match(/192\.168\./)) {
-	  base_url = "http://192.168.1.13/Projects/Madapp/index.php/api/";
-	  api_base_url = "http://192.168.1.13/Projects/Phoenix/v1/";
+	  base_url = window.location.protocol + "//192.168.1.13/Projects/Madapp/index.php/api/";
+	  api_base_url = window.location.protocol + "//192.168.1.13/Projects/Phoenix/v1/";
 }
 
 var key = "am3omo32hom4lnv32vO";
@@ -65,7 +65,7 @@ var mobileApp = angular.module('mobileApp', [
 		resolve: {
 		  style : function() {
 			if( !angular.element('link#mentor-attendance-css').length) {
-			  angular.element('head').append('<link id="mentor-css" href="styles/mentor_attendance.css" rel="stylesheet">');
+			  angular.element('head').append('<link id="mentor-css" href="styles/teacher.css" rel="stylesheet">');
 			}
 		  }
 		}
