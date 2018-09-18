@@ -9,6 +9,10 @@
 #class-details h3 {
 	margin:5px 0;
 }
+#students {
+	margin-left: 20px;
+	background: none;
+}
 
 .student-name {
 	font-size: 120%;
