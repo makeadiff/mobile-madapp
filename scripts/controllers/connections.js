@@ -68,7 +68,7 @@ angular.module('mobileApp')
 		ConnectionCtrl.user.student_data_not_updated= data.student_data_not_updated;
 		ConnectionCtrl.user.student_data_not_updated_length = Object.keys(ConnectionCtrl.user.student_data_not_updated).length;
 	}
-
+	console.log("HEllo weRLD");
 	ConnectionCtrl.userBatchInfo = function(data) {
 		loaded();
 
