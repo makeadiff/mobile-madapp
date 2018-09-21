@@ -3,7 +3,7 @@
   "name": "MAdApp",
   "short_name": "MAdApp",
   "description": "MAdApp is an internal application used by Make A Difference.",
-  "start_url": "/madapp/mobile/pwa/#/connections",
+  "start_url": "/madapp/mobile/pwa//index.html#/connections",
   "scope": "/madapp/mobile/pwa/",
   "display": "standalone",
   "lang": "en-US",
