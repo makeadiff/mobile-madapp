@@ -1,0 +1,16 @@
+<div class="container" ng-controller="MentorAtndCtrl as MACtrl" ng-init="MACtrl.load()">
+
+<div id="class-details" class="row">
+<h3>{{MACtrl.center_name}}</h3>
+<strong>Class on :</strong> <span class="info">{{MACtrl.date}}<br />
+<p>Which mentor/fellow was onground to support you today...</p>
+</div>
+
+<div class="mentors" ng-repeat="mentor in MACtrl.mentors">
+	<input type="checkbox" class="mentor-attendance" id="mentor-{{mentor.id}}" data-mentor-id="{{mentor.id}}" ng-checked="MACtrl.attendance[mentor.id]" />
+	<label class="mentor-name" for="mentor-{{mentor.id}}">{{mentor.name}}</label><br />
+</div>
+
+<button class="btn btn-lg btn-bottom btn-block" type="submit" name="action" value="Save" ng-click="MACtrl.save()">Save</button><br />
+
+</div>

@@ -19,6 +19,7 @@ angular.module('mobileApp')
 	}
 	var user_id = user_service.getUserId();
 	var options = $location.search();
+	TeacherCtrl.class_id = options.class_id;
 
 	jQuery(".student-participation").rating();
 	TeacherCtrl.user_id = user_id;
