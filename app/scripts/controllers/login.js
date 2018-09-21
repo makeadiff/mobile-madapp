@@ -65,6 +65,10 @@ angular.module('mobileApp')
 						if(!difference_in_days) { // Class is happening TODAY. Show the mentor page...
 							$location.path("/mentor").search({"batch_id": connections.mentor_at[i].batch_id});
 							return;
+						}else{
+							// Class not happening today. 
+							$location.path("/connections");
+							return;
 						}
 					}
 				} else {
