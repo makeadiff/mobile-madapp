@@ -58,6 +58,7 @@ angular.module('mobileApp')
 			url: base_url + 'user_get_teachers',
 			params: {city_id: user.city_id, project_id: user.project_id, key: key}
 		}).success(function(data) {
+			data.teachers.push({id: "0", name: "None"});
 			MentorCtrl.all_teachers = data.teachers;
 		});
 	}
