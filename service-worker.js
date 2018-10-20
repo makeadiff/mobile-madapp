@@ -23,7 +23,7 @@ workbox.routing.registerRoute(
   // Use cache but update in the background ASAP
   workbox.strategies.staleWhileRevalidate({
     // Use a custom cache name
-    cacheName: 'js-cache',
+    cacheName: 'jss-cache',
   })
 );
 
