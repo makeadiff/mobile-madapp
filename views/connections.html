@@ -124,9 +124,9 @@ Substitution : <span class="item-count">{{CCtrl.user.substitution_info.substitut
 
 <h4>Extra Class</h4>
 
-<a class="btn btn-info" href="#extra_class" ng-show="CCtrl.user.connections.mentor_at.length">Create Extra Class in your Batch</a>
+<a class="btn btn-info" href="#extra_class?batch_id={{CCtrl.user.connections.mentor_at[0].batch_id}}" ng-show="CCtrl.user.connections.mentor_at.length">Create Extra Class in your Batch</a>
 
-<a class="btn btn-info" href="#select_class?action=extra_class" ng-show="!CCtrl.user.connections.mentor_at.length">Create Extra Class</a>
+<a class="btn btn-info" href="#select_class?action=extra_class" ng-show="CCtrl.user.connections.mentor_at.length == 0">Create Extra Class</a>
 
 </div>
 

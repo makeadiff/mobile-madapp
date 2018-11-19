@@ -12,7 +12,15 @@ workbox.routing.registerRoute(
   // Use cache but update in the background ASAP
   workbox.strategies.staleWhileRevalidate({
     // Use a custom cache name
-    cacheName: 'css-cache',
+    cacheName: 'css-cache-0',
+    plugins: [
+      new workbox.expiration.Plugin({
+        // Cache only 20 images
+        maxEntries: 20,
+        // Cache for a maximum of a day
+        maxAgeSeconds: 1 * 24 * 60 * 60,
+      })
+    ],
   })
 );
 
@@ -23,7 +31,15 @@ workbox.routing.registerRoute(
   // Use cache but update in the background ASAP
   workbox.strategies.staleWhileRevalidate({
     // Use a custom cache name
-    cacheName: 'jss-cache',
+    cacheName: 'js-cache-0',
+    plugins: [
+      new workbox.expiration.Plugin({
+        // Cache only 20 images
+        maxEntries: 20,
+        // Cache for a maximum of a week
+        maxAgeSeconds: 1 * 2 * 60 * 60,
+      })
+    ],
   })
 );
 
@@ -34,7 +50,7 @@ workbox.routing.registerRoute(
   // Use the cache if it's available
   workbox.strategies.cacheFirst({
     // Use a custom cache name
-    cacheName: 'image-cache',
+    cacheName: 'image-cache-0',
     plugins: [
       new workbox.expiration.Plugin({
         // Cache only 20 images
@@ -51,7 +67,7 @@ workbox.routing.registerRoute(
 workbox.routing.registerRoute(
   /^https:\/\/fonts\.googleapis\.com/,
   workbox.strategies.staleWhileRevalidate({
-    cacheName: 'google-fonts-stylesheets',
+    cacheName: 'google-fonts-stylesheets-0',
   }),
 );
 
@@ -59,7 +75,7 @@ workbox.routing.registerRoute(
 workbox.routing.registerRoute(
   /^https:\/\/fonts\.gstatic\.com/,
   workbox.strategies.cacheFirst({
-    cacheName: 'google-fonts-webfonts',
+    cacheName: 'google-fonts-webfonts-0',
     plugins: [
       new workbox.cacheableResponse.Plugin({
         statuses: [0, 200],

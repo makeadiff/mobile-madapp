@@ -10,7 +10,7 @@
  <!-- Add to home screen for Safari on iOS -->
  	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="apple-mobile-web-app-title" content="Weather PWA">
+	<meta name="apple-mobile-web-app-title" content="MADApp">
 	<link rel="apple-touch-icon" href="images/icons/icon-152x152.png">
 <!-- Add to home screen for Windows -->
 	<meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
@@ -135,7 +135,8 @@ UserVoice.push(['autoprompt', {}]);
 if ('serviceWorker' in navigator) {
 	navigator.serviceWorker
 					 .register('./service-worker.js')
-					 .then(function() { console.log('Service Worker Registered'); });
+					 .then(function() { console.log('Service Worker Registered'); })
+					 .catch(err => console.log("Boo err in serviceworker", err));
 }
 </script>
 

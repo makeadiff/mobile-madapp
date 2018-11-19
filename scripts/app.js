@@ -9,6 +9,10 @@
  * Main module of the application.
  */
 
+// Hack to make sure the app uses https at all time. For some reason the mobile/app/ folder don't redirect to https
+if(window.location.protocol == 'http:' && window.location.hostname == 'makeadiff.in') {
+	window.location.href = 'https://' + window.location.hostname + window.location.pathname + window.location.hash;
+}
 
 var base_url = window.location.protocol + "//makeadiff.in/madapp/index.php/api/";
 var api_base_url = window.location.protocol + "//makeadiff.in/api/v1/";

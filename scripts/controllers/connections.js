@@ -53,6 +53,7 @@ angular.module('mobileApp')
 		}
 		if(user.connections.mentor_at.length) {
 			loading();
+
 			$http({
 				method: 'GET',
 				url: base_url + 'user_batch_info',
