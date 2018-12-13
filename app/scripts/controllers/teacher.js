@@ -77,7 +77,8 @@ angular.module('mobileApp')
 		}).success(function(data) {
 			TeacherCtrl.is_event = data.is_event;
 		}).error(error);
-
+		
+		TeacherCtrl.class_id = data.id;
 		TeacherCtrl.teacher = data;
 		TeacherCtrl.teacher.class_satisfaction = Number(TeacherCtrl.teacher.class_satisfaction);
 
