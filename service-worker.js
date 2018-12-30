@@ -1,4 +1,4 @@
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.5.0/workbox-sw.js');
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js');
 
 if (workbox) {
   console.log(`Yay! Workbox is loaded 🎉`);
@@ -15,10 +15,10 @@ workbox.routing.registerRoute(
     cacheName: 'css-cache-0',
     plugins: [
       new workbox.expiration.Plugin({
-        // Cache only 20 images
-        maxEntries: 20,
-        // Cache for a maximum of a day
-        maxAgeSeconds: 1 * 24 * 60 * 60,
+        // Cache only 25 css
+        maxEntries: 25,
+        // Cache for a maximum of a week
+        maxAgeSeconds: 1* 7 * 24 * 60 * 60,
       })
     ],
   })
@@ -34,10 +34,10 @@ workbox.routing.registerRoute(
     cacheName: 'js-cache-0',
     plugins: [
       new workbox.expiration.Plugin({
-        // Cache only 20 images
+        // Cache only 20 js
         maxEntries: 20,
         // Cache for a maximum of a week
-        maxAgeSeconds: 1 * 2 * 60 * 60,
+        maxAgeSeconds: 1 * 7 * 24 * 60 * 60,
       })
     ],
   })
@@ -48,15 +48,15 @@ workbox.routing.registerRoute(
   // Cache image files
   /.*\.(?:png|jpg|jpeg|svg|gif)/,
   // Use the cache if it's available
-  workbox.strategies.cacheFirst({
+  workbox.strategies.staleWhileRevalidate({
     // Use a custom cache name
     cacheName: 'image-cache-0',
     plugins: [
       new workbox.expiration.Plugin({
-        // Cache only 20 images
-        maxEntries: 20,
+        // Cache only 25 images
+        maxEntries: 25,
         // Cache for a maximum of a week
-        maxAgeSeconds: 7 * 24 * 60 * 60,
+        maxAgeSeconds: 1 * 7 * 24 * 60 * 60,
       })
     ],
   })

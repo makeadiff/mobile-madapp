@@ -19,20 +19,24 @@
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 	<!-- build:css(.) styles/vendor.css -->
 	<!-- bower:css -->
-	<link rel="stylesheet" href="bower_components/bootstrap-star-rating/css/star-rating.css" />
+	<link rel="stylesheet" href="node_modules/bootstrap-star-rating/css/star-rating.css" />
 	<!-- endbower -->
 	<!-- endbuild -->
 	<!-- build:css(.tmp) styles/thirdparty.css -->
 	<link rel="stylesheet" type="text/css" href="styles/themes/darkly.css" />
-	<link rel="stylesheet" type="text/css" href="bower_components/angular-growl/build/angular-growl.min.css" />
-	<link rel="stylesheet" type="text/css" href="bower_components/kc_fab/dist/css/kc.fab.css" />
-	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-	<link rel="stylesheet" type="text/css" href="bower_components/ngDatepicker/src/css/ngDatepicker.css" />
-	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap-toggle/css/bootstrap-toggle.min.css" />
+	<link rel="stylesheet" type="text/css" href="node_modules/_angular-growl/build/angular-growl.min.css" />
+	<link rel="stylesheet" type="text/css" href="node_modules/_kc_fab/dist/css/kc.fab.css" />
+	<link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="node_modules/_ngDatepicker/src/css/ngDatepicker.css" />
+	<link rel="stylesheet" type="text/css" href="node_modules/bootstrap-toggle/css/bootstrap-toggle.min.css" />
 	<!-- endbuild -->
 	<!-- build:css(.tmp) styles/main.css -->
 	<link rel="stylesheet" href="styles/main.css">
 	<!-- endbuild -->
+	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-messaging.js"></script>
+
+
   </head>
   <body ng-app="mobileApp">
   <div id="loading">loading...</div>
@@ -69,22 +73,22 @@
 
 	<!-- build:js(.) scripts/vendor.js -->
 	<!-- bower:js -->
-	<script src="bower_components/jquery/dist/jquery.js"></script>
-	<script src="bower_components/angular/angular.js"></script>
-	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-	<script src="bower_components/angular-animate/angular-animate.js"></script>
-	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
-	<script src="bower_components/angular-resource/angular-resource.js"></script>
-	<script src="bower_components/angular-route/angular-route.js"></script>
-	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-	<script src="bower_components/angular-touch/angular-touch.js"></script>
-	<script src="bower_components/ngstorage/ngStorage.js"></script>
-	<script src="bower_components/bootstrap-star-rating/js/star-rating.min.js"></script>
-	<script src="bower_components/angular-growl/build/angular-growl.js"></script>
-	<script src="bower_components/kc_fab/dist/js/kc.fab.min.js"></script>
-	<script src="bower_components/moment/moment.js"></script>
-	<script src="bower_components/ngDatepicker/src/js/ngDatepicker.js"></script>
-	<script src="bower_components/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
+	<script src="node_modules/jquery/dist/jquery.js"></script>
+	<script src="node_modules/angular/angular.js"></script>
+	<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="node_modules/angular-animate/angular-animate.js"></script>
+	<script src="node_modules/angular-cookies/angular-cookies.js"></script>
+	<script src="node_modules/angular-resource/angular-resource.js"></script>
+	<script src="node_modules/angular-route/angular-route.js"></script>
+	<script src="node_modules/angular-sanitize/angular-sanitize.js"></script>
+	<script src="node_modules/angular-touch/angular-touch.js"></script>
+	<script src="node_modules/ngstorage/ngStorage.js"></script>
+	<script src="node_modules/bootstrap-star-rating/js/star-rating.min.js"></script>
+	<script src="node_modules/_angular-growl/build/angular-growl.js"></script>
+	<script src="node_modules/_kc_fab/dist/js/kc.fab.min.js"></script>
+	<script src="node_modules/moment/moment.js"></script>
+	<script src="node_modules/_ngDatepicker/src/js/ngDatepicker.js"></script>
+	<script src="node_modules/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
 	<!-- endbower -->
 	<!-- endbuild -->
 
@@ -129,6 +133,25 @@ UserVoice.push(['addTrigger', {mode: 'contact', trigger_position: 'bottom-left' 
 // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
 UserVoice.push(['autoprompt', {}]);
 </script> -->
+
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBZ278HcsmVncMN7M4XThCnQfw-h72vqpA",
+    authDomain: "upma-80899.firebaseapp.com",
+    databaseURL: "https://upma-80899.firebaseio.com",
+    projectId: "upma-80899",
+    storageBucket: "upma-80899.appspot.com",
+    messagingSenderId: "440196037821"
+  };
+  firebase.initializeApp(config);
+</script>
+
+
+
+
+
 
 <script>
 // Add to homescreen service worker and event management

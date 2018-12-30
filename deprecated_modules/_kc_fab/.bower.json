@@ -1,0 +1,37 @@
+{
+  "name": "kc_fab",
+  "homepage": "https://github.com/katrincwl/kc_fab",
+  "authors": [
+    "Mark Luk <katrin.cwl@gmail.com>"
+  ],
+  "description": "jQuery plugin to create materialize floating action button easily",
+  "main": [
+    "dist/js/kc.fab.min.js",
+    "dist/css/kc.fab.css"
+  ],
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "jquery",
+    "floating",
+    "action",
+    "button"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "/.*"
+  ],
+  "dependencies": {
+    "jquery": ">=1.10.2"
+  },
+  "_release": "e648c3bfcd",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "e648c3bfcd1a1d9ea7c9aaca81a16dac464d813d"
+  },
+  "_source": "https://github.com/katrincwl/kc_fab.git",
+  "_target": "*",
+  "_originalSource": "kc_fab"
+}
