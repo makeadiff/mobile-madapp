@@ -58,7 +58,7 @@ var mobileApp = angular.module('mobileApp', [
 						style : function() {
 						if( !angular.element('link#teacher-css').length) {
 							angular.element('head').append('<link id="teacher-css" href="styles/teacher.css" rel="stylesheet">');
-							angular.element('head').append('<link href="../node_modules/bootstrap-star-rating/css/star-rating.css" rel="stylesheet">');
+							angular.element('head').append('<link href="node_modules/bootstrap-star-rating/css/star-rating.css" rel="stylesheet">');
 						}
 						}
 					}
@@ -70,7 +70,7 @@ var mobileApp = angular.module('mobileApp', [
 		  style : function() {
 			if( !angular.element('link#teacher-css').length) {
 			  angular.element('head').append('<link id="teacher-css" href="styles/teacher.css" rel="stylesheet">');
-			  angular.element('head').append('<link href="../node_modules/bootstrap-star-rating/css/star-rating.css" rel="stylesheet">');
+			  angular.element('head').append('<link href="node_modules/bootstrap-star-rating/css/star-rating.css" rel="stylesheet">');
 			}
 		  }
 		}
