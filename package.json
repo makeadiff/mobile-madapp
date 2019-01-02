@@ -28,7 +28,7 @@
     "angular-route": "1.5.11",
     "angular-sanitize": "1.5.11",
     "angular-touch": "1.5.11",
-    "bootstrap": "^3.2.0",
+    "bootstrap": "^3.4.0",
     "bootstrap-star-rating": "4.0.4",
     "bootstrap-toggle": "2.2.2",
     "font-awesome": "^4.7.0",

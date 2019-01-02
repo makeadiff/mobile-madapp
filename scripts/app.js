@@ -37,9 +37,32 @@ var mobileApp = angular.module('mobileApp', [
   .config(function ($routeProvider) {
 	$routeProvider
 	  .when('/', {
-		templateUrl: 'views/main.html',
-		restricted : true
-	  })
+			templateUrl: 'views/login.html',
+			restricted : false,
+			resolve: {
+				style : function() {
+				if( !angular.element('link#login-css').length) {
+					angular.element('head').append('<link id="login-css" href="styles/login.css" rel="stylesheet">');
+				}
+				}
+			}
+			})
+		.when('/faq', {
+				templateUrl: 'views/faq.html',
+				restricted : true
+				})
+		.when('/notifications', {
+					templateUrl: 'views/notifications.html',
+					restricted : true,
+					resolve: {
+						style : function() {
+						if( !angular.element('link#teacher-css').length) {
+							angular.element('head').append('<link id="teacher-css" href="styles/teacher.css" rel="stylesheet">');
+							angular.element('head').append('<link href="../node_modules/bootstrap-star-rating/css/star-rating.css" rel="stylesheet">');
+						}
+						}
+					}
+					})
 	  .when('/teacher', {
 		templateUrl: 'views/teacher.html',
 		restricted : true,
@@ -47,7 +70,7 @@ var mobileApp = angular.module('mobileApp', [
 		  style : function() {
 			if( !angular.element('link#teacher-css').length) {
 			  angular.element('head').append('<link id="teacher-css" href="styles/teacher.css" rel="stylesheet">');
-			  angular.element('head').append('<link href="../bower_components/bootstrap-star-rating/css/star-rating.css" rel="stylesheet">');
+			  angular.element('head').append('<link href="../node_modules/bootstrap-star-rating/css/star-rating.css" rel="stylesheet">');
 			}
 		  }
 		}

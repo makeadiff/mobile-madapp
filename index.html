@@ -2,9 +2,9 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title>MadApp Mobile</title>
+	<title>U.P.M.A.</title>
 	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="width=device-width,  initial-scale=1.0">
 	<link rel="manifest" href="./manifest.json">
 
  <!-- Add to home screen for Safari on iOS -->
@@ -29,11 +29,12 @@
 	<link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="node_modules/_ngDatepicker/src/css/ngDatepicker.css" />
 	<link rel="stylesheet" type="text/css" href="node_modules/bootstrap-toggle/css/bootstrap-toggle.min.css" />
+	
 	<!-- endbuild -->
 	<!-- build:css(.tmp) styles/main.css -->
 	<link rel="stylesheet" href="styles/main.css">
 	<!-- endbuild -->
-	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-messaging.js"></script>
 
 
@@ -55,8 +56,9 @@
 			<!-- <a class="navbar-brand" href="#/select_class" ng-show="loginStatus()"><span class="glyphicon glyphicon-blackboard"></span> Update Different Class</a> -->
 			<!-- <a class="navbar-brand" href="#/reports" ng-show="loginStatus()"><span class="glyphicon glyphicon-stats"></span> 
 				Reports <span ng-class="{'badge-error': reportIssuePercentage > 25, 'badge': true}">{{reportIssueCount}}</span></a> -->
-				<a class="navbar-brand" href="http://makeadiff.in/madapp/tutorial/faq.html"><span class="glyphicon glyphicon-question-sign"></span> FAQ</a>
-			<a class="navbar-brand" href="#/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+				<a class="navbar-brand" href="#/notifications"><span class="glyphicon glyphicon-bell"></span> Notifications</a>
+				<a class="navbar-brand" href="#/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+			  <!-- <a class="navbar-brand" href="#/faq"><span class="glyphicon glyphicon-question-sign"></span> FAQ</a> -->
 		  </div>
 		  
 		</div>
@@ -109,6 +111,8 @@
 	<script src="scripts/controllers/select_class.js"></script>
 	<script src="scripts/controllers/impact_survey.js"></script>
 	<script src="scripts/controllers/mentor_attendance.js"></script>
+	<script src="scripts/controllers/faq.js"></script>
+	<script src="scripts/controllers/notifications.js"></script>
 
 	<script src="scripts/services/userservice.js"></script>
 	<script src="scripts/directives/checkuser.js"></script>
@@ -145,7 +149,69 @@ UserVoice.push(['autoprompt', {}]);
     storageBucket: "upma-80899.appspot.com",
     messagingSenderId: "440196037821"
   };
-  firebase.initializeApp(config);
+	firebase.initializeApp(config);
+	
+	var messaging = firebase.messaging();
+	messaging.usePublicVapidKey("BOwB5gLBO4M7il8vdNf5Ftpej6-iMJ2iRv80NNx3QqWBEFOvZWSsCxIkaofYwm_KVKtxYCAlXNHVek4-cLA7Zo4");
+
+	messaging.requestPermission().then(function() {
+  console.log('Notification permission granted.');
+  // TODO(developer): Retrieve an Instance ID token for use with FCM.
+  // ...
+}).catch(function(err) {
+  console.log('Unable to get permission to notify.', err);
+});
+
+// [START refresh_token]
+  // Callback firedx if Instance ID token is updated.
+  messaging.onTokenRefresh(function() {
+    messaging.getToken().then(function(refreshedToken) {
+      console.log('Token refreshed.');
+      // Indicate that the new Instance ID token has not yet been sent to the
+      // app server.
+      setTokenSentToServer(false);
+      // Send Instance ID token to app server.
+      sendTokenToServer(refreshedToken);
+      // [START_EXCLUDE]
+      // Display new Instance ID token and clear UI of all previous messages.
+      resetUI();
+      // [END_EXCLUDE]
+    }).catch(function(err) {
+      console.log('Unable to retrieve refreshed token ', err);
+      showToken('Unable to retrieve refreshed token ', err);
+    });
+  });
+  // [END refresh_token]
+
+
+
+
+
+// Get Instance ID token. Initially this makes a network call, once retrieved
+// subsequent calls to getToken will return from cache.
+messaging.getToken().then(function(currentToken) {
+  if (currentToken) {
+    sendTokenToServer(currentToken);
+    updateUIForPushEnabled(currentToken);
+  } else {
+    // Show permission request.
+    console.log('No Instance ID token available. Request permission to generate one.');
+    // Show permission UI.
+    updateUIForPushPermissionRequired();
+    setTokenSentToServer(false);
+  }
+}).catch(function(err) {
+  console.log('An error occurred while retrieving token. ', err);
+  showToken('Error retrieving Instance ID token. ', err);
+  setTokenSentToServer(false);
+});
+
+
+
+
+
+
+
 </script>
 
 
