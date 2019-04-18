@@ -31,6 +31,7 @@
     "bootstrap": "^3.4.0",
     "bootstrap-star-rating": "4.0.4",
     "bootstrap-toggle": "2.2.2",
+    "firebase": "^5.7.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "moment": "^2.23.0",

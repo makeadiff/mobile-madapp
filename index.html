@@ -34,8 +34,8 @@
 	<!-- build:css(.tmp) styles/main.css -->
 	<link rel="stylesheet" href="styles/main.css">
 	<!-- endbuild -->
-	<!-- <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-messaging.js"></script> -->
+	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-messaging.js"></script>
 
 
   </head>
@@ -136,10 +136,10 @@ UserVoice.push(['addTrigger', {mode: 'contact', trigger_position: 'bottom-left' 
 
 // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
 UserVoice.push(['autoprompt', {}]);
-</script> -->
+</script>  -->
 
 
-<!-- <script>
+<script>
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyBZ278HcsmVncMN7M4XThCnQfw-h72vqpA",
@@ -152,16 +152,35 @@ UserVoice.push(['autoprompt', {}]);
 	firebase.initializeApp(config);
 	
 	var messaging = firebase.messaging();
-	messaging.usePublicVapidKey("BOwB5gLBO4M7il8vdNf5Ftpej6-iMJ2iRv80NNx3QqWBEFOvZWSsCxIkaofYwm_KVKtxYCAlXNHVek4-cLA7Zo4");
+	navigator.serviceWorker.register('./firebase-messaging-sw.js')
+			.then((registration) => {
+				  messaging.useServiceWorker(registration);
+					messaging.usePublicVapidKey("BOwB5gLBO4M7il8vdNf5Ftpej6-iMJ2iRv80NNx3QqWBEFOvZWSsCxIkaofYwm_KVKtxYCAlXNHVek4-cLA7Zo4");
 
+	// Request permission and get token.....
 	messaging.requestPermission().then(function() {
-  console.log('Notification permission granted.');
-  // TODO(developer): Retrieve an Instance ID token for use with FCM.
-  // ...
+ 		 console.log('Notification permission granted.');
+			// Get Instance ID token. Initially this makes a network call, once retrieved
+		// subsequent calls to getToken will return from cache.
+		messaging.getToken().then(function(currentToken) {
+			if (currentToken) {
+				sendTokenToServer(currentToken);
+			} else {
+				// Show permission request.
+				console.log('No Instance ID token available. Request permission to generate one.');
+				setTokenSentToServer(false);
+			}
+		}).catch(function(err) {
+			console.log('An error occurred while retrieving token. ', err);
+			setTokenSentToServer(false);
+		});
 }).catch(function(err) {
   console.log('Unable to get permission to notify.', err);
 });
 
+});
+
+	
 // [START refresh_token]
   // Callback firedx if Instance ID token is updated.
   messaging.onTokenRefresh(function() {
@@ -172,47 +191,114 @@ UserVoice.push(['autoprompt', {}]);
       setTokenSentToServer(false);
       // Send Instance ID token to app server.
       sendTokenToServer(refreshedToken);
-      // [START_EXCLUDE]
-      // Display new Instance ID token and clear UI of all previous messages.
-      resetUI();
       // [END_EXCLUDE]
     }).catch(function(err) {
       console.log('Unable to retrieve refreshed token ', err);
       showToken('Unable to retrieve refreshed token ', err);
     });
   });
-  // [END refresh_token]
+	// [END refresh_token]
+
+	// Detect Device - Android, Ios, Web
+	function detectmob() { 
+		if( navigator.userAgent.match(/Android/i)){
+				return "Android";
+			}
+		else  if(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i)){
+				return "Ios";
+			}
+			else{
+				return "Web";
+			}
+		}
+
+// Send the Instance ID token your application server, so that it can:
+  // - send messages back to this app
+  // - subscribe/unsubscribe the token from topics
+  function sendTokenToServer(currentToken) {
+			var user_id = "1";
+			var fcm_regid = currentToken;
+			var platform = detectmob();//"Web" "Android" "Ios"
+			var app = "UPMA";//"Website" "UPMA" "Donut" ""
+
+			var username= "sulu.simulation@makeadiff.in";
+		 	var password= "pass";
+
+		var base_url = window.location.protocol + '//makeadiff.in/api/v1/';
+		// var request_headers = {
+		// 	'Content-Type': 'application/x-www-form-urlencoded', 
+		// 	'Authorization': 'Basic ' + window.btoa('sulu.simulation@makeadiff.in:pass')
+		// };
+		// var transformRequest = function(obj) {
+		// 	var str = [];
+		// 	for(var p in obj) { str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p])); }
+		// 	return str.join('&');
+		// };
+
+    if (!isTokenSentToServer()) {
+      console.log('Sending token to server...');
+			
+			$.ajax({
+				type: "post",
+				url: base_url + "notifications", // http://localhost/MAD/api/v1/users", // "
+				data: {
+					"user_id": user_id,
+					"fcm_regid": fcm_regid,
+					"platform": platform, //"Web" "Android" "Ios"
+					"app": app //"Website" "UPMA" "Donut" ""
+				},
+				dataType: 'json',
+				async: false,
+				beforeSend: function (xhr) {
+					xhr.setRequestHeader ("Authorization", "Basic " + btoa(username + ":" + password));
+				},
+				success: function(result){
+					console.log("sent token to server success");
+					setTokenSentToServer(true);
+				},
+				error: function(result, status, error) {
+					var response = result.responseJSON;
+					var error_message = [];
+					for(var i in response.data) {
+						error_message.push(response.data[i].join("<br />"));
+					}
+					console.log(error_message);
+				}
+			});
+						
+			// $http({
+			// 			method: 'POST',
+			// 			url: base_url + 'notifications',
+			// 			headers: request_headers,
+			// 			transformRequest: transformRequest,
+			// 			data: {user_id :'121087', fcm_regid: currentToken,platform:'Web',app:'UPMA', format : 'json'}
+			// 		}).success(function (data) {
+			// 			console.log("sent to server success!")
+
+			// 		}).error(function (data) {
+			// 			console.log("sent to server error!",data)
+			// 		})
 
 
-
-
-
-// Get Instance ID token. Initially this makes a network call, once retrieved
-// subsequent calls to getToken will return from cache.
-messaging.getToken().then(function(currentToken) {
-  if (currentToken) {
-    sendTokenToServer(currentToken);
-    updateUIForPushEnabled(currentToken);
-  } else {
-    // Show permission request.
-    console.log('No Instance ID token available. Request permission to generate one.');
-    // Show permission UI.
-    updateUIForPushPermissionRequired();
-    setTokenSentToServer(false);
+      
+    } else {
+      console.log('Token already sent to server so won\'t send it again ' +
+          'unless it changes');
+    }
   }
-}).catch(function(err) {
-  console.log('An error occurred while retrieving token. ', err);
-  showToken('Error retrieving Instance ID token. ', err);
-  setTokenSentToServer(false);
-});
+
+	function isTokenSentToServer() {
+    return window.localStorage.getItem('sentToServer') === '1';
+  }
+  function setTokenSentToServer(sent) {
+		window.localStorage.setItem('sentToServer', sent ? '1' : '0');
+  }
 
 
 
 
 
-
-
-</script> -->
+</script>
 
 
 
