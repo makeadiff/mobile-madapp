@@ -34,8 +34,10 @@
 	<!-- build:css(.tmp) styles/main.css -->
 	<link rel="stylesheet" href="styles/main.css">
 	<!-- endbuild -->
-	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-messaging.js"></script>
+
+	<!-- firebase messaging includes -->
+	<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-messaging.js"></script>
 
 
   </head>
@@ -160,10 +162,10 @@ UserVoice.push(['autoprompt', {}]);
 	// Request permission and get token.....
 	messaging.requestPermission().then(function() {
  		 console.log('Notification permission granted.');
-			// Get Instance ID token. Initially this makes a network call, once retrieved
+		// Get Instance ID token. Initially this makes a network call, once retrieved
 		// subsequent calls to getToken will return from cache.
 		messaging.getToken().then(function(currentToken) {
-			if (currentToken) {
+			if (currentToken) { 
 				sendTokenToServer(currentToken);
 			} else {
 				// Show permission request.
@@ -182,7 +184,7 @@ UserVoice.push(['autoprompt', {}]);
 
 	
 // [START refresh_token]
-  // Callback firedx if Instance ID token is updated.
+  // Callback fired if Instance ID token is updated.
   messaging.onTokenRefresh(function() {
     messaging.getToken().then(function(refreshedToken) {
       console.log('Token refreshed.');
@@ -223,7 +225,8 @@ UserVoice.push(['autoprompt', {}]);
 			var imei = "";
 
 			var username= "sulu.simulation@makeadiff.in";
-		 	var password= "pass";
+			 var password= "pass";
+			 console.log(currentToken);
 
 		var base_url = window.location.protocol + '//makeadiff.in/api/v1/';
 		// var request_headers = {
@@ -264,7 +267,6 @@ UserVoice.push(['autoprompt', {}]);
 					console.log(error_message);
 				}
 			});
-			e.preventDefault();
 						
 			// $http({
 			// 			method: 'POST',
@@ -295,7 +297,10 @@ UserVoice.push(['autoprompt', {}]);
   }
 
 
-
+	messaging.onMessage(function(payload) {
+  console.log('Message received. ', payload);
+  // ...
+});
 
 
 </script>
