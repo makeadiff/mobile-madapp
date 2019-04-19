@@ -220,6 +220,7 @@ UserVoice.push(['autoprompt', {}]);
 			var fcm_regid = currentToken;
 			var platform = detectmob();//"Web" "Android" "Ios"
 			var app = "UPMA";//"Website" "UPMA" "Donut" ""
+			var imei = "";
 
 			var username= "sulu.simulation@makeadiff.in";
 		 	var password= "pass";
@@ -245,7 +246,8 @@ UserVoice.push(['autoprompt', {}]);
 					"user_id": user_id,
 					"fcm_regid": fcm_regid,
 					"platform": platform, //"Web" "Android" "Ios"
-					"app": app //"Website" "UPMA" "Donut" ""
+					"app": app, //"Website" "UPMA" "Donut" ""
+					"imei": imei
 				},
 				dataType: 'json',
 				async: false,
@@ -259,12 +261,10 @@ UserVoice.push(['autoprompt', {}]);
 				error: function(result, status, error) {
 					var response = result.responseJSON;
 					var error_message = [];
-					for(var i in response.data) {
-						error_message.push(response.data[i].join("<br />"));
-					}
 					console.log(error_message);
 				}
 			});
+			e.preventDefault();
 						
 			// $http({
 			// 			method: 'POST',
