@@ -247,7 +247,7 @@ UserVoice.push(['autoprompt', {}]);
 		// - send messages back to this app
 		// - subscribe/unsubscribe the token from topics
 		function sendTokenToServer(currentToken) {
-			var user_id = "1";
+			var user_id = JSON.parse(localStorage.getItem('ngStorage-user')).user_id;
 			var fcm_regid = currentToken;
 			var platform = detectmob();//"Web" "Android" "Ios"
 			var app = "UPMA";//"Website" "UPMA" "Donut" ""
