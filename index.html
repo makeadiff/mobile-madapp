@@ -1,21 +1,22 @@
 <!doctype html>
 <html class="no-js">
-  <head>
+
+<head>
 	<meta charset="utf-8">
 	<title>U.P.M.A.</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width,  initial-scale=1.0">
 	<link rel="manifest" href="./manifest.json">
 
- <!-- Add to home screen for Safari on iOS -->
- 	<meta name="mobile-web-app-capable" content="yes">
+	<!-- Add to home screen for Safari on iOS -->
+	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="apple-mobile-web-app-title" content="MADApp">
 	<link rel="apple-touch-icon" href="images/icons/icon-152x152.png">
-<!-- Add to home screen for Windows -->
+	<!-- Add to home screen for Windows -->
 	<meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
 	<meta name="msapplication-TileColor" content="#2F3BA2">
-	
+
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 	<!-- build:css(.) styles/vendor.css -->
 	<!-- bower:css -->
@@ -29,7 +30,7 @@
 	<link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="deprecated_modules/_ngDatepicker/src/css/ngDatepicker.css" />
 	<link rel="stylesheet" type="text/css" href="node_modules/bootstrap-toggle/css/bootstrap-toggle.min.css" />
-	
+
 	<!-- endbuild -->
 	<!-- build:css(.tmp) styles/main.css -->
 	<link rel="stylesheet" href="styles/main.css">
@@ -40,9 +41,10 @@
 	<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-messaging.js"></script>
 
 
-  </head>
-  <body ng-app="mobileApp">
-  <div id="loading">loading...</div>
+</head>
+
+<body ng-app="mobileApp">
+	<div id="loading">loading...</div>
 
 	<!--[if lt IE 7]>
 	  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -50,26 +52,27 @@
 
 	<!-- Add your site or application content here -->
 	<div class="header">
-	  <div class="navbar navbar-default" role="navigation">
-		<div class="container">
-		  <div class="navbar-header">
-		    <!-- <a class="navbar-brand" href="#" onclick="window.history.back();"><span class="glyphicon glyphicon-menu-left"></span></a> -->
-			<a class="navbar-brand" href="#/connections"><span class="glyphicon glyphicon-home"></span> Home</a>
-			<!-- <a class="navbar-brand" href="#/select_class" ng-show="loginStatus()"><span class="glyphicon glyphicon-blackboard"></span> Update Different Class</a> -->
-			<!-- <a class="navbar-brand" href="#/reports" ng-show="loginStatus()"><span class="glyphicon glyphicon-stats"></span> 
+		<div class="navbar navbar-default" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<!-- <a class="navbar-brand" href="#" onclick="window.history.back();"><span class="glyphicon glyphicon-menu-left"></span></a> -->
+					<a class="navbar-brand" href="#/connections"><span class="glyphicon glyphicon-home"></span> Home</a>
+					<!-- <a class="navbar-brand" href="#/select_class" ng-show="loginStatus()"><span class="glyphicon glyphicon-blackboard"></span> Update Different Class</a> -->
+					<!-- <a class="navbar-brand" href="#/reports" ng-show="loginStatus()"><span class="glyphicon glyphicon-stats"></span> 
 				Reports <span ng-class="{'badge-error': reportIssuePercentage > 25, 'badge': true}">{{reportIssueCount}}</span></a> -->
-				<a class="navbar-brand" href="#/notifications"><span class="glyphicon glyphicon-bell"></span> Notifications</a>
-				<a class="navbar-brand" href="#/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
-			  <!-- <a class="navbar-brand" href="#/faq"><span class="glyphicon glyphicon-question-sign"></span> FAQ</a> -->
-		  </div>
-		  
+					<a class="navbar-brand" href="#/notifications"><span class="glyphicon glyphicon-bell"></span>
+						Notifications</a>
+					<a class="navbar-brand" href="#/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+					<!-- <a class="navbar-brand" href="#/faq"><span class="glyphicon glyphicon-question-sign"></span> FAQ</a> -->
+				</div>
+
+			</div>
 		</div>
-	  </div>
 	</div>
 	<div growl></div>
 
 	<div id="content" class="container">
-	<div ng-view=""></div>
+		<div ng-view=""></div>
 	</div>
 
 	<div class="kc_fab_wrapper"></div>
@@ -120,7 +123,7 @@
 	<script src="scripts/directives/checkuser.js"></script>
 	<!-- endbuild -->
 
-<!-- <script>
+	<!-- <script>
 // Include the UserVoice JavaScript SDK (only needed once on a page)
 UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/r8rld71oIQoEim5xAPjA.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
 
@@ -141,197 +144,178 @@ UserVoice.push(['autoprompt', {}]);
 </script>  -->
 
 
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyBZ278HcsmVncMN7M4XThCnQfw-h72vqpA",
-    authDomain: "upma-80899.firebaseapp.com",
-    databaseURL: "https://upma-80899.firebaseio.com",
-    projectId: "upma-80899",
-    storageBucket: "upma-80899.appspot.com",
-    messagingSenderId: "440196037821"
-  };
-	firebase.initializeApp(config);
-	
-	var messaging = firebase.messaging();
-	navigator.serviceWorker.register('./firebase-messaging-sw.js')
-			.then((registration) => {
-				  messaging.useServiceWorker(registration);
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyBZ278HcsmVncMN7M4XThCnQfw-h72vqpA",
+			authDomain: "upma-80899.firebaseapp.com",
+			databaseURL: "https://upma-80899.firebaseio.com",
+			projectId: "upma-80899",
+			storageBucket: "upma-80899.appspot.com",
+			messagingSenderId: "440196037821"
+		};
+		firebase.initializeApp(config);
+
+		var messaging = firebase.messaging();
+
+
+		if ('serviceWorker' in navigator) {
+			window.addEventListener('load', function () {
+				navigator.serviceWorker.register('./service-worker.js').then(function (registration) {
+					// Registration was successful
+					console.log('ServiceWorker registration successful with scope: ', registration.scope);
+					messaging.useServiceWorker(registration);
 					messaging.usePublicVapidKey("BOwB5gLBO4M7il8vdNf5Ftpej6-iMJ2iRv80NNx3QqWBEFOvZWSsCxIkaofYwm_KVKtxYCAlXNHVek4-cLA7Zo4");
+				}, function (err) {
+					// registration failed :(
+					console.log('ServiceWorker registration failed: ', err);
+				});
 
-	// Request permission and get token.....
-	messaging.requestPermission().then(function() {
- 		 console.log('Notification permission granted.');
-		// Get Instance ID token. Initially this makes a network call, once retrieved
-		// subsequent calls to getToken will return from cache.
-		messaging.getToken().then(function(currentToken) {
-			if (currentToken) { 
-				sendTokenToServer(currentToken);
-			} else {
-				// Show permission request.
-				console.log('No Instance ID token available. Request permission to generate one.');
-				setTokenSentToServer(false);
-			}
-		}).catch(function(err) {
-			console.log('An error occurred while retrieving token. ', err);
-			setTokenSentToServer(false);
-		});
-}).catch(function(err) {
-  console.log('Unable to get permission to notify.', err);
-});
 
-});
+				window.addEventListener('storage', function (e) {
+					if (JSON.parse(localStorage.getItem('ngStorage-user')).user_id != null) {
 
-	
-// [START refresh_token]
-  // Callback fired if Instance ID token is updated.
-  messaging.onTokenRefresh(function() {
-    messaging.getToken().then(function(refreshedToken) {
-      console.log('Token refreshed.');
-      // Indicate that the new Instance ID token has not yet been sent to the
-      // app server.
-      setTokenSentToServer(false);
-      // Send Instance ID token to app server.
-      sendTokenToServer(refreshedToken);
-      // [END_EXCLUDE]
-    }).catch(function(err) {
-      console.log('Unable to retrieve refreshed token ', err);
-      showToken('Unable to retrieve refreshed token ', err);
-    });
-  });
-	// [END refresh_token]
+						// Request permission and get token.....
+						messaging.requestPermission().then(function () {
+							console.log('Notification permission granted.');
+							// Get Instance ID token. Initially this makes a network call, once retrieved
+							// subsequent calls to getToken will return from cache.
+							messaging.getToken().then(function (currentToken) {
+								if (currentToken) {
+									sendTokenToServer(currentToken);
+								} else {
+									// Show permission request.
+									console.log('No Instance ID token available. Request permission to generate one.');
+									setTokenSentToServer(false);
+								}
+							}).catch(function (err) {
+								console.log('An error occurred while retrieving token. ', err);
+								setTokenSentToServer(false);
+							});
+						}).catch(function (err) {
+							console.log('Unable to get permission to notify.', err);
+						});
+						//window.removeEventListener('storage', false);
 
-	// Detect Device - Android, Ios, Web
-	function detectmob() { 
-		if( navigator.userAgent.match(/Android/i)){
+					};
+				});
+				// [START refresh_token]
+				// Callback fired if Instance ID token is updated.
+				messaging.onTokenRefresh(function () {
+					if (JSON.parse(localStorage.getItem('ngStorage-user')).user_id != null) {
+						messaging.getToken().then(function (refreshedToken) {
+							console.log('Token refreshed.');
+							// Indicate that the new Instance ID token has not yet been sent to the
+							// app server.
+							setTokenSentToServer(false);
+							// Send Instance ID token to app server.
+							sendTokenToServer(refreshedToken);
+							// [END_EXCLUDE]
+						}).catch(function (err) {
+							console.log('Unable to retrieve refreshed token ', err);
+							showToken('Unable to retrieve refreshed token ', err);
+						});
+					}
+				});
+				// [END refresh_token]
+
+				//Foreground Notification behaviour
+				messaging.onMessage(function (payload) {
+					console.log('Message received. ', payload);
+					// ...
+				});
+
+
+			});
+		}
+
+
+		// Detect Device - Android, Ios, Web
+		function detectmob() {
+			if (navigator.userAgent.match(/Android/i)) {
 				return "Android";
 			}
-		else  if(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i)){
+			else if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i)) {
 				return "Ios";
 			}
-			else{
+			else {
 				return "Web";
 			}
 		}
 
-// Send the Instance ID token your application server, so that it can:
-  // - send messages back to this app
-  // - subscribe/unsubscribe the token from topics
-  function sendTokenToServer(currentToken) {
+		// Send the Instance ID token your application server, so that it can:
+		// - send messages back to this app
+		// - subscribe/unsubscribe the token from topics
+		function sendTokenToServer(currentToken) {
 			var user_id = "1";
 			var fcm_regid = currentToken;
 			var platform = detectmob();//"Web" "Android" "Ios"
 			var app = "UPMA";//"Website" "UPMA" "Donut" ""
 			var imei = "";
 
-			var username= "sulu.simulation@makeadiff.in";
-			 var password= "pass";
-			 console.log(currentToken);
+			var username = "sulu.simulation@makeadiff.in";
+			var password = "pass";
+			console.log(currentToken);
 
-		var base_url = window.location.protocol + '//makeadiff.in/api/v1/';
-		// var request_headers = {
-		// 	'Content-Type': 'application/x-www-form-urlencoded', 
-		// 	'Authorization': 'Basic ' + window.btoa('sulu.simulation@makeadiff.in:pass')
-		// };
-		// var transformRequest = function(obj) {
-		// 	var str = [];
-		// 	for(var p in obj) { str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p])); }
-		// 	return str.join('&');
-		// };
+			var base_url = window.location.protocol + '//makeadiff.in/api/v1/';
 
-    if (!isTokenSentToServer()) {
-      console.log('Sending token to server...');
-			
-			$.ajax({
-				type: "post",
-				url: base_url + "notifications", // http://localhost/MAD/api/v1/users", // "
-				data: {
-					"user_id": user_id,
-					"fcm_regid": fcm_regid,
-					"platform": platform, //"Web" "Android" "Ios"
-					"app": app, //"Website" "UPMA" "Donut" ""
-					"imei": imei
-				},
-				dataType: 'json',
-				async: false,
-				beforeSend: function (xhr) {
-					xhr.setRequestHeader ("Authorization", "Basic " + btoa(username + ":" + password));
-				},
-				success: function(result){
-					console.log("sent token to server success");
-					setTokenSentToServer(true);
-				},
-				error: function(result, status, error) {
-					var response = result.responseJSON;
-					var error_message = [];
-					console.log(error_message);
-				}
-			});
-						
-			// $http({
-			// 			method: 'POST',
-			// 			url: base_url + 'notifications',
-			// 			headers: request_headers,
-			// 			transformRequest: transformRequest,
-			// 			data: {user_id :'121087', fcm_regid: currentToken,platform:'Web',app:'UPMA', format : 'json'}
-			// 		}).success(function (data) {
-			// 			console.log("sent to server success!")
+			if (!isTokenSentToServer()) {
+				console.log('Sending token to server...');
 
-			// 		}).error(function (data) {
-			// 			console.log("sent to server error!",data)
-			// 		})
+				$.ajax({
+					type: "post",
+					url: base_url + "notifications", // http://localhost/MAD/api/v1/users", // "
+					data: {
+						"user_id": user_id,
+						"fcm_regid": fcm_regid,
+						"platform": platform, //"Web" "Android" "Ios"
+						"app": app, //"Website" "UPMA" "Donut" ""
+						"imei": imei
+					},
+					dataType: 'json',
+					async: false,
+					beforeSend: function (xhr) {
+						xhr.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
+					},
+					success: function (result) {
+						console.log("sent token to server success");
+						setTokenSentToServer(true);
+					},
+					error: function (result, status, error) {
+						var response = result.responseJSON;
+						var error_message = [];
+						console.log(error_message);
+					}
+				});
 
+			} else {
+				console.log('Token already sent to server so won\'t send it again ' +
+					'unless it changes');
+			}
+		}
 
-      
-    } else {
-      console.log('Token already sent to server so won\'t send it again ' +
-          'unless it changes');
-    }
-  }
+		function isTokenSentToServer() {
+			return window.localStorage.getItem('sentToServer') === '1';
+		}
+		function setTokenSentToServer(sent) {
+			window.localStorage.setItem('sentToServer', sent ? '1' : '0');
+		}
 
-	function isTokenSentToServer() {
-    return window.localStorage.getItem('sentToServer') === '1';
-  }
-  function setTokenSentToServer(sent) {
-		window.localStorage.setItem('sentToServer', sent ? '1' : '0');
-  }
-
-
-	messaging.onMessage(function(payload) {
-  console.log('Message received. ', payload);
-  // ...
-});
-
-
-</script>
+	</script>
 
 
 
-
-
-
-<script>
-// Add to homescreen service worker and event management
-if ('serviceWorker' in navigator) {
-	navigator.serviceWorker
-					 .register('./service-worker.js')
-					 .then(function() { console.log('Service Worker Registered'); })
-					 .catch(err => console.log("Boo err in serviceworker", err));
-}
-</script>
-
-
-
-<script>
-  window.intercomSettings = {
-    app_id: "xnngu157"
-  };
-</script>
-<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/xnngu157';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+	<script>
+		window.intercomSettings = {
+			app_id: "xnngu157"
+		};
+	</script>
+	<script>(function () { var w = window; var ic = w.Intercom; if (typeof ic === "function") { ic('reattach_activator'); ic('update', intercomSettings); } else { var d = document; var i = function () { i.c(arguments) }; i.q = []; i.c = function (args) { i.q.push(args) }; w.Intercom = i; function l() { var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://widget.intercom.io/widget/xnngu157'; var x = d.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); } if (w.attachEvent) { w.attachEvent('onload', l); } else { w.addEventListener('load', l, false); } } })()</script>
 
 
 
 
 
 </body>
+
 </html>
