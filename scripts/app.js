@@ -16,10 +16,10 @@ if(window.location.protocol == 'http:' && window.location.hostname == 'makeadiff
 
 var base_url = window.location.protocol + "//makeadiff.in/madapp/index.php/api/";
 var api_base_url = window.location.protocol + "//makeadiff.in/api/v1/";
-// if(location.href.toString().match(/localhost/) || location.href.toString().match(/192\.168\./)) {
-// 	  base_url = window.location.protocol + "//192.168.1.13/Projects/Madapp/index.php/api/";
-// 	  api_base_url = window.location.protocol + "//192.168.1.13/Projects/Phoenix/v1/";
-// }
+if(location.href.toString().match(/localhost/) || location.href.toString().match(/192\.168\./)) {
+	  base_url = window.location.protocol + "//localhost/madapp/index.php/api/";
+	  api_base_url = window.location.protocol + "//localhost/api/v1/";
+}
 
 var key = "am3omo32hom4lnv32vO";
 
@@ -296,5 +296,30 @@ mobileApp.run(['$localStorage','$rootScope', '$http',function ($localStorage,$ro
 			}).error(error);
 		}
 	}();
+
+
+	$rootScope.requestPermission = function() {
+			// Request permission and get token.....
+			messaging.requestPermission().then(function () {
+				console.log('Notification permission granted.');
+				// Get Instance ID token. Initially this makes a network call, once retrieved
+				// subsequent calls to getToken will return from cache.
+				messaging.getToken().then(function (currentToken) {
+					if (currentToken) {
+						sendTokenToServer(currentToken);
+					} else {
+						// Show permission request.
+						console.log('No Instance ID token available. Request permission to generate one.');
+						setTokenSentToServer(false);
+					}
+				}).catch(function (err) {
+					console.log('An error occurred while retrieving token. ', err);
+					setTokenSentToServer(false);
+				});
+			}).catch(function (err) {
+				console.log('Unable to get permission to notify.', err);
+			});
+	}
+		
 }]);
 
