@@ -11,6 +11,12 @@ angular.module('mobileApp')
   .controller('ConnectionCtrl', ['$scope', '$location', '$http', 'UserService', function ($scope, $location, $http, user_service) {
 	var ConnectionCtrl = this;
 
+	//helper function to filter object
+	Object.filter = (obj, predicate) => 
+    Object.keys(obj)
+          .filter( key => predicate(obj[key]) )
+          .reduce( (res, key) => (res[key] = obj[key], res), {} );
+
 	if(user_service.isLoggedIn()) {
   		var user = user_service.getUser();
   		if(!user) {
@@ -67,8 +73,19 @@ angular.module('mobileApp')
 		ConnectionCtrl.user.classes_total	= data.status_counts.attended + data.status_counts.absent;
 		ConnectionCtrl.user.all_classes		= data.all_classes;
 		ConnectionCtrl.user.student_data_not_updated= data.student_data_not_updated;
+
+		// Do not show classes for future date.
+		var filtered_student_data_not_updated = Object.filter(ConnectionCtrl.user.student_data_not_updated, function(datevalue){ 
+			var now = new moment();
+			var datediff = now.diff(moment(datevalue), 'days');
+			console.log(datediff);
+			return datediff > 0;
+		}); 	
+
+		ConnectionCtrl.user.student_data_not_updated = filtered_student_data_not_updated;
 		ConnectionCtrl.user.student_data_not_updated_length = Object.keys(ConnectionCtrl.user.student_data_not_updated).length;
 	}
+
 
 	ConnectionCtrl.userBatchInfo = function(data) {
 		loaded();
@@ -82,8 +99,8 @@ angular.module('mobileApp')
 			var datediff = now.diff(moment(datevalue), 'days');
 			return datediff > 0;
 		});
+
 		ConnectionCtrl.user.volunteer_data_not_updated = filtered_volunteer_data_not_updated;
-		
 		ConnectionCtrl.user.classes_where_student_data_not_updated	= data.student_data_not_updated;
 		ConnectionCtrl.user.classes_where_student_data_not_updated_length = Object.keys(ConnectionCtrl.user.classes_where_student_data_not_updated).length;
 		ConnectionCtrl.user.teachers_with_negative_credits	= data.teachers_with_negative_credits;

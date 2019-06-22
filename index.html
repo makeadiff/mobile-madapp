@@ -2,13 +2,24 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title>MobApp</title>
+	<title>MadApp Mobile</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
+	<link rel="manifest" href="./manifest.json">
+
+ <!-- Add to home screen for Safari on iOS -->
+ 	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="Weather PWA">
+	<link rel="apple-touch-icon" href="images/icons/icon-152x152.png">
+<!-- Add to home screen for Windows -->
+	<meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
+	<meta name="msapplication-TileColor" content="#2F3BA2">
+	
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 	<!-- build:css(.) styles/vendor.css -->
 	<!-- bower:css -->
-	<link rel="stylesheet" href="bower_components/bootstrap-star-rating/css/star-rating.min.css" />
+	<link rel="stylesheet" href="bower_components/bootstrap-star-rating/css/star-rating.css" />
 	<!-- endbower -->
 	<!-- endbuild -->
 	<!-- build:css(.tmp) styles/thirdparty.css -->
@@ -40,7 +51,8 @@
 			<!-- <a class="navbar-brand" href="#/select_class" ng-show="loginStatus()"><span class="glyphicon glyphicon-blackboard"></span> Update Different Class</a> -->
 			<!-- <a class="navbar-brand" href="#/reports" ng-show="loginStatus()"><span class="glyphicon glyphicon-stats"></span> 
 				Reports <span ng-class="{'badge-error': reportIssuePercentage > 25, 'badge': true}">{{reportIssueCount}}</span></a> -->
-			<a class="navbar-brand" href="http://makeadiff.in/madapp/tutorial/faq.html"><span class="glyphicon glyphicon-question-sign"></span> FAQ</a>
+				<a class="navbar-brand" href="http://makeadiff.in/madapp/tutorial/faq.html"><span class="glyphicon glyphicon-question-sign"></span> FAQ</a>
+			<a class="navbar-brand" href="#/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
 		  </div>
 		  
 		</div>
@@ -99,11 +111,26 @@
 	<!-- endbuild -->
 
 <script>
+// Add to homescreen service worker and event management
+if ('serviceWorker' in navigator) {
+	navigator.serviceWorker
+					 .register('./service-worker.js')
+					 .then(function() { console.log('Service Worker Registered'); });
+}
+</script>
+
+
+
+<script>
   window.intercomSettings = {
     app_id: "xnngu157"
   };
 </script>
 <script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/xnngu157';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+
+
+
+
 
 </body>
 </html>
