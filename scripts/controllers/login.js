@@ -28,6 +28,7 @@ angular.module('mobileApp')
 				user_service.setUser(LoginCtrl.user);
 				var connections = data.connections;
 				var now = new moment();
+				$scope.requestPermission();
 
 				if(connections.teacher_at.length && connections.mentor_at.length) { // User is a teacher AND mentor
 					$location.path("/connections"); // Show Teacher/mentor choice page

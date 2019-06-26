@@ -1,0 +1,46 @@
+{
+  "name": "upma",
+  "version": "1.1.0",
+  "description": "U.P.M.A is an internal front-end application for MAD Programmes to collect operations and impact data.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "copy-old-dependency": "run-script-os",
+    "copy-old-dependency:win32": "xcopy /E /H /Y \".\\deprecated_modules\" \".\\node_modules\" ",
+    "copy-old-dependency:darwin:linux": "cp -r \"./deprecated_modules\" \"./node_modules\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/makeadiff/mobile-madapp.git"
+  },
+  "keywords": [],
+  "author": "Make A Difference",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/makeadiff/mobile-madapp/issues"
+  },
+  "homepage": "https://github.com/makeadiff/mobile-madapp#readme",
+  "dependencies": {
+    "angular": "1.5.11",
+    "angular-animate": "1.5.11",
+    "angular-cookies": "1.5.11",
+    "angular-resource": "1.5.11",
+    "angular-route": "1.5.11",
+    "angular-sanitize": "1.5.11",
+    "angular-touch": "1.5.11",
+    "bootstrap": "^3.4.0",
+    "bootstrap-star-rating": "4.0.4",
+    "bootstrap-toggle": "2.2.2",
+    "firebase": "^5.7.2",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.3.1",
+    "moment": "^2.23.0",
+    "ngstorage": "0.3.6"
+  },
+  "devDependencies": {
+    "firebase-tools": "^6.2.2",
+    "nodemon": "^1.18.9",
+    "run-script-os": "^1.0.5",
+    "workbox-cli": "^3.6.3"
+  }
+}

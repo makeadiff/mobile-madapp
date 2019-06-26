@@ -97,6 +97,14 @@ angular.module('mobileApp')
 				var teach = cls.teachers[inde];
 				MentorCtrl.mentor.classes[index].teachers[inde].index = inde;
 				MentorCtrl.mentor.classes[index].teachers[inde].show_substitute = teach.substitute_id; // By default don't show the subsitute area.
+				MentorCtrl.mentor.classes[index].teachers[inde].vol_type = "";
+				
+				if (teach.substitute_id ==0){
+					MentorCtrl.mentor.classes[index].teachers[inde].vol_type = "Regular";
+				}
+				else{
+					MentorCtrl.mentor.classes[index].teachers[inde].vol_type = "Substitute";
+				}
 			}
 		}
 
@@ -174,6 +182,18 @@ angular.module('mobileApp')
 			teacher.show_substitute = 0;
 		else
 			teacher.show_substitute = 1;
+	}
+
+	
+	MentorCtrl.changeVolunteerType = function (teacher) {
+		if ($('#vol-type').val() == "Regular") {
+			console.log("set reg");
+			teacher.show_substitute = 0;
+		}
+		else if ($('#vol-type').val() == "Substitute") {
+			console.log("set sub");
+			MentorCtrl.showSubstitute(teacher);
+		}
 	}
 
 	MentorCtrl.browseClass = function(batch_id, class_on, direction) {

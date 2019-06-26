@@ -100,12 +100,13 @@ angular.module('mobileApp')
 		}
 		for(var i in TeacherCtrl.teacher.students) {
 			TeacherCtrl.teacher.students[i].participation = Number(TeacherCtrl.teacher.students[i].participation);
-
-			// Workaround for this to function. Not working by default. I think library issue.
-			if(TeacherCtrl.teacher.students[i].check_for_understanding)
-				$("#check_for_understanding-" + TeacherCtrl.teacher.students[i].id).bootstrapToggle('on');
-			else 
-				$("#check_for_understanding-" + TeacherCtrl.teacher.students[i].id).bootstrapToggle('off');
+			TeacherCtrl.teacher.students[i].check_for_understanding = Number(TeacherCtrl.teacher.students[i].check_for_understanding);
+			
+			// // Workaround for this to function. Not working by default. I think library issue.
+			// if(TeacherCtrl.teacher.students[i].check_for_understanding)
+			// 	$("#check_for_understanding-" + TeacherCtrl.teacher.students[i].id).bootstrapToggle('on');
+			// else 
+			// 	$("#check_for_understanding-" + TeacherCtrl.teacher.students[i].id).bootstrapToggle('off');
 		}
 
 		TeacherCtrl.current_teacher = current_teacher;
@@ -119,12 +120,12 @@ angular.module('mobileApp')
 			  off: 'No'
 			});
 
-			$('.toggle-switch').change(function() {
-				var id = $(this).prop("id");
-				var student_index = $("#" + id).attr('student-index');
+			// $('.toggle-switch').change(function() {
+			// 	var id = $(this).prop("id");
+			// 	var student_index = $("#" + id).attr('student-index');
 
-				TeacherCtrl.teacher.students[student_index].check_for_understanding = $(this).prop('checked');
-			});
+			// 	TeacherCtrl.teacher.students[student_index].check_for_understanding = $(this).prop('checked');
+			// });
 
 			$(".class_satisfaction").rating({starCaptions: {
 				"0": "No Data",
@@ -135,6 +136,15 @@ angular.module('mobileApp')
 				"5": "Completely Satisfied",
 			}}).rating("refresh", {showCaption: true, disabled: cancelled, showClear: false});
 
+			$(".check_for_understanding").rating({starCaptions: {
+				"0": "Absent",
+				"1": "Doesn't understand the lesson at all",
+				"2": "Understands basic flow",
+				"3": "Understands part of the lesson",
+				"4": "Understands the lesson but doesn't clarify doubts",
+				"5": "Understands and clarifies doubts and/or is able to help others",
+			}}).rating("refresh", {showCaption: true, disabled: cancelled}); // Make sure this option is passed with the refresh command. Else, its not updating on new data.;
+	
 			$(".participation").rating({starCaptions: {
 				"0": "Absent",
 				"1": "Disruptive",
@@ -144,12 +154,15 @@ angular.module('mobileApp')
 				"5": "Participative",
 			}}).rating("refresh", {showCaption: true, disabled: cancelled}); // Make sure this option is passed with the refresh command. Else, its not updating on new data.;
 		}, 300);
+
 	}
 
 	TeacherCtrl.save = function(class_id, students, class_satisfaction) {
+		
 		// Stupid hack to make sure that the absent students are marked as 0. Right now due to some conflict between angular and star-ratings, its not happening.
 		for (var i in students) {
 			students[i].participation = Number($("#participation-" + i).val());
+			students[i].check_for_understanding = Number($("#check_for_understanding-" + i).val());
 		}
 
 		loading();

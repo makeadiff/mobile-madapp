@@ -7,9 +7,9 @@
 <h4 ng-show="TCtrl.other_teacher">Co Teacher: {{TCtrl.other_teacher}}</h4>
 <h4>Level: {{TCtrl.teacher.level}}</h4>
 
-<h5 class="class_satisfaction_label">Class Satisfaction</h5>
+<h5 class="class_satisfaction_label">Teacher Class Satisfaction</h5>
 <input type="number" name="class_satisfaction" id="class_satisfaction" ng-model="TCtrl.teacher.class_satisfaction" class="rating class_satisfaction" min="0" max="5" step="1"
-	   data-size="xs" data-show-caption="true" data-clear-value="0" data-clear-caption="Unknown" value="0" />
+	   data-size="xs" data-show-caption="true" data-clear-value="0" data-clear-caption="Unknown" value="0" required/>
 
 <a href="#mentor_attendance?class_id={{TCtrl.class_id}}&date={{TCtrl.teacher.class_on.split(' ')[0]}}&center_name={{TCtrl.teacher.center_name}}" 
 	class="btn btn-primary btn-sm">Who did you see on ground today?</a><br />
@@ -34,13 +34,16 @@
 	<span class="attendance"></span>
 	<div class="row">
 		<span class="student-name">{{student.name}}</span>
+		<br/>
+		<strong>Child Participation</strong>
 		<input type="number" name="participation[{{student.id}}]" id="participation-{{student.id}}" ng-model="student.participation" 
 				class="rating participation" min="0" max="5" step="1" 
-				data-size="xs" data-show-caption="true" data-clear-value="0" data-clear-caption="Absent" value="0" />
+				data-size="xs" data-show-caption="true" data-clear-value="0" data-clear-caption="Absent" value="0" required/>
 
 		<strong>Check for Understanding</strong>
-		<input class="toggle-switch" ng-model="student.check_for_understanding" id="check_for_understanding-{{student.id}}" data-toggle="toggle" 
-			ng-disabled="TCtrl.teacher.status == 'cancelled'" data-height="25" data-width="70" data-size="small" type="checkbox" value="1" student-index="{{student.id}}" />
+		<input type="number"  id="check_for_understanding-{{student.id}}" ng-model="student.check_for_understanding"
+			   class="rating check_for_understanding" min="0" max="5" step="1" 
+			   data-size="xs" data-show-caption="true" data-clear-value="0" data-clear-caption="Absent" value="0" required/>
 
 		<!-- <toggle-switch ng-model="student.check_for_understanding" id="check_for_understanding-{{student.id}}" is-disabled="TCtrl.teacher.status == 'cancelled'"
 				on-label="Yes" off-label="No"></toggle-switch> -->

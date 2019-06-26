@@ -27,20 +27,28 @@
 <div class="pull-right cancel-area" ng-show="(class.class_status == '0')">
 <select ng-model="class.cancel_option" class="cancel-option">
 	<optgroup label="Internal(MAD)">
-		<option value="in-volunteer-unavailable">Volunteer Unavailabe to take class</option>
-		<option value="in-volunteer-unassigned">Volunteer are yet to be recruited</option>
+		<!-- <option value="in-volunteer-unavailable">Volunteer unavailabe to take class</option> -->
+		<option value="in-volunteer-unassigned">Volunteer is yet to be recruited</option>
 		<option value="in-volunteer-engaged">MAD has an event</option>
 		<option value="in-other">Other</option>
 	</optgroup>
-	<optgroup label="External(CA)">
-		<option value="ext-children-out-holiday">Children not back from holiday</option>
+	<optgroup label="Shelter">
+		<option value="ext-children-out-holiday">Children have gone back home</option>
 		<option value="ext-children-doing-chores">Children are doing chores</option>
 		<option value="ext-children-have-events">Children engaged with shelter events</option>
-		<option value="ext-children-have-events-practice">Children are practicing for an event</option>
-		<option value="ext-children-unwell">Children are unwell</option>
+		<!-- <option value="ext-children-have-events-practice">Children are practicing for an event</option> -->
+		<option value="ext-parent-visiting-shelter">Parents visiting the shelter</option>
 		<option value="ext-donor-visit">Donor Visit</option> 
-		<option value="ext-other">Other</option>
+		<option value="ext-other">Other</option>		
 	</optgroup>
+	<optgroup label="External(CA)">
+		<option value="ext-holiday">Holiday</option>
+		<option value="ext-children-unwell">Children are unwell</option>
+		<option value="ext-out-school">Children have school</option>
+		<option value="ext-disturbances-city">Disturbances in the city / local holiday / natural calamity </option>
+
+	</optgroup>
+
 </select><br />
 
 <textarea class="cancel-reason" rows="2" cols="25" ng-model="class.cancel_reason" ng-show="(class.cancel_option == 'in-other' || class.cancel_option == 'ext-other')"></textarea>
@@ -58,13 +66,18 @@
 	</span>
 	</div>
 
-	<span ng-class="{'substituted': (teacher.substitute_id != '0'), 'teacher-name':true}"
-			ng-click="MCtrl.showSubstitute(teacher)" ng-show="class.class_status == '1'">
-		<span ng-class="{'glyphicon':true, 'glyphicon-triangle-bottom': (teacher.show_substitute != '0'), 'glyphicon-triangle-right': (teacher.show_substitute == '0')}"></span>
+	<span ng-show="class.class_status == '1'">
+		<!-- <span ng-class="{'glyphicon':true, 'glyphicon-triangle-bottom': (teacher.show_substitute != '0'), 'glyphicon-triangle-right': (teacher.show_substitute == '0')}"></span> -->
+		<select id="vol-type" ng-model="teacher.vol_type" ng-change="MCtrl.changeVolunteerType(teacher)">
+			<option value="Regular">Regular</option>
+			<option value="Substitute">Substitute</option>
+		</select>
+	</span>
+	<span ng-show="(teacher.show_substitute == '0' && class.class_status == '1')">
 		<span class="glyphicon glyphicon-user user-icon"></span> {{teacher.name}}</span>
 
 	<div id="substitute-{{teacher.id}}" class="substitute-area" ng-show="teacher.show_substitute != 0">
-		<label>Substitute: </label>
+		<label>Substitute Name: </label>
 		<select name="substitute[{{teacher.id}}]" ng-model="teacher.substitute_id" id="sub-{{teacher.id}}">
 			<option ng-repeat="sub in MCtrl.all_teachers" value="{{sub.id}}">{{sub.name}}</option>
 		</select>
