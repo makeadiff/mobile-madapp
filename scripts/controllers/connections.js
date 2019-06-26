@@ -25,9 +25,9 @@ angular.module('mobileApp')
   			return false;
   		}
   		var params = $location.search();
-
   	} else {
-  		$location.path('/login')
+  		$location.path('/login');
+  		return;
   	}
   	user.classes_total = 0;
   	user.classes_took = 0;

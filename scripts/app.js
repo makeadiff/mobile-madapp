@@ -16,10 +16,17 @@ if(window.location.protocol == 'http:' && window.location.hostname == 'makeadiff
 
 var base_url = window.location.protocol + "//makeadiff.in/madapp/index.php/api/";
 var api_base_url = window.location.protocol + "//makeadiff.in/api/v1/";
+<<<<<<< Updated upstream:scripts/app.js
 // if(location.href.toString().match(/localhost/) || location.href.toString().match(/192\.168\./)) {
 // 	  base_url = window.location.protocol + "//192.168.1.13/Projects/Madapp/index.php/api/";
 // 	  api_base_url = window.location.protocol + "//192.168.1.13/Projects/Phoenix/v1/";
 // }
+=======
+if(location.href.toString().match(/localhost/) || location.href.toString().match(/192\.168\./)) {
+	  base_url = window.location.protocol + "//localhost/Projects/Madapp/index.php/api/";
+	  api_base_url = window.location.protocol + "//localhost/Projects/Phoenix/v1/";
+}
+>>>>>>> Stashed changes:app/scripts/app.js
 
 var key = "am3omo32hom4lnv32vO";
 
