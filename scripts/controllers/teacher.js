@@ -143,7 +143,7 @@ angular.module('mobileApp')
 				"3": "Understands part of the lesson",
 				"4": "Understands the lesson but doesn't clarify doubts",
 				"5": "Understands and clarifies doubts and/or is able to help others",
-			}}).rating("refresh", {showCaption: true, disabled: cancelled, showClear: false}); // Make sure this option is passed with the refresh command. Else, its not updating on new data.;
+			}}).rating("refresh", {showCaption: true, disabled: cancelled}); // Make sure this option is passed with the refresh command. Else, its not updating on new data.;
 	
 			$(".participation").rating({starCaptions: {
 				"0": "Absent",
@@ -152,7 +152,7 @@ angular.module('mobileApp')
 				"3": "Attentive",
 				"4": "Involved",
 				"5": "Participative",
-			}}).rating("refresh", {showCaption: true, disabled: cancelled, showClear: false}); // Make sure this option is passed with the refresh command. Else, its not updating on new data.;
+			}}).rating("refresh", {showCaption: true, disabled: cancelled}); // Make sure this option is passed with the refresh command. Else, its not updating on new data.;
 		}, 300);
 
 	}
