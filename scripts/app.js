@@ -48,22 +48,14 @@ var mobileApp = angular.module('mobileApp', [
 				}
 			}
 			})
-		.when('/faq', {
-				templateUrl: 'views/faq.html',
-				restricted : true
-				})
-		.when('/notifications', {
-					templateUrl: 'views/notifications.html',
-					restricted : true,
-					resolve: {
-						style : function() {
-						if( !angular.element('link#teacher-css').length) {
-							angular.element('head').append('<link id="teacher-css" href="styles/teacher.css" rel="stylesheet">');
-							angular.element('head').append('<link href="node_modules/bootstrap-star-rating/css/star-rating.css" rel="stylesheet">');
-						}
-						}
-					}
-					})
+	  .when('/faq', {
+			templateUrl: 'views/faq.html',
+			restricted : true
+			})
+	  .when('/notifications', {
+			templateUrl: 'views/notifications.html',
+			restricted : true,
+			})
 	  .when('/teacher', {
 		templateUrl: 'views/teacher.html',
 		restricted : true,

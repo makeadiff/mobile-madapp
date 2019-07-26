@@ -51,15 +51,7 @@ angular.module('mobileApp')
 		}
 
 		user.getUser = function() {
-			if(!$localStorage.user) return false;
-
-			// For intercode
-			window.Intercom('boot', {  
-			    app_id: 'xnngu157',  
-			    email: $localStorage.user.email ,
-			    name: $localStorage.user.name,
-			    user_id: $localStorage.user.id
-			});
+			if(!$localStorage.user) return false;																						
 			
 			return $localStorage.user;
 		}
