@@ -74,7 +74,7 @@ angular.module('mobileApp')
 					}
 				} else {
 					var access = 0;
-					for(var pos in data.positions) { 
+					for(var pos in data.positions) {
 						if(data.positions[pos] != 'volunteer') access = 1; // Anything other than a volunteer gets a auto pass.
 					}
 
@@ -103,6 +103,4 @@ angular.module('mobileApp')
 
 		});
 	}
-  
-  
 }]);

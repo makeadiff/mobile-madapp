@@ -53,13 +53,14 @@ angular.module('mobileApp')
 			}).success(MentorCtrl.openBatch).error(error);
 		}
 
+		var teacher_user_group_id = $scope.getTeacherGroupId(user.project_id);
 		$http({
 			method: 'GET',
-			url: base_url + 'user_get_teachers',
-			params: {city_id: user.city_id, project_id: user.project_id, key: key}
+			url: api_base_url + 'users',
+			params: {city_id: user.city_id, group_id: teacher_user_group_id},
+			headers: $scope.request_headers
 		}).success(function(data) {
-			data.teachers.unshift({id: "0", name: "None"});
-			MentorCtrl.all_teachers = data.teachers;
+			MentorCtrl.all_teachers = data.data.users;
 		});
 	}
 

@@ -290,6 +290,29 @@ mobileApp.run(['$localStorage','$rootScope', '$http',function ($localStorage,$ro
 		}
 	}();
 
+	$rootScope.getTeacherGroupId = function(project_id) {
+		let project_teacher_group_mapping = {
+			1: 9,
+			2: 376,
+			4: 349,
+			5: 348,
+			6: 377
+		};
+
+		return project_teacher_group_mapping[project_id];
+	}
+
+	$rootScope.getMentorGroupId = function(project_id) {
+		let project_mentor_group_mapping = {
+			1: 8,
+			2: 375,
+			4: 272,
+			5: 348,
+			6: 378
+		};
+
+		return project_mentor_group_mapping[project_id];
+	}
 
 	$rootScope.requestPermission = function() {
 			// Request permission and get token.....
