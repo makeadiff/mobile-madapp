@@ -315,6 +315,8 @@ mobileApp.run(['$localStorage','$rootScope', '$http',function ($localStorage,$ro
 	}
 
 	$rootScope.requestPermission = function() {
+			if(typeof messaging == "undefined") return false;
+			
 			// Request permission and get token.....
 			messaging.requestPermission().then(function () {
 				console.log('Notification permission granted.');

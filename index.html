@@ -157,7 +157,6 @@ firebase.initializeApp(config);
 
 var messaging = firebase.messaging();
 
-
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', function () {
 		navigator.serviceWorker.register('./service-worker.js').then(function (registration) {
@@ -228,7 +227,7 @@ function sendTokenToServer(currentToken) {
 	var password = "pass";
 	console.log(currentToken);
 
-	var base_url = window.location.protocol + '//makeadiff.in/api/v1/';
+	var base_url = window.location.protocol + '//'+window.location.hostname+'/api/v1/';
 
 	if (!isTokenSentToServer()) {
 		console.log('Sending token to server...');
