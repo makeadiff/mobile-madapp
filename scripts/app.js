@@ -14,8 +14,8 @@ if(window.location.protocol == 'http:' && window.location.hostname == 'makeadiff
 	window.location.href = 'https://' + window.location.hostname + window.location.pathname + window.location.hash;
 }
 
-var base_url = window.location.protocol + "//makeadiff.in/madapp/index.php/api/";
-var api_base_url = window.location.protocol + "//makeadiff.in/api/v1/";
+var base_url = window.location.protocol + "//" + window.location.hostname + "/madapp/index.php/api/";
+var api_base_url = window.location.protocol + "//" + window.location.hostname + "/api/v1/";
 
 if(location.href.toString().match(/localhost/) || location.href.toString().match(/192\.168\./)) {
 	  base_url = window.location.protocol + "//localhost/Projects/Madapp/index.php/api/";
