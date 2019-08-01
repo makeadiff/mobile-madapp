@@ -24,23 +24,23 @@ angular.module('mobileApp')
 			var logged_in = $localStorage.logged_in;
 			if(logged_in) return logged_in;
 
-			var cookies = $cookies.getAll();
-			var email = cookies.email;
-			var auth_token = cookies.auth_token;
+			// var cookies = $cookies.getAll();
+			// var email = cookies.email;
+			// var auth_token = cookies.auth_token;
 
-			var that = this;
-			$http({
-				method: 'GET',
-				url: base_url + 'user_login',
-				params: {email: email, auth_token: auth_token, key: key}
-			}).success(function(data) {
-				if(data.success) {
-					that.setUser(data);
-					$location.path("/connections");
-				}
-			});
+			// var that = this;
+			// $http({
+			// 	method: 'GET',
+			// 	url: base_url + 'user_login',
+			// 	params: {email: email, auth_token: auth_token, key: key}
+			// }).success(function(data) {
+			// 	if(data.success) {
+			// 		that.setUser(data);
+			// 		$location.path("/connections");
+			// 	}
+			// });
 
-			return false;
+			// return false;
 		}
 
 		user.getUserId = function() {

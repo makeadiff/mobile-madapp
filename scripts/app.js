@@ -38,27 +38,23 @@ var mobileApp = angular.module('mobileApp', [
   .config(function ($routeProvider) {
 	$routeProvider
 	  .when('/', {
-			templateUrl: 'views/login.html',
-			restricted : false,
+			templateUrl: 'views/connections.html',
 			resolve: {
-				style : function() {
-				if( !angular.element('link#login-css').length) {
-					angular.element('head').append('<link id="login-css" href="styles/login.css" rel="stylesheet">');
+			  style : function() {
+				if( !angular.element('link#connections-css').length) {
+				  angular.element('head').append('<link id="connections-css" href="styles/connections.css" rel="stylesheet">');
 				}
-				}
+			  }
 			}
-			})
+		})
 	  .when('/faq', {
-			templateUrl: 'views/faq.html',
-			restricted : true
-			})
+			templateUrl: 'views/faq.html'
+		})
 	  .when('/notifications', {
 			templateUrl: 'views/notifications.html',
-			restricted : true,
-			})
+		})
 	  .when('/teacher', {
 		templateUrl: 'views/teacher.html',
-		restricted : true,
 		resolve: {
 		  style : function() {
 			if( !angular.element('link#teacher-css').length) {
@@ -70,7 +66,6 @@ var mobileApp = angular.module('mobileApp', [
 	  })
 	  .when('/mentor', {
 		templateUrl: 'views/mentor.html',
-		restricted : true,
 		resolve: {
 		  style : function() {
 			if( !angular.element('link#mentor-css').length) {
@@ -81,7 +76,6 @@ var mobileApp = angular.module('mobileApp', [
 	  })
 	  .when('/mentor_attendance', {
 		templateUrl: 'views/mentor_attendance.html',
-		restricted : true,
 		resolve: {
 		  style : function() {
 			if( !angular.element('link#mentor-attendance-css').length) {
@@ -100,7 +94,6 @@ var mobileApp = angular.module('mobileApp', [
 	  })
 	  .when('/connections', {
 		templateUrl: 'views/connections.html',
-		restricted : true,
 		resolve: {
 		  style : function() {
 			if( !angular.element('link#connections-css').length) {
@@ -110,12 +103,10 @@ var mobileApp = angular.module('mobileApp', [
 		}
 	  })
 	  .when('/extra_class', {
-		templateUrl: 'views/extra_class.html',
-		restricted : true
+		templateUrl: 'views/extra_class.html'
 	  })
 	  .when('/mentor_report', {
 		templateUrl: 'views/mentor_report.html',
-		restricted : true,
 		resolve: {
 		  style : function() {
 			if( !angular.element('link#report-css').length) {
@@ -126,7 +117,6 @@ var mobileApp = angular.module('mobileApp', [
 	  })
 	  .when('/center_report', {
 		templateUrl: 'views/center_report.html',
-		restricted : true,
 		resolve: {
 		  style : function() {
 			if( !angular.element('link#report-css').length) {
@@ -137,7 +127,6 @@ var mobileApp = angular.module('mobileApp', [
 	  })
 	  .when('/teacher_report', {
 		templateUrl: 'views/teacher_report.html',
-		restricted : true,
 		resolve: {
 		  style : function() {
 			if( !angular.element('link#report-css').length) {
@@ -148,7 +137,6 @@ var mobileApp = angular.module('mobileApp', [
 	  })
 	  .when('/reports', {
 		templateUrl: 'views/reports.html',
-		restricted : true,
 		resolve: {
 		  style : function() {
 			if( !angular.element('link#report-css').length) {
@@ -159,11 +147,9 @@ var mobileApp = angular.module('mobileApp', [
 	  })
 	  .when('/select_class', {
 		templateUrl: 'views/select_class.html',
-		restricted : true,
 	  })
 	  .when('/impact_survey', {
 		templateUrl: 'views/impact_survey.html',
-		restricted : true,
 		resolve: {
 		  style : function() {
 			if( !angular.element('link#report-css').length) {
@@ -182,9 +168,6 @@ var mobileApp = angular.module('mobileApp', [
 			}
 		  }
 		}
-	  })
-	  .otherwise({
-		redirectTo: '/login'
 	  });
   });
 
@@ -201,37 +184,18 @@ function loaded() {
 }
 
 
-mobileApp.run(['$localStorage','$rootScope', '$http',function ($localStorage,$rootScope, $http) {
+mobileApp.run(['$localStorage','$rootScope', '$http', 'UserService',function ($localStorage,$rootScope, $http, user_service) {
 	$rootScope.loginStatus = function() {
 		if(!$localStorage.user) return 0;
 		if(typeof $localStorage.user.user_id == "undefined") return 0;
 		return $localStorage.user.user_id;
 	};
 
-	$rootScope.request_headers = {
-		'Content-Type': 'application/x-www-form-urlencoded', 
-		'Authorization': 'Basic ' + window.btoa('sulu.simulation@makeadiff.in:pass')
-	};
-	
 	$rootScope.transformRequest = function(obj) {
 		var str = [];
 		for(var p in obj) { str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p])); }
 		return str.join('&');
 	}
-
-	$rootScope.$on("$stateChangeStart", function(event, curr, prev){
-	  if ($loginStatus.user) {
-	      window.Intercom("boot", {
-	        app_id: "xnngu157",
-	        email: $localStorage.user.email,
-	        name: $localStorage.user.name,
-	        user_id: $localStorage.user.user_id,
-	        widget: {
-	          activator: "#IntercomDefaultWidget"
-	        }
-	    });
-	 }
-	});
 
 	$rootScope.reportStatus = function() {
 		if(typeof $rootScope.reportIssueCount != "undefined") return false;
@@ -338,6 +302,22 @@ mobileApp.run(['$localStorage','$rootScope', '$http',function ($localStorage,$ro
 				console.log('Unable to get permission to notify.', err);
 			});
 	}
-		
+
+	// user_service.setUser(current_user);
+	$http({
+		method: 'GET',
+		url: base_url + 'user_info/' + current_user.user_id
+	}).success(function(data) {
+		if(data) {
+			user_service.setUser(data);
+		}
+	});
+	$rootScope.requestPermission();
+
+	$rootScope.request_headers = {
+		'Content-Type': 'application/x-www-form-urlencoded', 
+		'Authorization': 'Basic ' + window.btoa('sulu.simulation@makeadiff.in:pass')
+	};
+
 }]);
 

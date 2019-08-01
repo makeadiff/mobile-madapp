@@ -7,11 +7,7 @@ importScripts('https://www.gstatic.com/firebasejs/5.9.4/firebase-messaging.js');
 //Import and configure Workbox base SW
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.2.0/workbox-sw.js');
 
-
-
 // Firebase Messaging SW
-
-console.log("firebase SW initiate")
 var config = {
   apiKey: "AIzaSyBZ278HcsmVncMN7M4XThCnQfw-h72vqpA",
   authDomain: "upma-80899.firebaseapp.com",
@@ -40,12 +36,11 @@ messaging.setBackgroundMessageHandler(function(payload) {
 });
 // [END background_handler]
 
-
-if (workbox) {
-  console.log(`Yay! Workbox is loaded 🎉`);
-} else {
-  console.log(`Boo! Workbox didn't load 😬`);
-}
+workbox.core.setCacheNameDetails({
+  prefix: 'UPMA',
+  suffix: 'v1'
+});
+workbox.setConfig({debug: false});
 
 workbox.routing.registerRoute(
   // Cache CSS files
@@ -103,7 +98,6 @@ workbox.routing.registerRoute(
   })
 );
 
-
 // Cache the Google Fonts stylesheets with a stale while revalidate strategy.
 workbox.routing.registerRoute(
   /^https:\/\/fonts\.googleapis\.com/,
@@ -126,4 +120,5 @@ workbox.routing.registerRoute(
       }),
     ],
   }),
-); 
+);
+

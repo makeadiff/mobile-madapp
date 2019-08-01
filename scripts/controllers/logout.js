@@ -14,5 +14,5 @@ angular.module('mobileApp')
     // Logout the user 
     user_service.unsetUser();
 
-    $location.path("/login");
+    // $location.path("/login");
 }]);
