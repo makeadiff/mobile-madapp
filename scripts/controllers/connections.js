@@ -78,7 +78,6 @@ angular.module('mobileApp')
 		var filtered_student_data_not_updated = Object.filter(ConnectionCtrl.user.student_data_not_updated, function(datevalue){ 
 			var now = new moment();
 			var datediff = now.diff(moment(datevalue), 'days');
-			console.log(datediff);
 			return datediff > 0;
 		}); 	
 
@@ -105,7 +104,7 @@ angular.module('mobileApp')
 		ConnectionCtrl.user.classes_where_student_data_not_updated_length = Object.keys(ConnectionCtrl.user.classes_where_student_data_not_updated).length;
 		ConnectionCtrl.user.teachers_with_negative_credits	= data.teachers_with_negative_credits;
 		ConnectionCtrl.user.substitution_info = data.substitution_info;
-        }
+    }
 
 	ConnectionCtrl.mentorClass = function(batch_id) {
 		user_service.setUserData("active_batch", batch_id);

@@ -23,7 +23,7 @@ Credit : <span class="item-count">{{CCtrl.user.credit}}</span></h4>
 	<li ng-repeat="class in CCtrl.user.all_classes">{{class.center_name}}, {{class.level_grade}} {{class.level_name}} 
 		: {{formatDate(class.class_on) | date:'MMM d EEE, hh:mm a'}}
 		- <span class='label label-success' ng-show="class.status == 'attended'">Attended</span>
-		  <span class='label label-danger' ng-show="class.status == 'absent'"">Absent</span>
+		  <span class='label label-danger' ng-show="class.status == 'absent'">Absent</span>
 	</li>
 	</ul>
 </div>
