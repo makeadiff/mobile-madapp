@@ -8,7 +8,7 @@
  * Controller of the mobileApp
  */
 angular.module('mobileApp')
-  .controller('ConnectionCtrl', ['$scope', '$location', '$http', 'UserService', function ($scope, $location, $http, user_service) {
+  .controller('ConnectionCtrl', ['$scope', '$location', '$http', 'growl', 'UserService', function ($scope, $location, $http, growl, user_service) {
 	var ConnectionCtrl = this;
 
 	//helper function to filter object
@@ -17,21 +17,18 @@ angular.module('mobileApp')
           .filter( key => predicate(obj[key]) )
           .reduce( (res, key) => (res[key] = obj[key], res), {} );
 
-	if(user_service.isLoggedIn()) {
-  		var user = user_service.getUser();
-  		if(!user) {
-  			$location.path("/login");
-  			growl.addErrorMessage("Please login to continue", {ttl: 3000});
-  			return false;
-  		}
-  		var params = $location.search();
-  	} else {
-  		$location.path('/login');
-  		return;
-  	}
+	var user = user_service.getUser();
+	if(!user) { // This should NOT get called.
+		$location.path("/login");
+		growl.addErrorMessage("Please login to continue", {ttl: 3000});
+		return false;
+	}
+	var params = $location.search();
+
   	user.classes_total = 0;
   	user.classes_took = 0;
   	user.classes_missed = 0;
+  	user.fetch_attepmt = 0;
   	ConnectionCtrl.user = user;
   	ConnectionCtrl.show_summary = 0;
   	ConnectionCtrl.show_class_history = 0;
@@ -43,6 +40,18 @@ angular.module('mobileApp')
   	ConnectionCtrl.show_substitution_info = 0;
 
 	ConnectionCtrl.load = function() {
+		// This will make sure that this function is only exeucted if we have proper user data - not just the data PHP passes to the curret_user variable - but also the /user_info/ID call ka data.
+		if(!user.connections) {
+			user.fetch_attepmt++;
+			if(user.fetch_attepmt > 2) { // Just to make sure we are not continously trying to fetch data even in the event of failure.
+				growl.addErrorMessage("Some error getting user data. Trying to fix issue by auto-refreshing the page.", {ttl: 3000});
+				location.reload();
+				return false;
+			} else {
+				user_service.updateUser(false, ConnectionCtrl.load);
+			}
+			return false;
+		}
 		if(user.connections.teacher_at.length) {
 			loading();
 			$http({

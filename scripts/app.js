@@ -303,15 +303,7 @@ mobileApp.run(['$localStorage','$rootScope', '$http', 'UserService',function ($l
 			});
 	}
 
-	// user_service.setUser(current_user);
-	$http({
-		method: 'GET',
-		url: base_url + 'user_info/' + current_user.user_id
-	}).success(function(data) {
-		if(data) {
-			user_service.setUser(data);
-		}
-	});
+	user_service.updateUser();
 	$rootScope.requestPermission();
 
 	$rootScope.request_headers = {

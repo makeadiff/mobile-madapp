@@ -1,4 +1,5 @@
 'use strict';
+// IMPORTANT Note. We are using PHP for session management. Login and auth is handled by PHP - apps/auth. It was handled by JS before, now that's depricated.
 
 /**
  * @ngdoc service
@@ -51,9 +52,29 @@ angular.module('mobileApp')
 		}
 
 		user.getUser = function() {
-			if(!$localStorage.user) return false;																						
+			if(!$localStorage.user) {
+				if(current_user) {
+					user.updateUser(current_user);
+					return current_user;
+				} else {
+					return false;
+				}
+			}
 			
 			return $localStorage.user;
+		}
+
+		user.updateUser = function(user_info, callback) {
+			if(user_info) user.setUser(user_info);
+			$http({
+				method: 'GET',
+				url: base_url + 'user_info/' + current_user.user_id
+			}).success(function(data) {
+				if(data) {
+					user.setUser(data);
+					if(callback) callback.call(data);
+				}
+			});
 		}
 
 		user.unsetUser = function() {
