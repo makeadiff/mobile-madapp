@@ -178,22 +178,12 @@ angular.module('mobileApp')
 		$("#cancel-button-"+class_info.id).html(button_text);
 	}
 
-	MentorCtrl.showSubstitute = function(teacher) {
-		if(teacher.show_substitute != '0') // It can be 1 or substitute id
-			teacher.show_substitute = 0;
-		else
-			teacher.show_substitute = 1;
-	}
-
-	
 	MentorCtrl.changeVolunteerType = function (teacher) {
-		if ($('#vol-type').val() == "Regular") {
-			console.log("set reg");
+		if (teacher.vol_type == "Regular") {
 			teacher.show_substitute = 0;
 		}
-		else if ($('#vol-type').val() == "Substitute") {
-			console.log("set sub");
-			MentorCtrl.showSubstitute(teacher);
+		else if (teacher.vol_type == "Substitute") {
+			teacher.show_substitute = 1;
 		}
 	}
 

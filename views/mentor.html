@@ -20,8 +20,7 @@
 <button type="button" class="btn btn-default btn-xs pull-right cancel-button" name="cancel" id="cancel-button-{{class.id}}" 
 	title="Cancel Class" ng-click="MCtrl.cancelClass(class)"><span class="glyphicon glyphicon-remove-sign"></span> Cancel Class</button>
 
-<button class="btn btn-primary btn-xs class-open" id="class-open-{{class.id}}" ng-click="MCtrl.gotoClass(class)" 
-		ng-disabled="class.class_status == '0'">
+<button class="btn btn-primary btn-xs class-open" id="class-open-{{class.id}}" ng-click="MCtrl.gotoClass(class)" ng-disabled="class.class_status == '0'">
 	<strong><span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span> Class {{class.grade}} {{class.level_name}}</strong></button>
 
 <div class="pull-right cancel-area" ng-show="(class.class_status == '0')">
@@ -46,9 +45,7 @@
 		<option value="ext-children-unwell">Children are unwell</option>
 		<option value="ext-out-school">Children have school</option>
 		<option value="ext-disturbances-city">Disturbances in the city / local holiday / natural calamity </option>
-
 	</optgroup>
-
 </select><br />
 
 <textarea class="cancel-reason" rows="2" cols="25" ng-model="class.cancel_reason" ng-show="(class.cancel_option == 'in-other' || class.cancel_option == 'ext-other')"></textarea>
@@ -67,13 +64,12 @@
 	</div>
 
 	<span ng-show="class.class_status == '1'">
-		<!-- <span ng-class="{'glyphicon':true, 'glyphicon-triangle-bottom': (teacher.show_substitute != '0'), 'glyphicon-triangle-right': (teacher.show_substitute == '0')}"></span> -->
 		<select id="vol-type" ng-model="teacher.vol_type" ng-change="MCtrl.changeVolunteerType(teacher)">
 			<option value="Regular">Regular</option>
 			<option value="Substitute">Substitute</option>
 		</select>
 	</span>
-	<span ng-show="(teacher.show_substitute == '0' && class.class_status == '1')">
+	<span ng-show="(class.class_status == '1')" ng-class="{'text-muted': (teacher.show_substitute == '1')}">
 		<span class="glyphicon glyphicon-user user-icon"></span> {{teacher.name}}</span>
 
 	<div id="substitute-{{teacher.id}}" class="substitute-area" ng-show="teacher.show_substitute != 0">
