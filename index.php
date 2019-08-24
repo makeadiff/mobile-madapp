@@ -1,7 +1,7 @@
 <?php
 include 'common.php';
 
-$_SESSION['theme'] = 'darkly'; // This will make sure that 
+$_SESSION['theme'] = 'darkly'; // This will make sure that the color of Auth will be close to what UPMA is
 
 // IMPORTANT Note. We are using PHP for session management. Login and auth is handled by PHP - apps/auth. It was handled by JS before, now that's depricated.
 $current_user = accessControl([]);

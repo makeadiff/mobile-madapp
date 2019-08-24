@@ -25,7 +25,7 @@ if(location.href.toString().match(/localhost/) || location.href.toString().match
 var key = "am3omo32hom4lnv32vO";
 
 var mobileApp = angular.module('mobileApp', [
-	'ngAnimate',
+	'ngAnimate', 
 	'ngCookies',
 	'ngResource',
 	'ngRoute',
@@ -159,15 +159,23 @@ var mobileApp = angular.module('mobileApp', [
 		}
 	  })
 	  .when('/login', {
-		templateUrl: 'views/login.html',
-		restricted : false,
+	  	templateUrl: 'views/connections.html',
 		resolve: {
 		  style : function() {
-			if( !angular.element('link#login-css').length) {
-			  angular.element('head').append('<link id="login-css" href="styles/login.css" rel="stylesheet">');
+			if( !angular.element('link#connections-css').length) {
+			  angular.element('head').append('<link id="connections-css" href="styles/connections.css" rel="stylesheet">');
 			}
 		  }
 		}
+		// templateUrl: 'views/login.html',
+		// restricted : false,
+		// resolve: {
+		//   style : function() {
+		// 	if( !angular.element('link#login-css').length) {
+		// 	  angular.element('head').append('<link id="login-css" href="styles/login.css" rel="stylesheet">');
+		// 	}
+		//   }
+		// }
 	  });
   });
 

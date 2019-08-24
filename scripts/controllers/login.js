@@ -14,8 +14,8 @@ angular.module('mobileApp')
 	LoginCtrl.user = false;
 	LoginCtrl.error = "";
 
-    // Logout the user 
-	user_service.unsetUser();
+	$location.path("/connections");
+
  
 	this.loginUser = function(user) {
 		$http({

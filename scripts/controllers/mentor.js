@@ -146,6 +146,19 @@ angular.module('mobileApp')
 	}
 
 	MentorCtrl.save = function(batch_id, class_on, classes) {
+		var error = false;
+		for(var i in classes) {
+			var cls = classes[i];
+			if(cls.cancel_option == "in-volunteer-unavailable") {
+				error = true;
+			}
+		}
+
+		if(error) {
+			growl.addSuccessMessage("Please enter a reason for class cancelation", {ttl: 3000});
+			return;
+		}
+
 		loading();
 
 		$http({
