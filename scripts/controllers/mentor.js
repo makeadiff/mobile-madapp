@@ -149,13 +149,14 @@ angular.module('mobileApp')
 		var error = false;
 		for(var i in classes) {
 			var cls = classes[i];
-			if(cls.cancel_option == "in-volunteer-unavailable") {
+			console.log(cls);
+			if(cls.class_status == 0 && cls.cancel_option == "in-volunteer-unavailable") {
 				error = true;
 			}
 		}
 
 		if(error) {
-			growl.addSuccessMessage("Please enter a reason for class cancelation", {ttl: 3000});
+			growl.addErrorMessage("Please enter a reason for class cancelation", {ttl: 3000});
 			return;
 		}
 
