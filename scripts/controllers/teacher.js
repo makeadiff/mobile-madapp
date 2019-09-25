@@ -20,8 +20,6 @@ angular.module('mobileApp')
 	var user_id = user_service.getUserId();
 	var options = $location.search();
 	TeacherCtrl.class_id = options.class_id;
-
-	jQuery(".student-participation").rating();
 	TeacherCtrl.user_id = user_id;
 
 	TeacherCtrl.load = function() {
@@ -101,12 +99,8 @@ angular.module('mobileApp')
 		for(var i in TeacherCtrl.teacher.students) {
 			TeacherCtrl.teacher.students[i].participation = Number(TeacherCtrl.teacher.students[i].participation);
 			TeacherCtrl.teacher.students[i].check_for_understanding = Number(TeacherCtrl.teacher.students[i].check_for_understanding);
-			
-			// // Workaround for this to function. Not working by default. I think library issue.
-			// if(TeacherCtrl.teacher.students[i].check_for_understanding)
-			// 	$("#check_for_understanding-" + TeacherCtrl.teacher.students[i].id).bootstrapToggle('on');
-			// else 
-			// 	$("#check_for_understanding-" + TeacherCtrl.teacher.students[i].id).bootstrapToggle('off');
+			TeacherCtrl.teacher.students[i].present = (TeacherCtrl.teacher.students[i].participation != 0 ) ? true : false ;
+			//	console.log("hellow"+ TeacherCtrl.teacher.students[i].present + TeacherCtrl.teacher.students[i].participation );
 		}
 
 		TeacherCtrl.current_teacher = current_teacher;
@@ -114,21 +108,15 @@ angular.module('mobileApp')
 		TeacherCtrl.other_teacher = other_teacher;
 
 		// Wait a small time before applying the makeup.
-		setTimeout(function() {
+		setTimeout(
+			// Set text for toggle 
+			function() {
 			$('.toggle-switch').bootstrapToggle({
-			  on: 'Yes',
-			  off: 'No'
+			  on: 'Present',
+			  off: 'Absent'
 			});
-
-			// $('.toggle-switch').change(function() {
-			// 	var id = $(this).prop("id");
-			// 	var student_index = $("#" + id).attr('student-index');
-
-			// 	TeacherCtrl.teacher.students[student_index].check_for_understanding = $(this).prop('checked');
-			// });
-
+			
 			$(".class_satisfaction").rating({starCaptions: {
-				"0": "No Data",
 				"1": "Dissatisfied",
 				"2": "Less Satisfied",
 				"3": "Satisfied",
@@ -143,7 +131,7 @@ angular.module('mobileApp')
 				"3": "Understands part of the lesson",
 				"4": "Understands the lesson but doesn't clarify doubts",
 				"5": "Understands and clarifies doubts and/or is able to help others",
-			}}).rating("refresh", {showCaption: true, disabled: cancelled}); // Make sure this option is passed with the refresh command. Else, its not updating on new data.;
+			}}).rating("refresh", {showCaption: true, disabled: cancelled, showClear: false}); // Make sure this option is passed with the refresh command. Else, its not updating on new data.;
 	
 			$(".participation").rating({starCaptions: {
 				"0": "Absent",
@@ -152,11 +140,68 @@ angular.module('mobileApp')
 				"3": "Attentive",
 				"4": "Involved",
 				"5": "Participative",
-			}}).rating("refresh", {showCaption: true, disabled: cancelled}); // Make sure this option is passed with the refresh command. Else, its not updating on new data.;
-		}, 300);
+			}}).rating("refresh", {showCaption: true, disabled: cancelled, showClear: false}); // Make sure this option is passed with the refresh command. Else, its not updating on new data.;
+			
+			// Disable toggle switch if the class is cancelled
+			if(cancelled){
+				$('.toggle-switch').bootstrapToggle('disable')
+			}
+			
+				// Initialize correct value of the toggle when the page opens
+		for(var i in TeacherCtrl.teacher.students) {
+			// Workaround for this to function. Not working by default. I think library issue.
+			console.log(TeacherCtrl.teacher.students[i].present);
+
+			if(TeacherCtrl.teacher.students[i].present){
+				$("#present-" + TeacherCtrl.teacher.students[i].id).bootstrapToggle('on');
+				$("#check_for_understanding-container-" + TeacherCtrl.teacher.students[i].id).show();
+				$("#participation-container-" + TeacherCtrl.teacher.students[i].id).show();
+			}
+			else {
+				$("#present-" + TeacherCtrl.teacher.students[i].id).bootstrapToggle('off');
+				$("#check_for_understanding-container-" + TeacherCtrl.teacher.students[i].id).hide();
+				$("#participation-container-" + TeacherCtrl.teacher.students[i].id).hide();
+		 }
+		}
+			// On change of student absent/present toggle 
+			$('.toggle-switch').change(function() {
+				var id = $(this).prop("id");
+				var student_index = $("#" + id).attr('student-index');
+				var student_id = $("#" + id).attr('student-id');
+				TeacherCtrl.teacher.students[student_id].present = $(this).prop('checked');
+				if(TeacherCtrl.teacher.students[student_id].present){
+					console.log("change true"+ student_id);
+					$("#check_for_understanding-container-" + TeacherCtrl.teacher.students[student_id].id).show();
+					$("#participation-container-" + TeacherCtrl.teacher.students[student_id].id).show();
+					$("#check_for_understanding-" + TeacherCtrl.teacher.students[student_id].id).prop('required',true);
+					$("#participation-" + TeacherCtrl.teacher.students[student_id].id).prop('required',true);
+				}
+				else
+				{ //TODO: set both values as zero and check hide and show!
+					console.log("change false"+ student_id);
+					TeacherCtrl.teacher.students[i].check_for_understanding = 0;
+					TeacherCtrl.teacher.students[i].participation = 0;
+					$("#check_for_understanding-" + TeacherCtrl.teacher.students[student_id].id).rating('update', 0);
+					$("#participation-" + TeacherCtrl.teacher.students[student_id].id).rating('update', 0);
+
+					$("#check_for_understanding-container-" + TeacherCtrl.teacher.students[student_id].id).hide();
+					$("#participation-container-" + TeacherCtrl.teacher.students[student_id].id).hide();
+					$("#check_for_understanding-" + TeacherCtrl.teacher.students[student_id].id).prop('required',false);
+					$("#participation-" + TeacherCtrl.teacher.students[student_id].id).prop('required',false);
+				}
+			});
+
+
+
+		}, 500);
+
+
+		
 
 	}
+	
 
+	// TODO: Right now whenever the user open the page the save function automatically gets called
 	TeacherCtrl.save = function(class_id, students, class_satisfaction) {
 		
 		// Stupid hack to make sure that the absent students are marked as 0. Right now due to some conflict between angular and star-ratings, its not happening.

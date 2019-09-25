@@ -35,18 +35,25 @@
 	<div class="row">
 		<span class="student-name">{{student.name}}</span>
 		<br/>
-		<strong>Child Participation</strong>
-		<input type="number" name="participation[{{student.id}}]" id="participation-{{student.id}}" ng-model="student.participation" 
-				class="rating participation" min="0" max="5" step="1" 
-				data-size="xs" data-show-caption="true" data-clear-value="0" data-clear-caption="Absent" value="0" />
 
-		<strong>Check for Understanding</strong>
-		<input type="number"  id="check_for_understanding-{{student.id}}" ng-model="student.check_for_understanding"
-			   class="rating check_for_understanding" min="0" max="5" step="1" 
-			   data-size="xs" data-show-caption="true" data-clear-value="0" data-clear-caption="Absent" value="0" />
+		<div class="pull-right">
+			<input  class=" toggle-switch ts-attendance" ng-model="student.present" id="present-{{student.id}}" data-toggle="toggle" 
+				data-height="25" data-width="110"  type="checkbox"  student-id="{{student.id}}" student-index="{{$index}}"><br />
+		</div>
 
-		<!-- <toggle-switch ng-model="student.check_for_understanding" id="check_for_understanding-{{student.id}}" is-disabled="TCtrl.teacher.status == 'cancelled'"
-				on-label="Yes" off-label="No"></toggle-switch> -->
+		<div id="participation-container-{{student.id}}">
+			<strong>Child Participation</strong>
+			<input type="number" name="participation[{{student.id}}]" id="participation-{{student.id}}" ng-model="student.participation" 
+					class="rating participation" min="0" max="5" step="1" 
+					data-size="xs" data-show-caption="true"  />
+		</div>
+
+		<div id="check_for_understanding-container-{{student.id}}">
+			<strong>Check for Understanding</strong>
+			<input type="number"  id="check_for_understanding-{{student.id}}" ng-model="student.check_for_understanding"
+				class="rating check_for_understanding" min="0" max="5" step="1" 
+				data-size="xs" data-show-caption="true"  />
+		</div>
 	</div>
 </div>
 
