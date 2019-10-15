@@ -54,10 +54,17 @@ angular.module('mobileApp')
 		}
 
 		var teacher_user_group_id = $scope.getTeacherGroupId(user.project_id);
+		var search_groups = [teacher_user_group_id];
+
+		// Ed support has a special case - ES trained - that should be shown in substitute list.
+		if(user.project_id == 1) {
+			let es_trained_group_id = 368; // ES Trained - User Group.
+			search_groups.push(es_trained_group_id);
+		}
 		$http({
 			method: 'GET',
 			url: api_base_url + 'users',
-			params: {city_id: user.city_id, group_id: teacher_user_group_id},
+			params: {city_id: user.city_id, group_in: search_groups},
 			headers: $scope.request_headers
 		}).success(function(data) {
 			MentorCtrl.all_teachers = data.data.users;
