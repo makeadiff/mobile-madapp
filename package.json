@@ -15,7 +15,7 @@
   },
   "keywords": [],
   "author": "Make A Difference",
-  "license": "ISC",
+  "license": "BSD",
   "bugs": {
     "url": "https://github.com/makeadiff/mobile-madapp/issues"
   },
@@ -29,7 +29,7 @@
     "angular-sanitize": "1.5.11",
     "angular-touch": "1.5.11",
     "bootstrap": "^3.4.0",
-    "bootstrap-star-rating": "4.0.4",
+    "bootstrap-star-rating": "4.0.6",
     "bootstrap-toggle": "2.2.2",
     "firebase": "^5.7.2",
     "font-awesome": "^4.7.0",

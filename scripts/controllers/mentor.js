@@ -153,16 +153,16 @@ angular.module('mobileApp')
 	}
 
 	MentorCtrl.save = function(batch_id, class_on, classes) {
-		var error = false;
+		var validation_error = false;
 		for(var i in classes) {
 			var cls = classes[i];
 			console.log(cls);
 			if(cls.class_status == 0 && cls.cancel_option == "in-volunteer-unavailable") {
-				error = true;
+				validation_error = true;
 			}
 		}
 
-		if(error) {
+		if(validation_error) {
 			growl.addErrorMessage("Please enter a reason for class cancelation", {ttl: 3000});
 			return;
 		}
@@ -185,6 +185,17 @@ angular.module('mobileApp')
 	}
 
 	MentorCtrl.cancelClass = function(class_info, reverse) {
+
+		// Reset all subs currently marked before cancelling the class
+		for(var index in class_info.teachers) {
+			console.log(index);
+				var teachers = class_info.teachers[index];
+				teachers.show_substitute = "0";
+				teachers.vol_type = "Regular";
+				teachers.substitute_id = "0";
+
+		}
+
 		var status = class_info.class_status;
 		if(reverse) status = (status == "1") ? "0" : "1"; // This is needed when loading.
 		var button_text = "";
