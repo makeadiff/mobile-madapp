@@ -91,7 +91,7 @@ angular.module('mobileApp')
 
 	ctrl.makeup = function() {
 		$(".response").rating("refresh", {showCaption: false, showClear: false});
-		$(".response").on("rating.change", ctrl.save);
+		$(".response").on("rating:change", ctrl.save);
 		// console.log("Applying Makeup");
 	}
 
