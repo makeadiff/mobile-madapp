@@ -243,5 +243,8 @@ function setTokenSentToServer(sent) {
 }
 
 </script>
+
+<!-- <script src="https://cdn.lr-ingest.io/LogRocket.min.js" crossorigin="anonymous"></script>
+<script>window.LogRocket && window.LogRocket.init('2obogn/upma');</script> -->
 </body>
 </html>
