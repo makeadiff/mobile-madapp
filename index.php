@@ -27,12 +27,13 @@ $current_user['user_id'] = $current_user['id'];
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 	<!-- build:css(.) styles/vendor.css -->
 	<!-- bower:css -->
-	<link rel="stylesheet" href="node_modules/bootstrap-star-rating/css/star-rating.css" />
+	
 	<link rel="stylesheet" type="text/css" href="styles/themes/darkly.css" />
 	<link rel="stylesheet" type="text/css" href="deprecated_modules/_angular-growl/build/angular-growl.min.css" />
 	<link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="deprecated_modules/_ngDatepicker/src/css/ngDatepicker.css" />
 	<link rel="stylesheet" type="text/css" href="node_modules/bootstrap-toggle/css/bootstrap-toggle.min.css" />
+	<link rel="stylesheet" href="node_modules/bootstrap-star-rating/css/star-rating.css" />
 	<!-- endbower -->
 	<!-- endbuild -->
 
@@ -41,8 +42,8 @@ $current_user['user_id'] = $current_user['id'];
 	<!-- endbuild -->
 
 	<!-- firebase messaging includes -->
-	<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-messaging.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-messaging.js"></script>
 </head>
 
 <body ng-app="mobileApp">
@@ -242,5 +243,8 @@ function setTokenSentToServer(sent) {
 }
 
 </script>
+
+<!-- <script src="https://cdn.lr-ingest.io/LogRocket.min.js" crossorigin="anonymous"></script>
+<script>window.LogRocket && window.LogRocket.init('2obogn/upma');</script> -->
 </body>
 </html>
