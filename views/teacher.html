@@ -4,7 +4,7 @@
 <div id="class-details" class="row">
 <h4 class="teacher-credits" ng-show="TCtrl.current_teacher_credit">Credit: {{TCtrl.current_teacher_credit}}</h4>
 <h3>{{TCtrl.current_teacher}}</h3>
-<h4 ng-show="TCtrl.other_teacher">Co Teacher: {{TCtrl.other_teacher}}</h4>
+<h4 ng-show="TCtrl.other_teacher">Co Teacher(s): {{TCtrl.other_teacher}}</h4>
 <h4>Level: {{TCtrl.teacher.level}}</h4>
 
 <h5 class="class_satisfaction_label">Teacher Class Satisfaction</h5>
@@ -26,6 +26,14 @@
 		Please fill out the <a href="#impact_survey?is_event_id={{is_event_id}}">Impact Survey {{is_event_name}}</a> for your students.
 	</span>
 </div>
+<span id="dc_impact_survey">We would like to get some infomation on how your students have been impacted by Dream Camp...
+<ul>
+	<li ng-repeat="student in TCtrl.teacher.students">
+		<a href="https://makeadiff.in/apps/formad/79/{{student.id}}">{{student.name}}</a>
+	</li>
+</ul>
+</span>
+
 
 <input type="hidden" name="class_id" value="{{TCtrl.teacher.id}}" />
 <div id="students" class="{{TCtrl.teacher.status}}"> 
