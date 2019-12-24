@@ -147,22 +147,21 @@ angular.module('mobileApp')
 				$('.toggle-switch').bootstrapToggle('disable')
 			}
 			
-				// Initialize correct value of the toggle when the page opens
-		for(var i in TeacherCtrl.teacher.students) {
-			// Workaround for this to function. Not working by default. I think library issue.
-			console.log(TeacherCtrl.teacher.students[i].present);
-
-			if(TeacherCtrl.teacher.students[i].present){
-				$("#present-" + TeacherCtrl.teacher.students[i].id).bootstrapToggle('on');
-				$("#check_for_understanding-container-" + TeacherCtrl.teacher.students[i].id).show();
-				$("#participation-container-" + TeacherCtrl.teacher.students[i].id).show();
+			// Initialize correct value of the toggle when the page opens
+			for(var i in TeacherCtrl.teacher.students) {
+				// Workaround for this to function. Not working by default. I think library issue.
+				if(TeacherCtrl.teacher.students[i].present){
+					$("#present-" + TeacherCtrl.teacher.students[i].id).bootstrapToggle('on');
+					$("#check_for_understanding-container-" + TeacherCtrl.teacher.students[i].id).show();
+					$("#participation-container-" + TeacherCtrl.teacher.students[i].id).show();
+				}
+				else {
+					$("#present-" + TeacherCtrl.teacher.students[i].id).bootstrapToggle('off');
+					$("#check_for_understanding-container-" + TeacherCtrl.teacher.students[i].id).hide();
+					$("#participation-container-" + TeacherCtrl.teacher.students[i].id).hide();
+			 	}
 			}
-			else {
-				$("#present-" + TeacherCtrl.teacher.students[i].id).bootstrapToggle('off');
-				$("#check_for_understanding-container-" + TeacherCtrl.teacher.students[i].id).hide();
-				$("#participation-container-" + TeacherCtrl.teacher.students[i].id).hide();
-		 }
-		}
+			
 			// On change of student absent/present toggle 
 			$('.toggle-switch').change(function() {
 				var id = $(this).prop("id");
@@ -170,7 +169,7 @@ angular.module('mobileApp')
 				var student_id = $("#" + id).attr('student-id');
 				TeacherCtrl.teacher.students[student_id].present = $(this).prop('checked');
 				if(TeacherCtrl.teacher.students[student_id].present){
-					console.log("change true"+ student_id);
+					// console.log("change true"+ student_id);
 					$("#check_for_understanding-container-" + TeacherCtrl.teacher.students[student_id].id).show();
 					$("#participation-container-" + TeacherCtrl.teacher.students[student_id].id).show();
 					$("#check_for_understanding-" + TeacherCtrl.teacher.students[student_id].id).prop('required',true);
@@ -178,7 +177,7 @@ angular.module('mobileApp')
 				}
 				else
 				{ //TODO: set both values as zero and check hide and show!
-					console.log("change false"+ student_id);
+					// console.log("change false"+ student_id);
 					TeacherCtrl.teacher.students[i].check_for_understanding = 0;
 					TeacherCtrl.teacher.students[i].participation = 0;
 					$("#check_for_understanding-" + TeacherCtrl.teacher.students[student_id].id).rating('update', 0);
@@ -190,16 +189,8 @@ angular.module('mobileApp')
 					$("#participation-" + TeacherCtrl.teacher.students[student_id].id).prop('required',false);
 				}
 			});
-
-
-
 		}, 500);
-
-
-		
-
 	}
-	
 
 	// TODO: Right now whenever the user open the page the save function automatically gets called
 	TeacherCtrl.save = function(class_id, students, class_satisfaction) {

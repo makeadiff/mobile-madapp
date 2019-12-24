@@ -57,9 +57,12 @@ angular.module('mobileApp')
 		var search_groups = [teacher_user_group_id];
 
 		// Ed support has a special case - ES trained - that should be shown in substitute list.
-		if(user.project_id == 1) {
+		if(user.project_id === 1) {
 			let es_trained_group_id = 368; // ES Trained - User Group.
 			search_groups.push(es_trained_group_id);
+		} else if(user.project_id === 5) {
+			let fp_trained_group_id = 387; // Foundation Trained - User Group.
+			search_groups.push(fp_trained_group_id);
 		}
 
 		$http({
