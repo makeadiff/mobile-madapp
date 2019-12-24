@@ -61,10 +61,11 @@ angular.module('mobileApp')
 			let es_trained_group_id = 368; // ES Trained - User Group.
 			search_groups.push(es_trained_group_id);
 		}
+
 		$http({
 			method: 'GET',
 			url: api_base_url + 'users',
-			params: {city_id: user.city_id, group_in: search_groups},
+			params: {city_id: user.city_id, group_in: search_groups.join(",")},
 			headers: $scope.request_headers
 		}).success(function(data) {
 			MentorCtrl.all_teachers = data.data.users;
