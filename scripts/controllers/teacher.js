@@ -145,6 +145,8 @@ angular.module('mobileApp')
 			// Disable toggle switch if the class is cancelled
 			if(cancelled){
 				$('.toggle-switch').bootstrapToggle('disable')
+			} else {
+				$('.toggle-switch').bootstrapToggle('enable')
 			}
 			
 			// Initialize correct value of the toggle when the page opens
