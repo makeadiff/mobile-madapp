@@ -115,9 +115,9 @@ angular.module('mobileApp')
 		ConnectionCtrl.user.substitution_info = data.substitution_info;
     }
 
-	ConnectionCtrl.mentorClass = function(batch_id) {
+	ConnectionCtrl.mentorClass = function(batch_id, date) {
 		user_service.setUserData("active_batch", batch_id);
-		$location.path("/mentor").search({"batch_id": batch_id});
+		$location.path("/mentor").search({"batch_id": batch_id, "class_on": date});
 	}
 
 	ConnectionCtrl.teachClass = function(class_id) {

@@ -189,15 +189,12 @@ angular.module('mobileApp')
 	}
 
 	MentorCtrl.cancelClass = function(class_info, reverse) {
-
 		// Reset all subs currently marked before cancelling the class
 		for(var index in class_info.teachers) {
-			console.log(index);
-				var teachers = class_info.teachers[index];
-				teachers.show_substitute = "0";
-				teachers.vol_type = "Regular";
-				teachers.substitute_id = "0";
-
+			var teachers = class_info.teachers[index];
+			teachers.show_substitute = "0";
+			teachers.vol_type = "Regular";
+			teachers.substitute_id = "0";
 		}
 
 		var status = class_info.class_status;
@@ -226,8 +223,6 @@ angular.module('mobileApp')
 	MentorCtrl.browseClass = function(batch_id, class_on, direction) {
 		var class_on = new Date(class_on);
 
-		// if(direction == "+") class_on.setDate(class_on.getDate() + 7);
-		// else class_on.setDate(class_on.getDate() - 7);
 		var mysql_format = (class_on.getYear() + 1900) +  "-" + pad(class_on.getMonth() + 1, 2) + "-" + pad(class_on.getDate(), 2);
 
 		loading();
