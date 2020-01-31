@@ -24,7 +24,7 @@
 	<strong><span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span> Class {{class.grade}} {{class.level_name}}</strong></button>
 
 <div class="pull-right cancel-area" ng-show="(class.class_status == '0')">
-<select ng-model="class.cancel_option" class="cancel-option">
+<select ng-model="class.cancel_option" class="cancel-option" required>
 	<optgroup label="Internal(MAD)">
 		<!-- <option value="in-volunteer-unavailable">Volunteer unavailabe to take class</option> -->
 		<option value="in-volunteer-unassigned">Volunteer is yet to be recruited</option>
