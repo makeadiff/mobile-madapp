@@ -60,10 +60,11 @@ angular.module('mobileApp')
 		if(user.project_id === 1) {
 			let es_trained_group_id = 368; // ES Trained - User Group.
 			search_groups.push(es_trained_group_id);
-		} else if(user.project_id === 5) {
+		} else if(user.project_id === 2) {
 			let fp_trained_group_id = 387; // Foundation Trained - User Group.
 			search_groups.push(fp_trained_group_id);
 		}
+		console.log(teacher_user_group_id, search_groups, user)
 
 		$http({
 			method: 'GET',
