@@ -24,7 +24,7 @@
 	<strong><span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span> Class {{class.grade}} {{class.level_name}}</strong></button>
 
 <div class="pull-right cancel-area" ng-show="(class.class_status == '0')">
-<select ng-model="class.cancel_option" class="cancel-option">
+<select ng-model="class.cancel_option" class="cancel-option" required>
 	<optgroup label="Internal(MAD)">
 		<!-- <option value="in-volunteer-unavailable">Volunteer unavailabe to take class</option> -->
 		<option value="in-volunteer-unassigned">Volunteer is yet to be recruited</option>
@@ -88,7 +88,7 @@
 <button class="btn btn-lg btn-bottom btn-block" type="submit" name="action" value="Save">Save</button><br />
 </form>
 
-<a href="{{MCtrl.base_url}}../classes/assign/{{MCtrl.mentor.center_id}}/{{MCtrl.mentor.batch_id}}" class="btn btn-primary btn-sm">
+<!-- <a href="{{MCtrl.base_url}}../classes/assign/{{MCtrl.mentor.center_id}}/{{MCtrl.mentor.batch_id}}" class="btn btn-primary btn-sm">
 <span class="glyphicon glyphicon-pencil"></span> Edit Batch Assignment
-</a>
+</a> -->
 </div>
