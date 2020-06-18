@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/makeadiff/mobile-madapp#readme",
   "dependencies": {
-    "angular": "1.5.11",
+    "angular": "1.8.0",
     "angular-animate": "1.5.11",
     "angular-cookies": "1.5.11",
     "angular-resource": "1.5.11",
