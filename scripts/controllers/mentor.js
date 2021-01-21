@@ -63,8 +63,9 @@ angular.module('mobileApp')
 		} else if(user.project_id === 2) {
 			let fp_trained_group_id = 387; // Foundation Trained - User Group.
 			search_groups.push(fp_trained_group_id);
+			search_groups.push(9); // Show Ed volunteers in the substitute list for FP.
 		}
-		console.log(teacher_user_group_id, search_groups, user)
+		// console.log(teacher_user_group_id, search_groups, user)
 
 		$http({
 			method: 'GET',

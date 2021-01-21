@@ -277,7 +277,7 @@ mobileApp.run(['$localStorage','$rootScope', '$http', 'UserService',function ($l
 	$rootScope.getMentorGroupId = function(project_id) {
 		let project_mentor_group_mapping = {
 			1: 8,
-			2: 375,
+			2: 386,
 			4: 272,
 			5: 348,
 			6: 378
