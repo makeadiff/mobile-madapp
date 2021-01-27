@@ -286,34 +286,6 @@ mobileApp.run(['$localStorage','$rootScope', '$http', 'UserService',function ($l
 		return project_mentor_group_mapping[project_id];
 	}
 
-	$rootScope.requestPermission = function() {
-			if(typeof messaging == "undefined") return false;
-			
-			// Request permission and get token.....
-			messaging.requestPermission().then(function () {
-				console.log('Notification permission granted.');
-				// Get Instance ID token. Initially this makes a network call, once retrieved
-				// subsequent calls to getToken will return from cache.
-				messaging.getToken().then(function (currentToken) {
-					if (currentToken) {
-						sendTokenToServer(currentToken);
-					} else {
-						// Show permission request.
-						console.log('No Instance ID token available. Request permission to generate one.');
-						setTokenSentToServer(false);
-					}
-				}).catch(function (err) {
-					console.log('An error occurred while retrieving token. ', err);
-					setTokenSentToServer(false);
-				});
-			}).catch(function (err) {
-				console.log('Unable to get permission to notify.', err);
-			});
-	}
-
-	user_service.updateUser();
-	$rootScope.requestPermission();
-
 	$rootScope.request_headers = {
 		'Content-Type': 'application/x-www-form-urlencoded', 
 		'Authorization': 'Basic ' + window.btoa('sulu.simulation@makeadiff.in:pass')
