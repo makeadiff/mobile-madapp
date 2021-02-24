@@ -136,25 +136,27 @@ angular.module('mobileApp')
 
 				var attended = $(this).prop('checked');
 				MentorCtrl.mentor.classes[class_index].teachers[teacher_index].status = attended;
-				if(attended) {
-					$("#zero-hour-area-" + class_index + "-" + teacher_index).removeClass("ng-hide");
-				} else {
-					$("#zero-hour-area-" + class_index + "-" + teacher_index).addClass("ng-hide");
-				}
+
+				// if(attended) {
+				// 	$("#zero-hour-area-" + class_index + "-" + teacher_index).removeClass("ng-hide");
+				// } else {
+				// 	$("#zero-hour-area-" + class_index + "-" + teacher_index).addClass("ng-hide");
+				// }
 			});
 
-			$('.ts-zero-hour').bootstrapToggle({
-			  on: 'Attended 0 Hour',
-			  off: 'Missed 0 Hour'
-			});
+			// Commented out because no one wants Zero Hour Attendance data now.
+			// $('.ts-zero-hour').bootstrapToggle({
+			//   on: 'Attended 0 Hour',
+			//   off: 'Missed 0 Hour'
+			// });
 
-			$('.ts-zero-hour').change(function() {
-				var id = $(this).prop("id");
-				var class_index = $("#" + id).attr('class-index');
-				var teacher_index = $("#" + id).attr('teacher-index');
+			// $('.ts-zero-hour').change(function() {
+			// 	var id = $(this).prop("id");
+			// 	var class_index = $("#" + id).attr('class-index');
+			// 	var teacher_index = $("#" + id).attr('teacher-index');
 
-				MentorCtrl.mentor.classes[class_index].teachers[teacher_index].zero_hour_attendance = $(this).prop('checked');
-			});
+			// 	MentorCtrl.mentor.classes[class_index].teachers[teacher_index].zero_hour_attendance = $(this).prop('checked');
+			// });
 		}, 500);
 	}
 
@@ -162,7 +164,7 @@ angular.module('mobileApp')
 		var validation_error = false;
 		for(var i in classes) {
 			var cls = classes[i];
-			console.log(cls);
+			// console.log(cls);
 			if(cls.class_status == 0 && cls.cancel_option == "in-volunteer-unavailable") {
 				validation_error = true;
 			}
@@ -174,12 +176,11 @@ angular.module('mobileApp')
 		}
 
 		loading();
-
 		$http({
 			method: 'POST',
 			url: base_url + 'class_save',
-			data: {"user_id": user_id, "key": key, "class_data": angular.toJson(classes)},
-    		headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+			data: {"user_id": user_id, "key": key, "class_data": JSON.stringify(classes)},
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		}).success(function(data) {
 			loaded();
 			if(data.success) {
