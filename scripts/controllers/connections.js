@@ -45,13 +45,14 @@ angular.module('mobileApp')
 			user.fetch_attepmt++;
 			if(user.fetch_attepmt > 2) { // Just to make sure we are not continously trying to fetch data even in the event of failure.
 				growl.addErrorMessage("Some error getting user data. Trying to fix issue by auto-refreshing the page.", {ttl: 3000});
-				location.reload();
+				location.reload(); // :TODO: What horribleness is this?!
 				return false;
 			} else {
 				user_service.updateUser(false, ConnectionCtrl.load);
 			}
 			return false;
 		}
+		
 		if(user.connections.teacher_at.length) {
 			loading();
 			$http({
