@@ -162,9 +162,9 @@ angular.module('mobileApp')
 
 	MentorCtrl.save = function(batch_id, class_on, classes) {
 		var validation_error = false;
+
 		for(var i in classes) {
 			var cls = classes[i];
-			// console.log(cls);
 			if(cls.class_status == 0 && cls.cancel_option == "in-volunteer-unavailable") {
 				validation_error = true;
 			}
