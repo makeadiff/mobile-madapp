@@ -103,9 +103,9 @@ angular.module('mobileApp')
 		ConnectionCtrl.user.volunteer_data_not_updated	= data.volunteer_data_not_updated;
 		
 		// Do not show classes for future date.
-		var filtered_volunteer_data_not_updated = ConnectionCtrl.user.volunteer_data_not_updated.filter(function (datevalue){
+		var filtered_volunteer_data_not_updated = ConnectionCtrl.user.volunteer_data_not_updated.filter(function (batch_info){
 			var now = new moment();
-			var datediff = now.diff(moment(datevalue), 'days');
+			var datediff = now.diff(moment(batch_info.class_on), 'days');
 			return datediff > 0;
 		});
 

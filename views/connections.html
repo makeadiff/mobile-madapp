@@ -62,8 +62,8 @@ Batches not updated : <span class="badge badge-error item-count">{{CCtrl.user.vo
 
 <div class="card-area" ng-show="CCtrl.show_class_volunteer_data_not_updated == '1'">
 	<ul class="card-info-list">
-	<li ng-repeat="(id, date) in CCtrl.user.volunteer_data_not_updated" ng-click="CCtrl.mentorClass(CCtrl.user.batch_id, date)" class="btn btn-primary btn-sm">
-		{{formatDate(date) | date:'MMM d EEE, hh:mm a'}}
+	<li ng-repeat="cls_data in CCtrl.user.volunteer_data_not_updated" ng-click="CCtrl.mentorClass(cls_data.batch_id, cls_data.class_on)" class="btn btn-primary btn-sm">
+		{{formatDate(cls_data.class_on) | date:'MMM d EEE, hh:mm a'}}
 	</li>
 	</ul>
 </div>
