@@ -52,8 +52,6 @@ angular.module('mobileApp')
 			}
 			return false;
 		}
-
-		console.log(user, user.positions.includes('fellow'))
 		
 		if(user.connections.teacher_at.length) {
 			loading();
