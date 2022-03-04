@@ -14,8 +14,8 @@ angular.module('mobileApp')
 	var user_id = user.user_id;
 	var batch_id = 0;
 	var params = $location.search();
-	if(user.active_batch) batch_id = user.active_batch;
-	else if(params.batch_id) batch_id = params.batch_id;
+	if(params.batch_id) batch_id = params.batch_id;
+	else if(user.active_batch) batch_id = user.active_batch;
 
 	ExtraClassCtrl.load = function() {
 		loading();

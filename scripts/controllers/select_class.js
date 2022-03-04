@@ -59,7 +59,7 @@ angular.module('mobileApp')
 		$http({
 			method: 'GET',
 			url: base_url + 'get_batches_and_levels_in_center',
-			params: {center_id: center_id, key: key}
+			params: {center_id: center_id, project_id: user.project_id, key: key}
 		}).success(SelectClassCtrl.showBatchs).error(error);
 	}
 	SelectClassCtrl.showBatchs = function(data) {
