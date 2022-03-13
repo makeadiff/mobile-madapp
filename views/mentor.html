@@ -2,6 +2,7 @@
 
 <div id="class-details" class="row ng-class:MCtrl.mentor.classes[0].class_type">
 <strong>Center:</strong> <span class="info">{{MCtrl.mentor.center_name}}</span><br />
+<strong>Project:</strong> <span class="info">{{MCtrl.projects[MCtrl.mentor.project_id]}}</span><br />
 <strong>Date:</strong>
 <a class="glyphicon glyphicon-chevron-left batch-direction" ng-click="MCtrl.browseClass(MCtrl.mentor.batch_id, MCtrl.mentor.class_on, '-')"></a> 
 	<span class="info">{{MCtrl.mentor.class_date}}, 
@@ -31,20 +32,28 @@
 		<option value="in-volunteer-engaged">MAD has an event</option>
 		<option value="in-other">Other</option>
 	</optgroup>
+	<optgroup label="Digital Infrastructure">
+		<option value="in-infra-internet-issue">Internet issue</option>
+		<option value="in-infra-power-issue">Power issue</option>
+		<option value="in-infra-device-issue">Device Issue</option>
+	</optgroup>
 	<optgroup label="Shelter">
 		<option value="ext-children-out-holiday">Children have gone back home</option>
 		<option value="ext-children-doing-chores">Children are doing chores</option>
-		<option value="ext-children-have-events">Children engaged with shelter events</option>
-		<!-- <option value="ext-children-have-events-practice">Children are practicing for an event</option> -->
 		<option value="ext-parent-visiting-shelter">Parents visiting the shelter</option>
-		<option value="ext-donor-visit">Donor Visit</option> 
-		<option value="ext-other">Other</option>
+		<option value="ext-donor-visit">Donor Visit</option>
+		<option value="ext-shelter-annual-event">Annual Day/Annual Events</option>
+		<option value="ext-shelter-religious-event">Religious Festivals</option>
+		<option value="ext-shelter-medical-event">Medical Checkup</option>
+		<option value="ext-shelter-workshop">Workshops</option>
+		<option value="ext-shelter-cwc-visit">CWC Visit</option>
 	</optgroup>
-	<optgroup label="External(CA)">
+	<optgroup label="External">
 		<option value="ext-holiday">Holiday</option>
 		<option value="ext-children-unwell">Children are unwell</option>
 		<option value="ext-out-school">Children have school</option>
-		<option value="ext-disturbances-city">Disturbances in the city / local holiday / natural calamity </option>
+		<option value="ext-children-exam-prep">Exam Preparation</option>
+		<option value="ext-disturbances-city">Disturbances in the city/Local holiday/Natural calamity</option>
 		<option value="ext-other">Other</option>
 	</optgroup>
 </select><br />

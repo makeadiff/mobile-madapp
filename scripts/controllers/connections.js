@@ -25,19 +25,26 @@ angular.module('mobileApp')
 	}
 	var params = $location.search();
 
-  	user.classes_total = 0;
-  	user.classes_took = 0;
-  	user.classes_missed = 0;
-  	user.fetch_attepmt = 0;
-  	ConnectionCtrl.user = user;
-  	ConnectionCtrl.show_summary = 0;
-  	ConnectionCtrl.show_class_history = 0;
-  	ConnectionCtrl.show_student_data_not_updated = 0;
-  	ConnectionCtrl.show_class_student_data_not_updated = 0;
-  	ConnectionCtrl.show_class_teacher_data_not_updated = 0;
-  	ConnectionCtrl.show_class_volunteer_data_not_updated = 0;
-  	ConnectionCtrl.show_teachers_with_negative_credits = 0;
-  	ConnectionCtrl.show_substitution_info = 0;
+	user.classes_total = 0;
+	user.classes_took = 0;
+	user.classes_missed = 0;
+	user.fetch_attepmt = 0;
+	ConnectionCtrl.user = user;
+	ConnectionCtrl.show_summary = 0;
+	ConnectionCtrl.show_class_history = 0;
+	ConnectionCtrl.show_student_data_not_updated = 0;
+	ConnectionCtrl.show_class_student_data_not_updated = 0;
+	ConnectionCtrl.show_class_teacher_data_not_updated = 0;
+	ConnectionCtrl.show_class_volunteer_data_not_updated = 0;
+	ConnectionCtrl.show_teachers_with_negative_credits = 0;
+	ConnectionCtrl.show_substitution_info = 0;
+
+	ConnectionCtrl.projects = {
+		1: 'Ed',
+		2: 'FP',
+		4: 'TR ASV',
+		5: 'TR Wingman'
+	};
 
 	ConnectionCtrl.load = function() {
 		// This will make sure that this function is only exeucted if we have proper user data - not just the data PHP passes to the curret_user variable - but also the /user_info/ID call ka data.

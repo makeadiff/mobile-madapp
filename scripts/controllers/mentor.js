@@ -19,6 +19,13 @@ angular.module('mobileApp')
 	}
 	var user_id = user.user_id;
 
+	MentorCtrl.projects = {
+		1: 'Ed Support',
+		2: 'Foundation Project',
+		4: 'TR ASV',
+		5: 'TR Wingman'
+	};
+
 	MentorCtrl.load = function() {
 		loading();
 
@@ -136,27 +143,7 @@ angular.module('mobileApp')
 
 				var attended = $(this).prop('checked');
 				MentorCtrl.mentor.classes[class_index].teachers[teacher_index].status = attended;
-
-				// if(attended) {
-				// 	$("#zero-hour-area-" + class_index + "-" + teacher_index).removeClass("ng-hide");
-				// } else {
-				// 	$("#zero-hour-area-" + class_index + "-" + teacher_index).addClass("ng-hide");
-				// }
 			});
-
-			// Commented out because no one wants Zero Hour Attendance data now.
-			// $('.ts-zero-hour').bootstrapToggle({
-			//   on: 'Attended 0 Hour',
-			//   off: 'Missed 0 Hour'
-			// });
-
-			// $('.ts-zero-hour').change(function() {
-			// 	var id = $(this).prop("id");
-			// 	var class_index = $("#" + id).attr('class-index');
-			// 	var teacher_index = $("#" + id).attr('teacher-index');
-
-			// 	MentorCtrl.mentor.classes[class_index].teachers[teacher_index].zero_hour_attendance = $(this).prop('checked');
-			// });
 		}, 500);
 	}
 
@@ -167,6 +154,12 @@ angular.module('mobileApp')
 			var cls = classes[i];
 			if(cls.class_status == 0 && cls.cancel_option == "in-volunteer-unavailable") {
 				validation_error = true;
+				break;
+			}
+
+			if((cls.cancel_option == "ext-other" || cls.cancel_option == "in-other") && cls.cancel_reason == "") {
+				validation_error = true;
+				break;
 			}
 		}
 

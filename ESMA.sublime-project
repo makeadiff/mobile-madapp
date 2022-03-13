@@ -3,7 +3,7 @@
 	[
 		{
 			"path": ".",
-			"folder_exclude_patterns": ["Binny", "test"]
+			"folder_exclude_patterns": ["Binny", "test", "bower_components", "node_modules", "deprecated_modules"],
 		}
 	]
 }
