@@ -11,66 +11,108 @@ angular.module('mobileApp')
 	var SelectClassCtrl = this;
 	var user = false;
 	if(user_service.isLoggedIn()) {
-  		user = user_service.getUser();
-  		if(!user) {
-  			$location.path("/login");
-  			growl.addErrorMessage("Please login to continue", {ttl: 3000});
-  			return false;
-  		}
-  		var params = $location.search();
+		user = user_service.getUser();
+		if(!user) {
+			$location.path("/login");
+			growl.addErrorMessage("Please login to continue", {ttl: 3000});
+			return false;
+		}
+		var params = $location.search();
 
-  	} else {
-  		$location.path('/login')
-  	}
-  	SelectClassCtrl.user = user;
-  	SelectClassCtrl.selected_center = 0;
-  	SelectClassCtrl.selected_batch = 0;
-  	SelectClassCtrl.selected_level = 0;
+	} else {
+		$location.path('/login')
+	}
+	SelectClassCtrl.user = user;
+	SelectClassCtrl.selected_center = 0;
+	SelectClassCtrl.selected_batch = 0;
+	SelectClassCtrl.selected_level = 0;
 
 	SelectClassCtrl.load = function() {
 		SelectClassCtrl.loadCenters();
 	}
 
-	SelectClassCtrl.loadCenters = function() {
+	SelectClassCtrl.graphql = function(query, onSuccess) {
 		loading();
 		$http({
-			method: 'GET',
-			url: base_url + 'get_centers_in_city',
-			params: {city_id: user.city_id, key: key}
-		}).success(SelectClassCtrl.showCenters).error(error);
+			method: 'POST',
+			url: api_graphql_url,
+			params: { query: query },
+		}).success(function(data) {
+			loaded();
+			onSuccess(data)
+		}).error(error);
+	}
+
+	SelectClassCtrl.loadCenters = function() {
+		SelectClassCtrl.graphql(`{
+			  centers(city_id: ${user.city_id}) {
+			    id name
+			    projects {
+			      id name
+			    }
+			  }
+			}`, SelectClassCtrl.showCenters);
+
 	}
 	SelectClassCtrl.showCenters = function(data) {
-		loaded();
-
 		if(data.error) {
 			$location.path("/message").search({"error": data.error});
 			return;
 		}
-		SelectClassCtrl.centers = data.centers;
+
+		SelectClassCtrl.centers = data.data.centers;
 
 		if(params.center_id) SelectClassCtrl.selectCenter(params.center_id);
 	}
 
-
 	SelectClassCtrl.selectCenter = function(center_id) {
-		loading();
 		SelectClassCtrl.selected_center = center_id;
-	  	SelectClassCtrl.selected_batch = 0;
-		$http({
-			method: 'GET',
-			url: base_url + 'get_batches_and_levels_in_center',
-			params: {center_id: center_id, project_id: user.project_id, key: key}
-		}).success(SelectClassCtrl.showBatchs).error(error);
+	  SelectClassCtrl.selected_batch = 0;
+
+	  delete(SelectClassCtrl.projects)
+	  delete(SelectClassCtrl.batches)
+	  delete(SelectClassCtrl.levels)
+
+	  SelectClassCtrl.graphql(`{
+			  center(id: ${center_id}) {
+			    projects {
+			      id name
+			    }
+			  }
+			}`, SelectClassCtrl.showProjects);
 	}
-	SelectClassCtrl.showBatchs = function(data) {
-		loaded();
+
+	SelectClassCtrl.showProjects = function(data) {
 		if(data.error) {
 			$location.path("/message").search({"error": data.error});
 			return;
 		}
-		SelectClassCtrl.batches = data.batches;
-		SelectClassCtrl.all_levels = data.levels;
-		SelectClassCtrl.connection = data.connection;
+
+		SelectClassCtrl.projects = data.data.center.projects;
+
+		if(params.project_id) SelectClassCtrl.selectProject(params.project_id);
+		if(user.project_id) SelectClassCtrl.selectProject(user.project_id);
+	}
+	SelectClassCtrl.selectProject = function(project_id) {
+	  SelectClassCtrl.selected_project = project_id;
+		SelectClassCtrl.selected_batch = 0;
+
+	  SelectClassCtrl.graphql(`{
+			  batchSearch(center_id: ${SelectClassCtrl.selected_center}, project_id: ${project_id}) {
+			  	id
+			  	batch_name
+			  	classes { id }
+			  	levels { id level_name }
+			  }
+			}`, SelectClassCtrl.showBatchs);
+	}
+
+	SelectClassCtrl.showBatchs = function(data) {
+		if(data.error) {
+			$location.path("/message").search({"error": data.error});
+			return;
+		}
+		SelectClassCtrl.batches = data.data.batchSearch.filter(batch => batch.classes.length > 0 && batch.levels.length > 0); // Remove all batches without any classess in it.
 	}
 
 	SelectClassCtrl.selectBatch = function(batch_id) {
@@ -93,25 +135,21 @@ angular.module('mobileApp')
 			return;
 		}
 
+		access = false;
+
 		// If the current user is any thing other than just a teacher, Open batch
 		if(access) {
 			$location.path("/mentor").search({"batch_id": batch_id});
 			return;
 		}
 
-		var levels = [];
 		// Go thru each element in the connection to find all the levels in the current batch.
-		for(var i = 0; i<SelectClassCtrl.connection.length; i++) {
-			if(SelectClassCtrl.connection[i].batch_id == batch_id) {
-				var level_id = SelectClassCtrl.connection[i].level_id;
-				for(var j = 0; j < SelectClassCtrl.all_levels.length; j++) {
-					if(SelectClassCtrl.all_levels[j].id == level_id) {
-						levels.push(SelectClassCtrl.all_levels[j]); // Put all the found levels into an array.
-					}
-				}
+		for(var i = 0; i<SelectClassCtrl.batches.length; i++) {
+			if(SelectClassCtrl.batches[i].id == batch_id) {
+				SelectClassCtrl.levels = SelectClassCtrl.batches[i].levels
+				break
 			}
 		}
-		SelectClassCtrl.levels = levels;
 	}
 
 	SelectClassCtrl.selectLevel = function(level_id) {

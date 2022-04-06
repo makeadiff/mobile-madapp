@@ -4,26 +4,33 @@
 
 <div class="centers">
 
-<h4>Choose Center...</h4>
+<h4>Choose CCI...</h4>
 <div class="btn-group-vertical" role="group">
 <button ng-repeat="center in SCCtrl.centers" class="btn btn-primary ng-class:{'btn-info': (SCCtrl.selected_center == center.id) }" id="center-{{center.id}}"
 	title="{{center.name}}" ng-click="SCCtrl.selectCenter(center.id)">{{center.name}}</span></button>
 </div>
 </div>
 
+<div class="projects" ng-show="SCCtrl.projects">
+<h4>Choose Project...</h4>
+<div class="btn-group-vertical" role="group">
+<button ng-repeat="project in SCCtrl.projects" class="btn btn-primary ng-class:{'btn-info': (SCCtrl.selected_project == project.id) }" 
+	title="{{project.name}}" ng-click="SCCtrl.selectProject(project.id)">{{project.name}}</span></button>
+</div>
+</div>
 <div class="batches" ng-show="SCCtrl.batches">
 <h4>Choose Batch...</h4>
 <div class="btn-group-vertical" role="group">
 <button ng-repeat="batch in SCCtrl.batches" class="btn btn-primary ng-class:{'btn-info': (SCCtrl.selected_batch == batch.id) }" 
-	title="{{batch.name}}" ng-click="SCCtrl.selectBatch(batch.id)">{{batch.name}}</span></button>
+	title="{{batch.batch_name}}" ng-click="SCCtrl.selectBatch(batch.id)">{{batch.batch_name}}</span></button>
 </div>
 </div>
 
 <div class="levels" ng-show="SCCtrl.levels">
-<h4>Choose Level...</h4>
+<h4>Choose Class Section...</h4>
 <div class="btn-group-vertical" role="group">
-<button ng-repeat="level in SCCtrl.levels" class="btn btn-primary ng-class:{'btn-info': (SCCtrl.selected_level == level.id) }" 
-	title="{{level.name}}" ng-click="SCCtrl.selectLevel(level.id)">{{level.name}}</span></button>
+<button ng-repeat="level in SCCtrl.levels" class="btn btn-primary" 
+	title="{{level.level_name}}" ng-click="SCCtrl.selectLevel(level.id)">{{level.level_name}}</span></button>
 </div>
 </div>
 

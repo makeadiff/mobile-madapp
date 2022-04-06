@@ -16,10 +16,12 @@ if(window.location.protocol == 'http:' && window.location.hostname == 'makeadiff
 
 var base_url = window.location.protocol + "//" + window.location.hostname + "/madapp/index.php/api/";
 var api_base_url = window.location.protocol + "//" + window.location.hostname + "/api/v1/";
+var api_graphql_url = window.location.protocol + "//" + window.location.hostname + "/api/graphql"
 
 if(location.href.toString().match(/localhost/) || location.href.toString().match(/192\.168\./)) {
-	  base_url = window.location.protocol + "//localhost/MAD/madapp/index.php/api/";
-	  api_base_url = window.location.protocol + "//localhost/MAD/api/v1/";
+	  base_url = "http://localhost/MAD/madapp/index.php/api/";
+	  api_base_url = "http://localhost/MAD/api/v1/";
+	  api_graphql_url = "http://localhost/MAD/api/graphql";
 }
 
 var key = "am3omo32hom4lnv32vO";
@@ -54,117 +56,117 @@ var mobileApp = angular.module('mobileApp', [
 			templateUrl: 'views/notifications.html',
 		})
 	  .when('/teacher', {
-		templateUrl: 'views/teacher.html',
-		resolve: {
-		  style : function() {
-			if( !angular.element('link#teacher-css').length) {
-			  angular.element('head').append('<link id="teacher-css" href="styles/teacher.css" rel="stylesheet">');
-			  angular.element('head').append('<link href="node_modules/bootstrap-star-rating/css/star-rating.css" rel="stylesheet">');
+			templateUrl: 'views/teacher.html',
+			resolve: {
+			  style : function() {
+				if( !angular.element('link#teacher-css').length) {
+				  angular.element('head').append('<link id="teacher-css" href="styles/teacher.css" rel="stylesheet">');
+				  angular.element('head').append('<link href="node_modules/bootstrap-star-rating/css/star-rating.css" rel="stylesheet">');
+				}
+			  }
 			}
-		  }
-		}
 	  })
 	  .when('/mentor', {
-		templateUrl: 'views/mentor.html',
-		resolve: {
-		  style : function() {
-			if( !angular.element('link#mentor-css').length) {
-			  angular.element('head').append('<link id="mentor-css" href="styles/mentor.css" rel="stylesheet">');
+			templateUrl: 'views/mentor.html',
+			resolve: {
+			  style : function() {
+				if( !angular.element('link#mentor-css').length) {
+				  angular.element('head').append('<link id="mentor-css" href="styles/mentor.css" rel="stylesheet">');
+				}
+			  }
 			}
-		  }
-		}
 	  })
 	  .when('/mentor_attendance', {
-		templateUrl: 'views/mentor_attendance.html',
-		resolve: {
-		  style : function() {
-			if( !angular.element('link#mentor-attendance-css').length) {
-			  angular.element('head').append('<link id="mentor-css" href="styles/teacher.css" rel="stylesheet">');
+			templateUrl: 'views/mentor_attendance.html',
+			resolve: {
+			  style : function() {
+				if( !angular.element('link#mentor-attendance-css').length) {
+				  angular.element('head').append('<link id="mentor-css" href="styles/teacher.css" rel="stylesheet">');
+				}
+			  }
 			}
-		  }
-		}
 	  })
 	  .when('/about', {
-		templateUrl: 'views/about.html',
-		restricted : false
+			templateUrl: 'views/about.html',
+			restricted : false
 	  })
 	  .when('/message', {
-		templateUrl: 'views/message.html',
-		restricted : false
+			templateUrl: 'views/message.html',
+			restricted : false
 	  })
 	  .when('/connections', {
-		templateUrl: 'views/connections.html',
-		resolve: {
-		  style : function() {
-			if( !angular.element('link#connections-css').length) {
-			  angular.element('head').append('<link id="connections-css" href="styles/connections.css" rel="stylesheet">');
+			templateUrl: 'views/connections.html',
+			resolve: {
+			  style : function() {
+				if( !angular.element('link#connections-css').length) {
+				  angular.element('head').append('<link id="connections-css" href="styles/connections.css" rel="stylesheet">');
+				}
+			  }
 			}
-		  }
-		}
 	  })
 	  .when('/extra_class', {
-		templateUrl: 'views/extra_class.html'
+			templateUrl: 'views/extra_class.html'
 	  })
 	  .when('/mentor_report', {
-		templateUrl: 'views/mentor_report.html',
-		resolve: {
-		  style : function() {
-			if( !angular.element('link#report-css').length) {
-			  angular.element('head').append('<link id="report-css" href="styles/report.css" rel="stylesheet">');
+			templateUrl: 'views/mentor_report.html',
+			resolve: {
+			  style : function() {
+				if( !angular.element('link#report-css').length) {
+				  angular.element('head').append('<link id="report-css" href="styles/report.css" rel="stylesheet">');
+				}
+			  }
 			}
-		  }
-		}
 	  })
 	  .when('/center_report', {
-		templateUrl: 'views/center_report.html',
-		resolve: {
-		  style : function() {
-			if( !angular.element('link#report-css').length) {
-			  angular.element('head').append('<link id="report-css" href="styles/report.css" rel="stylesheet">');
+			templateUrl: 'views/center_report.html',
+			resolve: {
+			  style : function() {
+				if( !angular.element('link#report-css').length) {
+				  angular.element('head').append('<link id="report-css" href="styles/report.css" rel="stylesheet">');
+				}
+			  }
 			}
-		  }
-		}
 	  })
 	  .when('/teacher_report', {
-		templateUrl: 'views/teacher_report.html',
-		resolve: {
-		  style : function() {
-			if( !angular.element('link#report-css').length) {
-			  angular.element('head').append('<link id="report-css" href="styles/report.css" rel="stylesheet">');
+			templateUrl: 'views/teacher_report.html',
+			resolve: {
+			  style : function() {
+				if( !angular.element('link#report-css').length) {
+				  angular.element('head').append('<link id="report-css" href="styles/report.css" rel="stylesheet">');
+				}
+			  }
 			}
-		  }
-		}
 	  })
 	  .when('/reports', {
-		templateUrl: 'views/reports.html',
-		resolve: {
-		  style : function() {
-			if( !angular.element('link#report-css').length) {
-			  angular.element('head').append('<link id="report-css" href="styles/report.css" rel="stylesheet">');
+			templateUrl: 'views/reports.html',
+			resolve: {
+			  style : function() {
+				if( !angular.element('link#report-css').length) {
+				  angular.element('head').append('<link id="report-css" href="styles/report.css" rel="stylesheet">');
+				}
+			  }
 			}
-		  }
-		}
 	  })
 	  .when('/select_class', {
-		templateUrl: 'views/select_class.html',
+			templateUrl: 'views/select_class.html',
 	  })
 	  .when('/impact_survey', {
-		templateUrl: 'views/impact_survey.html',
-		resolve: {
-		  style : function() {
-			if( !angular.element('link#report-css').length) {
-			  angular.element('head').append('<link id="report-css" href="styles/report.css" rel="stylesheet">');
+			templateUrl: 'views/impact_survey.html',
+			resolve: {
+			  style : function() {
+				if( !angular.element('link#report-css').length) {
+				  angular.element('head').append('<link id="report-css" href="styles/report.css" rel="stylesheet">');
+				}
+			  }
 			}
-		  }
-		}
 	  })
 	  .when('/login', {
 	  	templateUrl: 'views/connections.html',
-		resolve: {
-		  style : function() {
-			if( !angular.element('link#connections-css').length) {
-			  angular.element('head').append('<link id="connections-css" href="styles/connections.css" rel="stylesheet">');
-			}
+			resolve: {
+			  style : function() {
+				if( !angular.element('link#connections-css').length) {
+				  angular.element('head').append('<link id="connections-css" href="styles/connections.css" rel="stylesheet">');
+				}
 		  }
 		}
 		// templateUrl: 'views/login.html',
