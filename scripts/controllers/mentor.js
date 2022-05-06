@@ -161,6 +161,11 @@ angular.module('mobileApp')
 				validation_error = true;
 				break;
 			}
+
+			if(cls.class_status == 0 && !cls.cancel_option) {
+				validation_error = true;
+				break;
+			}
 		}
 
 		if(validation_error) {
