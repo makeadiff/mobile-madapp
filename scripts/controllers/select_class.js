@@ -134,9 +134,7 @@ angular.module('mobileApp')
 			$location.path("/extra_class").search({"batch_id": batch_id});
 			return;
 		}
-
-		access = false;
-
+		
 		// If the current user is any thing other than just a teacher, Open batch
 		if(access) {
 			$location.path("/mentor").search({"batch_id": batch_id});
