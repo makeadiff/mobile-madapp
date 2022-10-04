@@ -136,6 +136,8 @@ angular.module('mobileApp')
 			  off: 'Absent'
 			});
 
+
+
 			$('.ts-attendance').change(function() {
 				var id = $(this).prop("id");
 				var class_index = $("#" + id).attr('class-index');
@@ -144,7 +146,25 @@ angular.module('mobileApp')
 				var attended = $(this).prop('checked');
 				MentorCtrl.mentor.classes[class_index].teachers[teacher_index].status = attended;
 			});
+
+
+			$('.ts-zero-hour').bootstrapToggle({
+				on: 'ZH: Present',
+				off: 'ZH: Absent'
+			});
+			
+	
+			$('.ts-zero-hour').change(function() {
+				var id = $(this).prop("id");
+				var class_index = $("#" + id).attr('class-index');
+				var teacher_index = $("#" + id).attr('teacher-index');
+	
+				var attended = $(this).prop('checked');
+				MentorCtrl.mentor.classes[class_index].teachers[teacher_index].status = attended;
+			});
+
 		}, 500);
+		
 	}
 
 	MentorCtrl.save = function(batch_id, class_on, classes) {

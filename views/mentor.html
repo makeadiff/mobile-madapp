@@ -65,16 +65,16 @@
 	<div class="teacher" ng-repeat="teacher in class.teachers" class="row">
 	<div class="pull-right attendance-area" ng-show="(class.class_status == '1')">
 	<input class="toggle-switch ts-attendance" ng-model="teacher.status" id="attendance-{{class.index}}-{{teacher.id}}" data-toggle="toggle"
-			data-height="25" data-width="70" data-size="small" type="checkbox" value="1" class-index="{{class.index}}" teacher-index="{{teacher.index}}"><br />
+			data-height="25" data-width="70" data-size="small" type="checkbox" value="1" class-index="{{class.index}}" teacher-index="{{teacher.index}}">
+			<!-- <br /> -->
 
-	<!-- Zero Hour Attendance  - ->
-	<span ng-show="(teacher.status == true)" class="zero-hour-area" id="zero-hour-area-{{class.index}}-{{teacher.index}}">
-	<input class="toggle-switch ts-zero-hour" ng-model="teacher.zero_hour_attendance" id="zero-hour-{{teacher.id}}" data-toggle="toggle"
-			data-height="25" data-width="120" data-size="small" type="checkbox" value="1" class-index="{{class.index}}" teacher-index="{{teacher.index}}">
-	</span>
-	< !-- -->
-
+	
+	<!-- <span ng-show="(teacher.status == true)" class="zero-hour-area" id="zero-hour-area-{{class.index}}-{{teacher.index}}"> -->
+	<input class="toggle-switch ts-zero-hour" ng-model="teacher.zero_hour_attendance" id="zero-hour-{{teacher.id}}" data-toggle="toggle" 
+		data-height="25" data-width="120" data-size="small" type="checkbox" value="1" class-index="{{class.index}}" teacher-index="{{teacher.index}}">
+	<!-- </div> -->
 	</div>
+	
 
 	<span ng-show="class.class_status == '1'">
 		<select id="vol-type" ng-model="teacher.vol_type" ng-change="MCtrl.changeVolunteerType(teacher)">
@@ -84,6 +84,7 @@
 	</span>
 	<span ng-show="(class.class_status == '1')" ng-class="{'text-muted': (teacher.show_substitute == '1')}">
 		<span class="glyphicon glyphicon-user user-icon"></span> {{teacher.name}}</span>
+	
 
 	<div id="substitute-{{teacher.id}}" class="substitute-area" ng-show="teacher.show_substitute != 0">
 		<label>Substitute Name: </label>
