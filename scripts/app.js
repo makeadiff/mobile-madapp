@@ -24,7 +24,7 @@ if(location.href.toString().match(/localhost/) || location.href.toString().match
 	  api_graphql_url = "http://localhost/MAD/api/public/index.php/graphql";
 }
 
-var key = "or4W3@KOERUme#3";
+var key = "am3omo32hom4lnv32vO";
 
 var mobileApp = angular.module('mobileApp', [
 	'ngAnimate', 
