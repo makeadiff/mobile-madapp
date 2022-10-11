@@ -136,6 +136,11 @@ angular.module('mobileApp')
 			  off: 'Absent'
 			});
 
+			$('.ts-zero-hour').bootstrapToggle({
+				on: 'ZH: Present',
+				off: 'ZH: Absent'
+			});
+
 
 
 			$('.ts-attendance').change(function() {
@@ -148,10 +153,7 @@ angular.module('mobileApp')
 			});
 
 
-			$('.ts-zero-hour').bootstrapToggle({
-				on: 'ZH: Present',
-				off: 'ZH: Absent'
-			});
+		
 			
 	
 			$('.ts-zero-hour').change(function() {
@@ -160,7 +162,7 @@ angular.module('mobileApp')
 				var teacher_index = $("#" + id).attr('teacher-index');
 	
 				var attended = $(this).prop('checked');
-				MentorCtrl.mentor.classes[class_index].teachers[teacher_index].status = attended;
+				MentorCtrl.mentor.classes[class_index].teachers[teacher_index].zero_hour_attendance = attended;
 			});
 
 		}, 500);

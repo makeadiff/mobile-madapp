@@ -20,11 +20,11 @@ var api_graphql_url = window.location.protocol + "//" + window.location.hostname
 
 if(location.href.toString().match(/localhost/) || location.href.toString().match(/192\.168\./)) {
 	  base_url = "http://localhost/MAD/madapp/index.php/api/";
-	  api_base_url = "http://localhost/MAD/api/v1/";
-	  api_graphql_url = "http://localhost/MAD/api/graphql";
+	  api_base_url = "http://localhost/MAD/api/public/index.php/v1/";
+	  api_graphql_url = "http://localhost/MAD/api/public/index.php/graphql";
 }
 
-var key = "am3omo32hom4lnv32vO";
+var key = "or4W3@KOERUme#3";
 
 var mobileApp = angular.module('mobileApp', [
 	'ngAnimate', 
