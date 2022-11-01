@@ -77,7 +77,7 @@ angular.module('mobileApp')
 		$http({
 			method: 'GET',
 			url: api_base_url + 'users',
-			params: {city_id: user.city_id, group_in: search_groups.join(",")},
+			params: {city_id: user.city_id, user_type: "volunteer"},
 			headers: $scope.request_headers
 		}).success(function(data) {
 			MentorCtrl.all_teachers = data.data.users;
