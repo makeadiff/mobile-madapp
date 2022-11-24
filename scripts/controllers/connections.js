@@ -62,6 +62,15 @@ angular.module('mobileApp')
 		
 		if(user.connections.teacher_at.length) {
 			loading();
+
+			// Special Text update for TR Wingman
+			for(var i = 0; i < user.connections.teacher_at.length; i++) {
+				if(typeof user.groups[348] == "string") { // 348 is id of TR Wingman User group
+						user.connections.teacher_at[i].level = 'Wingman';
+				}
+			}
+
+
 			$http({
 				method: 'GET',
 				url: base_url + 'user_class_info',
@@ -121,7 +130,7 @@ angular.module('mobileApp')
 		ConnectionCtrl.user.classes_where_student_data_not_updated_length = Object.keys(ConnectionCtrl.user.classes_where_student_data_not_updated).length;
 		ConnectionCtrl.user.teachers_with_negative_credits	= data.teachers_with_negative_credits;
 		ConnectionCtrl.user.substitution_info = data.substitution_info;
-    }
+  }
 
 	ConnectionCtrl.mentorClass = function(batch_id, date) {
 		user_service.setUserData("active_batch", batch_id);

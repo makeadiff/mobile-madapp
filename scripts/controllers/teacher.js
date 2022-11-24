@@ -75,6 +75,9 @@ angular.module('mobileApp')
 		}).success(function(data) {
 			TeacherCtrl.is_event = data.is_event;
 		}).error(error);
+
+		// TR Wingman special case. 348 is id of TR Wingman User group
+		if(data.level == '7 D' && typeof user.groups[348] == "string") data.level = "TR Wingman";
 		
 		TeacherCtrl.class_id = data.id;
 		TeacherCtrl.teacher = data;
